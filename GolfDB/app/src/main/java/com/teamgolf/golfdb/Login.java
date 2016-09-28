@@ -14,7 +14,7 @@ import java.io.InputStream;
 
 public class Login extends AppCompatActivity {
 
-    DatabaseHelper dbHelper = null;
+    DatabaseHandler dbHandler = null;
     Context context = null;
 
     @Override
@@ -27,37 +27,10 @@ public class Login extends AppCompatActivity {
 
         //initializations
         context = this.getApplicationContext();
-        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        DatabaseHandler dbHandler = new DatabaseHandler(context);
 
     }
 
-
-
-    public boolean checkPassword(String user, String password){
-
-        //perform querey
-        SQLiteDatabase db = dbHelper.connectDB();
-        Cursor c = db.query(true,"player",new String[]{"password"}, "userid =? ",new String[]{user},null,null,null,"1");
-        c.moveToFirst();
-        String result = c.getString(c.getColumnIndex("password"));
-        c.close();
-        db.close();
-
-        Log.d("CHECK_PASSWORD","Resulting query: "+ result);
-
-        //compare result
-        if (encryptCompare(password,result))
-            return true;
-
-        return false;
-    }
-
-
-    //// TODO: 9/26/2016
-    private boolean encryptCompare(String input, String fetch){
-
-        return false;
-    }
 
 
 }
