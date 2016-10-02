@@ -30,16 +30,12 @@ public class Login extends AppCompatActivity {
 
 
 
-        //Run Once at start
+        //Run Once at start (initalizations)
         if(firstStart) {
             context = this.getApplicationContext();
             DatabaseHandler dbHandler = new DatabaseHandler(context);
             firstStart = false;
-
         }
-
-
-
 
     }
 

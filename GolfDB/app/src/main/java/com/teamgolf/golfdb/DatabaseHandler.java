@@ -21,19 +21,17 @@ public class DatabaseHandler {
         this.context = context;
         dbHelper = new DatabaseHelper(context);
 
-
-
-        /* Test CODE
-        SQLiteDatabase db = dbHelper.connectDB();
-        Log.d("TEST",Integer.toString(db.rawQuery("Select * from player;",null).getCount()));
-        db.close();
-        */
-
-
     }
 
     //player table
     //______________________________________________________________________________________________________________________________________________________
+
+    /**
+     * Method used to input new users
+     * @param userid
+     * @param password
+     * @return True if user is suceesfully loaded to db
+     */
     public boolean insertUser(String userid, String password){
 
 
@@ -44,7 +42,7 @@ public class DatabaseHandler {
         Log.d("INSERT_USER:USER_EXIST?",Integer.toString(pass));
 
         //TODO
-        String encrypt = password;
+        String encrypt = passwordEncryption(password);
 
         if(pass==0) {
             Log.d("BEFORE_INSERT",Integer.toString(db.rawQuery("Select * from player;",null).getCount()));
@@ -64,7 +62,12 @@ public class DatabaseHandler {
         return false;
     }
 
-
+    /**
+     * Method used to check users password
+     * @param user
+     * @param password
+     * @return True if input is the correct password
+     */
     public boolean checkPassword(String user, String password){
 
         SQLiteDatabase db = dbHelper.connectDB();
@@ -73,20 +76,17 @@ public class DatabaseHandler {
         c.moveToFirst();
         String result = c.getString(c.getColumnIndex("password"));
         c.close();
+        db.close();
 
         Log.d("CHECK_PASSWORD","Resulting query: "+ result);
 
         //compare result
-        if (encryptCompare(password,result))
-            return true;
-
-        return false;
+        return encryptCompare(password,result);
     }
 
 
     //______________________________________________________________________________________________________________________________________________________________
 
-    //TODO
     public String passwordEncryption(String pass){
         String result = null;
         try {
@@ -106,9 +106,11 @@ public class DatabaseHandler {
         return result;
     }
 
-    private boolean encryptCompare(String input, String fetch){
+    public boolean encryptCompare(String input, String fetch){
 
         String s1 = passwordEncryption(input);
+        Log.d("COMPARE_PASS",s1);
+        Log.d("COMPARE_PASS",fetch);
 
         if(s1.equals(fetch))
             return true;
