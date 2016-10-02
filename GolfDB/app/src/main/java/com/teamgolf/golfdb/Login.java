@@ -8,9 +8,13 @@ import android.database.sqlite.SQLiteStatement;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static android.R.attr.id;
+
 
 public class Login extends AppCompatActivity {
 
@@ -29,7 +33,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
         //Run Once at start (initalizations)
         if(firstStart) {
             context = this.getApplicationContext();
@@ -37,6 +40,16 @@ public class Login extends AppCompatActivity {
             firstStart = false;
         }
 
+    }
+
+    protected void login(){
+        EditText tmp = (EditText)findViewById(R.id.uLogin);
+        String user = tmp.getText().toString().trim();
+
+        tmp = (EditText)findViewById(R.id.uPassword);
+        String password = tmp.getText().toString().trim();
+
+        Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
     }
 
     protected void onDestroy(){
