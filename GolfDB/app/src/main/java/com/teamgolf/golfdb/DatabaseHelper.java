@@ -59,19 +59,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     private void load_DB_From_APK(){
         //create file
-            try{
-                FileOutputStream out = new FileOutputStream(path);
-                InputStream in =context.getAssets().open(dbName);
-                byte [] buffer = new byte[1024];
-                int readBytes = 0;
+           if(!new File(path).exists()) {
+               try {
+                   FileOutputStream out = new FileOutputStream(path);
+                   InputStream in = context.getAssets().open(dbName);
+                   byte[] buffer = new byte[1024];
+                   int readBytes = 0;
 
-                while((readBytes = in.read(buffer))!= -1){
-                    out.write(buffer,0,readBytes);
-                }
-                in.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                   while ((readBytes = in.read(buffer)) != -1) {
+                       out.write(buffer, 0, readBytes);
+                   }
+                   in.close();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+           }
 
     }
     @Override

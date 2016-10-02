@@ -17,6 +17,10 @@ public class Login extends AppCompatActivity {
     DatabaseHandler dbHandler = null;
     Context context = null;
 
+    //boolean noting if app is on first run of code at startup
+    static Boolean firstStart = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -25,10 +29,25 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        //initializations
-        context = this.getApplicationContext();
-        DatabaseHandler dbHandler = new DatabaseHandler(context);
 
+        //Run Once at start
+        if(firstStart) {
+            context = this.getApplicationContext();
+            DatabaseHandler dbHandler = new DatabaseHandler(context);
+            firstStart = false;
+
+        }
+
+
+
+
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
+        if(isFinishing()){
+            firstStart = false;
+        }
     }
 
 
