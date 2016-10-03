@@ -57,6 +57,7 @@
         android:layout_below="@+id/loginButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="23dp" />
+        android:layout_marginTop="23dp"
+        android:id="@+id/newUserButton"/>
 
 </RelativeLayout>

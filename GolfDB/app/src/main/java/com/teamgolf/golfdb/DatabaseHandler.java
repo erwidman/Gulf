@@ -90,10 +90,18 @@ public class DatabaseHandler {
         return false;
     }
 
+    //
 
+    //log table
+    //__________________________________________________________________________________________________________________________________
+
+    //course table
+    //_________________________________________________________________________________________________________________________________
+
+    //helper methods
     //______________________________________________________________________________________________________________________________________________________________
 
-    public String passwordEncryption(String pass){
+    private String passwordEncryption(String pass){
         String result = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -112,7 +120,7 @@ public class DatabaseHandler {
         return result;
     }
 
-    public boolean encryptCompare(String input, String fetch){
+    private boolean encryptCompare(String input, String fetch){
 
         String s1 = passwordEncryption(input);
         Log.d("COMPARE_PASS",s1);

@@ -15,6 +15,7 @@ public class Login extends AppCompatActivity {
     DatabaseHandler dbHandler = null;
     Context context = null;
     Button loginButton;
+    Button newUserButton;
 
     //boolean noting if app iNs on first run of code at startup
     static Boolean firstStart = true;
@@ -36,8 +37,10 @@ public class Login extends AppCompatActivity {
 
             //init
             loginButton = (Button)findViewById(R.id.loginButton);
-            loginButton.setOnClickListener(new buttonListener("login",dbHandler));
+            loginButton.setOnClickListener(new ButtonListener("login",dbHandler));
 
+            newUserButton = (Button)findViewById(R.id.newUserButton);
+            newUserButton.setOnClickListener(new ButtonListener("newUser",dbHandler));
 
         }
 
@@ -53,11 +56,11 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public class buttonListener implements Button.OnClickListener {
+    public class ButtonListener implements Button.OnClickListener {
         String id;
         DatabaseHandler dbHandler;
 
-        public buttonListener(String id, DatabaseHandler dbHandler){
+        public ButtonListener(String id, DatabaseHandler dbHandler){
             this.id = id;
             this.dbHandler = dbHandler;
         }
@@ -71,7 +74,17 @@ public class Login extends AppCompatActivity {
                     String user = tmp.getText().toString().trim();
                     tmp = (EditText)findViewById(R.id.uPassword);
                     String password = tmp.getText().toString().trim();
-                    Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
+
+                    if(dbHandler.checkPassword(user,password)){
+                        //transition to blank activity
+                    }
+                    else{
+                        //prompt user of invalid login
+                    }
+                    break;
+                case "newUser":
+                    //todo (ben)
+                    //Transition to new view blank
                     break;
             }
         }
