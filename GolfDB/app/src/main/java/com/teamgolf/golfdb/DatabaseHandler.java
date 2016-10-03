@@ -74,14 +74,20 @@ public class DatabaseHandler {
         //perform querey
         Cursor c = db.query(true,"player",new String[]{"password"}, "userid = ? ",new String[]{user},null,null,null,"1");
         c.moveToFirst();
-        String result = c.getString(c.getColumnIndex("password"));
-        c.close();
-        db.close();
 
-        Log.d("CHECK_PASSWORD","Resulting query: "+ result);
+        String result;
+        if(c.getCount()!=0) {
+            result = c.getString(c.getColumnIndex("password"));
 
-        //compare result
-        return encryptCompare(password,result);
+            c.close();
+            db.close();
+
+            Log.d("CHECK_PASSWORD", "Resulting query: " + result);
+
+            //compare result
+            return encryptCompare(password, result);
+        }
+        return false;
     }
 
 
