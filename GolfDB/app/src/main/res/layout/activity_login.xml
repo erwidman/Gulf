@@ -73,17 +73,6 @@
          />
 
     <TextView
-        android:text="Username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/textView2"
-        tools:text="Username"
-        android:textSize="20sp"
-        android:layout_below="@+id/invalid_login"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,5 +81,15 @@
         android:layout_alignStart="@+id/textView2"
         android:id="@+id/textView3"
         android:textSize="20sp" />
+
+    <TextView
+        android:text="Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        tools:text="Username"
+        android:textSize="20sp"
+        android:layout_below="@+id/invalid_login"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
