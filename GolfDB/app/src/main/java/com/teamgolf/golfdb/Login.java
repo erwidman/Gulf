@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
 
         //Run Once at start (initalizations)
         if(firstStart) {
+            findViewById(R.id.invalid_login).setVisibility(View.INVISIBLE);
             context = this.getApplicationContext();
             DatabaseHandler dbHandler = new DatabaseHandler(context);
             firstStart = false;
@@ -80,6 +81,8 @@ public class Login extends AppCompatActivity {
                     }
                     else{
                         //prompt user of invalid login
+                        findViewById(R.id.invalid_login).setVisibility(View.VISIBLE);
+
                     }
                     break;
                 case "newUser":

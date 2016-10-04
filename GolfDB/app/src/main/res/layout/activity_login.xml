@@ -60,4 +60,37 @@
         android:layout_marginTop="23dp"
         android:id="@+id/newUserButton"/>
 
+    <TextView
+        android:text="Invalid Username/Password please try again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/invalid_login"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="17.2sp"
+         />
+
+    <TextView
+        android:text="Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/textView2"
+        tools:text="Username"
+        android:textSize="20sp"
+        android:layout_below="@+id/invalid_login"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/uPassword"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:id="@+id/textView3"
+        android:textSize="20sp" />
+
 </RelativeLayout>
