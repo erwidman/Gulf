@@ -1,6 +1,7 @@
 package com.teamgolf.golfdb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,12 +75,19 @@ public class Login extends AppCompatActivity {
                     String user = tmp.getText().toString().trim();
                     tmp = (EditText)findViewById(R.id.uPassword);
                     String password = tmp.getText().toString().trim();
-
+                    Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                     if(dbHandler.checkPassword(user,password)){
                         //transition to blank activity
+                        Intent intent = new Intent(Login.this, MainScreen.class);
+                        startActivity(intent);
+
                     }
                     else{
                         //prompt user of invalid login
+
+                        //create new user for testing purposes
+                        dbHandler.insertUser(user,password);
+                        Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                     }
                     break;
                 case "newUser":
