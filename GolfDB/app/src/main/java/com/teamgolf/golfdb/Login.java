@@ -32,6 +32,7 @@ public class Login extends AppCompatActivity {
 
         //Run Once at start (initalizations)
         if(firstStart) {
+            findViewById(R.id.invalid_login).setVisibility(View.INVISIBLE);
             context = this.getApplicationContext();
             DatabaseHandler dbHandler = new DatabaseHandler(context);
             firstStart = false;
@@ -88,6 +89,10 @@ public class Login extends AppCompatActivity {
                         //create new user for testing purposes
                         dbHandler.insertUser(user,password);
                         Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
+
+                        findViewById(R.id.invalid_login).setVisibility(View.VISIBLE);
+
+
                     }
                     break;
                 case "newUser":
