@@ -41,7 +41,26 @@ public class DatabaseHandler {
         int pass = c.getCount();
         Log.d("INSERT_USER:USER_EXIST?",Integer.toString(pass));
 
+        
         //TODO
+        int userLength = 0;
+        for (char ch: userid.toCharArray()) {
+            userLength+=1;
+        }
+        if (userLength > 31){
+            // TODO: 10/5/2016  Need to print error message to user
+            db.close();
+        }
+
+        int passLength = 0;
+        for (char ch: password.toCharArray()) {
+            passLength+=1;
+        }
+        if (passLength > 31){
+            // TODO: 10/5/2016  Need to print error message to user
+            db.close();
+        }
+
         String encrypt = passwordEncryption(password);
 
         if(pass==0) {
