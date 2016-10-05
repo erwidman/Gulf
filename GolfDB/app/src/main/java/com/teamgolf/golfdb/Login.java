@@ -98,6 +98,9 @@ public class Login extends AppCompatActivity {
                 case "newUser":
                     //todo (ben)
                     //Transition to new view blank
+                    Intent intent = new Intent(v.getContext(), create_new_acc.class);
+                    startActivity(intent);
+
                     break;
             }
         }
