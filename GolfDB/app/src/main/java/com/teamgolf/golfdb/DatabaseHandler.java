@@ -26,6 +26,22 @@ public class DatabaseHandler {
     //player table
     //______________________________________________________________________________________________________________________________________________________
 
+
+    public boolean isUser(String userid)
+    {
+        SQLiteDatabase db = dbHelper.connectDB();
+        Cursor c = db.rawQuery("Select * from player where userid = '"+userid+"';",null);
+        int pass = c.getCount();
+        if (pass !=0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
     /**
      * Method used to input new users
      * @param userid
