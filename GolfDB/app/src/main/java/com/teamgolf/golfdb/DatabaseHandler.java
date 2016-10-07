@@ -20,26 +20,12 @@ public class DatabaseHandler {
         //init dbHelper load file
         this.context = context;
         dbHelper = new DatabaseHelper(context);
+        dbHelper.connectDB().execSQL("delete from player where 1 =1;");
 
     }
 
     //player table
-    //______________________________________________________________________________________________________________________________________________________
-
-
-    public boolean isUser(String userid)
-    {
-        SQLiteDatabase db = dbHelper.connectDB();
-        Cursor c = db.rawQuery("Select * from player where userid = '"+userid+"';",null);
-        int pass = c.getCount();
-        if (pass !=0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-
+    //____________________________________________________________________________________________________________________________________________________
 
 
     /**
@@ -56,26 +42,6 @@ public class DatabaseHandler {
         Cursor c = db.rawQuery("Select * from player where userid = '"+userid+"';",null);
         int pass = c.getCount();
         Log.d("INSERT_USER:USER_EXIST?",Integer.toString(pass));
-
-        
-        //TODO
-        int userLength = 0;
-        for (char ch: userid.toCharArray()) {
-            userLength+=1;
-        }
-        if (userLength > 31){
-            // TODO: 10/5/2016  Need to print error message to user
-            db.close();
-        }
-
-        int passLength = 0;
-        for (char ch: password.toCharArray()) {
-            passLength+=1;
-        }
-        if (passLength > 31){
-            // TODO: 10/5/2016  Need to print error message to user
-            db.close();
-        }
 
         String encrypt = passwordEncryption(password);
 

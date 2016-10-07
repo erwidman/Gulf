@@ -54,11 +54,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create new Account"
-        android:onClick="setNewUserButton"
         android:layout_below="@+id/loginButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="23dp"
+        android:onClick="setNewUserButton"
         android:id="@+id/newUserButton"/>
 
     <TextView

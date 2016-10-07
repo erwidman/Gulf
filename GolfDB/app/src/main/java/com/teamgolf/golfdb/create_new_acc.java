@@ -16,38 +16,42 @@ import android.widget.EditText;
 
 public class create_new_acc extends AppCompatActivity {
     //Context context =getApplicationContext();
-    DatabaseHandler dbHandler;
+    DatabaseHandler dbHandler= Login.dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.create_new_acc);
+        setContentView(R.layout.activity_create_new_acc);
     }
-
 
 
     public void Check_Availiability(View v)
     {
         dbHandler=new DatabaseHandler(dbHandler.context);
         EditText d_uname = (EditText)findViewById(R.id.d_uname);
-       /* if (dbHandler.isUser(d_uname.toString()))
-        {
-            //if returns true that means username already used
-            TextView temp;
-            temp =(TextView) findViewById(R.id.uname_pass);
-            temp.setVisibility(View.INVISIBLE);
-            temp = (TextView)findViewById(R.id.uname_fail);
-            temp.setVisibility(View.VISIBLE);
-            temp.setText(d_uname.toString()+"Is not Available. Try Again");
+
+     //chk passwd then chk to make sure insert wins
+        String pass = ((EditText)findViewById(R.id.d_pw)).toString().trim();
+        String pass2 = ((EditText)findViewById(R.id.d_pw2)).toString().trim();
+        String userName = ((EditText)findViewById(R.id.d_uname)).toString().trim();
+
+        //// TODO: 10/7/16 Fred: add gui that signifys that passwords are not the same
+        if (!pass.equals(pass2))
+            Log.d("COMPARE_PASSWORDS","Passwords do not match!");
+
+        else{
+            if(dbHandler.insertUser(userName,pass))
+            {
+                Log.d("INSERT_USER", "User inserted!");
+                //// TODO: 10/7/16 transition
+            }
+            else
+            {
+                //user already exists print out gui error message
+                Log.d("Check Username", "User already exists in the database");
+            }
+
         }
-        else
-        {
-            TextView temp2;
-            temp2=(TextView)findViewById(R.id.uname_fail);
-            temp2.setVisibility(View.INVISIBLE);
-            temp2= (TextView)findViewById(R.id.uname_pass);
-            temp2.setVisibility(View.VISIBLE);
-            temp2.setText(d_uname.toString() + "Is Available!");
-        }*/
 
     }
 }
