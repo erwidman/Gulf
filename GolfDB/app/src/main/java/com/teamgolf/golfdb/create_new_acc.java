@@ -22,31 +22,41 @@ public class create_new_acc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_acc);
+        findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
+       findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
     }
 
 
-    public void Check_Availiability(View v)
+    public void create_Account(View v)
     {
         dbHandler=new DatabaseHandler(dbHandler.context);
         EditText d_uname = (EditText)findViewById(R.id.d_uname);
 
      //chk passwd then chk to make sure insert wins
-        String pass = ((EditText)findViewById(R.id.d_pw)).toString().trim();
-        String pass2 = ((EditText)findViewById(R.id.d_pw2)).toString().trim();
-        String userName = ((EditText)findViewById(R.id.d_uname)).toString().trim();
+        String pass = ((EditText)findViewById(R.id.d_pw)).getText().toString().trim();
+        String pass2 = ((EditText)findViewById(R.id.d_pw2)).getText().toString().trim();
+        String userName = ((EditText)findViewById(R.id.d_uname)).getText().toString().trim();
 
         //// TODO: 10/7/16 Fred: add gui that signifys that passwords are not the same
-        if (!pass.equals(pass2))
-            Log.d("COMPARE_PASSWORDS","Passwords do not match!");
-
-        else{
-            if(dbHandler.insertUser(userName,pass))
+        if (pass.compareTo(pass2)!=0) {
+            Log.d("COMPARE_PASSWORDS", "Passwords do not match!");
+            Log.d("COMPARE_PASSWORDS",pass);
+            Log.d("COMPARE_PASSWORDS",pass2);
+            findViewById(R.id.bad_pw).setVisibility(View.VISIBLE);
+        }
+        else
             {
-                Log.d("INSERT_USER", "User inserted!");
-                //// TODO: 10/7/16 transition
-            }
+                findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
+            if(dbHandler.insertUser("f","f"))
+                {
+                   Log.d("INSERT_USER", "User inserted!");
+                    findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
+                  //// TODO: 10/7/16 transition
+                }
             else
             {
+               findViewById(R.id.bad_uname).setVisibility(View.VISIBLE);
                 //user already exists print out gui error message
                 Log.d("Check Username", "User already exists in the database");
             }
