@@ -20,6 +20,8 @@ public class DatabaseHandler {
         //init dbHelper load file
         this.context = context;
         dbHelper = new DatabaseHelper(context);
+
+        //for testing
         dbHelper.connectDB().execSQL("delete from player where 1 =1;");
 
     }

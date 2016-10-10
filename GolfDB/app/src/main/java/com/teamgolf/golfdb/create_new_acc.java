@@ -16,7 +16,7 @@ import android.widget.EditText;
 
 public class create_new_acc extends AppCompatActivity {
     //Context context =getApplicationContext();
-    DatabaseHandler dbHandler= Login.dbHandler;
+    DatabaseHandler dbHandler= Constants.dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public class create_new_acc extends AppCompatActivity {
 
     public void create_Account(View v)
     {
-        dbHandler=new DatabaseHandler(dbHandler.context);
         EditText d_uname = (EditText)findViewById(R.id.d_uname);
 
      //chk passwd then chk to make sure insert wins
@@ -47,12 +46,14 @@ public class create_new_acc extends AppCompatActivity {
         else
             {
                 findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
-            if(dbHandler.insertUser("f","f"))
+            if(dbHandler.insertUser(userName,pass))
                 {
-                   Log.d("INSERT_USER", "User inserted!");
+                   Log.d("INSERT_USER","User inserted!");
                     findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
                     findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
                   //// TODO: 10/7/16 transition
+                    Intent intent = new Intent(create_new_acc.this, MainScreen.class);
+                    startActivity(intent);
                 }
             else
             {

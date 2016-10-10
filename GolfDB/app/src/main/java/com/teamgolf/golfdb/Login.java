@@ -15,8 +15,6 @@ import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
 
-    public static DatabaseHandler dbHandler = null;
-    Context context = null;
     Button loginButton, newUserButton;
 
     //boolean noting if app iNs on first run of code at startup
@@ -33,18 +31,20 @@ public class Login extends AppCompatActivity {
 
         //Run Once at start (initalizations)
         if(firstStart) {
-            context = this.getApplicationContext();
-            findViewById(R.id.invalid_login).setVisibility(View.INVISIBLE);
-            DatabaseHandler dbHandler = new DatabaseHandler(context);
-            firstStart = false;
+
+            //load constants
+            new Constants(this.getApplicationContext());
+            DatabaseHandler dbHandler = Constants.dbHandler;
+
+
+
 
             //init
             loginButton = (Button)findViewById(R.id.loginButton);
             loginButton.setOnClickListener(new ButtonListener("login",dbHandler));
-
             newUserButton = (Button)findViewById(R.id.newUserButton);
             newUserButton.setOnClickListener(new ButtonListener("newUser",dbHandler));
-
+            firstStart = false;
         }
 
     }
