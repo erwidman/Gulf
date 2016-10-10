@@ -55,9 +55,6 @@ public class DatabaseHandler {
             db.setTransactionSuccessful();
             db.endTransaction();
             db.close();
-            //test
-            db = dbHelper.connectDB();
-            Log.d("AFTER_INSERT",Integer.toString(db.rawQuery("Select * from player;",null).getCount()));
             return true;
         }
 
@@ -100,6 +97,37 @@ public class DatabaseHandler {
 
     //course table
     //_________________________________________________________________________________________________________________________________
+    public Cursor getCourses(String location){
+        SQLiteDatabase db = dbHelper.connectDB();
+        //perform query
+        Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"loaction = ?",new String[] {location},null,null,null,null);
+        db.close();
+
+        if(c.getCount()>0)
+            return c;
+
+        return null;
+    }
+
+    public boolean insertCourse(String name, String state, String city, String difficulty, String numOfHoles){
+
+        String loc = state + ":" + name;
+
+        SQLiteDatabase db = dbHelper.connectDB();
+
+        Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"loaction = ? and name = ?",new String[] {loc,name},null,null,null,null);
+
+        if(c.getCount() > 0)
+            return false;
+
+        db.beginTransaction();
+        db.execSQL("insert into courses values(?,?, ?,?);",new String [] {name ,loc,difficulty,numOfHoles});
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+
+        return true;
+    }
 
     //helper methods
     //______________________________________________________________________________________________________________________________________________________________
