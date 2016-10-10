@@ -36,9 +36,6 @@ public class Login extends AppCompatActivity {
             new Constants(this.getApplicationContext());
             DatabaseHandler dbHandler = Constants.dbHandler;
 
-
-
-
             //init
             loginButton = (Button)findViewById(R.id.loginButton);
             loginButton.setOnClickListener(new ButtonListener("login",dbHandler));

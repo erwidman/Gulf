@@ -21,7 +21,7 @@ public class DatabaseHandler {
         this.context = context;
         dbHelper = new DatabaseHelper(context);
 
-        //for testing
+        //!!!!!!!!!!!!!!for testing
         dbHelper.connectDB().execSQL("delete from player where 1 =1;");
 
     }
