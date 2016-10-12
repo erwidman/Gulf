@@ -48,9 +48,12 @@ public class MainScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+            Intent intent;
             switch(id){
                 case "playGame":
                     //todo Transition to next page
+                    intent = new Intent(MainScreen.this,GameType.class);
+                    startActivity(intent);
                     break;
                 case "stats":
                     //todo Transition
@@ -59,7 +62,7 @@ public class MainScreen extends AppCompatActivity {
                     //todo Transition
                     break;
                 case "close":
-                    Intent intent = new Intent(MainScreen.this,Login.class);
+                    intent = new Intent(MainScreen.this,Login.class);
                     startActivity(intent);
                     break;
             }
