@@ -125,5 +125,14 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <TextView
+            android:text="Usernames must be at least 1 character and passwords must be at least 3 charecters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bad_uname"
+            android:layout_marginTop="14dp"
+            android:id="@+id/short_uname"
+            android:textColor="@android:color/holo_red_dark" />
+
     </RelativeLayout>
 </LinearLayout>

@@ -2,19 +2,12 @@ package com.teamgolf.golfdb;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
-public class create_new_acc extends AppCompatActivity {
+public class Create_new_acc extends AppCompatActivity {
     //Context context =getApplicationContext();
     DatabaseHandler dbHandler= Constants.dbHandler;
 
@@ -24,6 +17,7 @@ public class create_new_acc extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_acc);
         findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
        findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
+        findViewById(R.id.short_uname).setVisibility(View.INVISIBLE);
     }
 
 
@@ -49,10 +43,11 @@ public class create_new_acc extends AppCompatActivity {
             if(dbHandler.insertUser(userName,pass))
                 {
                    Log.d("INSERT_USER","User inserted!");
+                    findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
                     findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
                     findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
                   //// TODO: 10/7/16 transition
-                    Intent intent = new Intent(create_new_acc.this, MainScreen.class);
+                    Intent intent = new Intent(Create_new_acc.this, MainScreen.class);
                     startActivity(intent);
                 }
             else

@@ -1,13 +1,9 @@
 package com.teamgolf.golfdb;
 
-import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,7 +84,7 @@ public class Login extends AppCompatActivity {
                     break;
 
                 case "newUser":
-                    Intent intent = new Intent(v.getContext(), create_new_acc.class);
+                    Intent intent = new Intent(v.getContext(), Create_new_acc.class);
                     startActivity(intent);
                     break;
             }

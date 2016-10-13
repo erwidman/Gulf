@@ -17,10 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".create_new_acc" />
+        <activity android:name=".Create_new_acc" />
         <activity android:name=".MainScreen" />
         <activity android:name=".Location" />
-        <activity android:name=".GameType"></activity>
+        <activity android:name=".GameType" />
+        <activity android:name=".select_course"   ></activity>
     </application>
 
 </manifest>
