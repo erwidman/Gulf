@@ -21,6 +21,12 @@ public class select_course extends AppCompatActivity
         findViewById(R.id.search_checkbox_error).setVisibility(View.INVISIBLE);
     }
 
+    public void create_course(View v)
+    {
+        Intent intent = new Intent(v.getContext(), how_to_create_course.class);
+        startActivity(intent);
+    }
+
     public void courseSearch(View v)
     {
         String toSearch=((EditText)findViewById(R.id.search_course_entry)).getText().toString().trim();
@@ -28,13 +34,12 @@ public class select_course extends AppCompatActivity
         {
             //they have more than 1 box checked. they are fucking dumb.....
             findViewById(R.id.search_checkbox_error).setVisibility(View.VISIBLE);
-            Log.d("Choice","1");
 
         }
         else if (((CheckBox)findViewById(R.id.search_city)).isChecked()&&(!((CheckBox)findViewById(R.id.search_course)).isChecked()))
         {
             //we are searching with a city name if we get here
-            Log.d("Choice","1");
+
 
             //Todo search the dba for toSearch
         }
@@ -42,7 +47,7 @@ public class select_course extends AppCompatActivity
         {
             //we are searching for a golf course name
             //Todo search the dba for toSearch
-            Log.d("Choice","1");
+
         }
     }
 }

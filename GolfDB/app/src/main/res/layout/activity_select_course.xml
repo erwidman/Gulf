@@ -91,4 +91,15 @@
         android:layout_alignLeft="@+id/search_course"
         android:layout_alignStart="@+id/search_course" />
 
+    <Button
+        android:text="Create Unlisted Course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button"
+        android:layout_toRightOf="@+id/textView5"
+        android:id="@+id/create_course"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button"
+        android:onClick="create_course"/>
+
 </RelativeLayout>

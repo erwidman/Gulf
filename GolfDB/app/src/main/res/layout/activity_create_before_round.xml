@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="51dp"
+        android:id="@+id/cbr_hole" />
+
+    <TextView
+        android:text="yds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbr_yd3"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/cbr_man_yard"
+        android:layout_alignBottom="@+id/cbr_man_yard"
+        android:layout_toRightOf="@+id/cbr_man_yard"
+        android:layout_toEndOf="@+id/cbr_man_yard" />
+
+    <TextView
+        android:text="Hole Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/cbr_hole_number"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="Distance From Children Tee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbr_hole_number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="61dp"
+        android:id="@+id/cbr_child_tee" />
+
+    <TextView
+        android:text="Distance From Women's Tee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbr_child_tee"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="54dp"
+        android:id="@+id/cbr_woman_tee" />
+
+    <TextView
+        android:text="Distance From Men's Tee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbr_woman_tee"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="59dp"
+        android:id="@+id/cbr_man_tee" />
+
+    <TextView
+        android:text="yds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbr_yd"
+        android:textSize="24sp"
+        android:layout_alignBottom="@+id/cbr_child_yard"
+        android:layout_toRightOf="@+id/cbr_child_yard"
+        android:layout_toEndOf="@+id/cbr_child_yard" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/cbr_man_yard"
+        android:layout_width="75dp"
+        android:layout_alignBottom="@+id/cbr_man_tee"
+        android:layout_toRightOf="@+id/cbr_woman_tee"
+        android:layout_toEndOf="@+id/cbr_woman_tee" />
+
+    <TextView
+        android:text="yds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbr_yd2"
+        android:textSize="24sp"
+        android:layout_alignBottom="@+id/cbr_woman_yard"
+        android:layout_toRightOf="@+id/cbr_woman_yard"
+        android:layout_toEndOf="@+id/cbr_woman_yard" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/cbr_woman_yard"
+        android:layout_width="75dp"
+        android:layout_alignBaseline="@+id/cbr_woman_tee"
+        android:layout_alignBottom="@+id/cbr_woman_tee"
+        android:layout_toRightOf="@+id/cbr_woman_tee"
+        android:layout_toEndOf="@+id/cbr_woman_tee" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/cbr_child_yard"
+        android:layout_width="75dp"
+        android:layout_alignBaseline="@+id/cbr_child_tee"
+        android:layout_alignBottom="@+id/cbr_child_tee"
+        android:layout_alignLeft="@+id/cbr_woman_yard"
+        android:layout_alignStart="@+id/cbr_woman_yard" />
+
+    <Button
+        android:text="Next Hole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbr_man_tee"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:id="@+id/cbr_next_hole" />
+
+    <Button
+        android:text="THIS IS A BIG FUCKING BUTTON"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbr_next_hole"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/cbr_testbox"
+        android:textSize="30sp"
+        android:onClick="test"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="392dp"
+        android:layout_marginStart="392dp"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/textView15" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/cbr_1_course_name"
+        android:layout_alignBaseline="@+id/cbr_woman_tee"
+        android:layout_alignBottom="@+id/cbr_woman_tee"
+        android:layout_alignLeft="@+id/cbr_1_course_location"
+        android:layout_alignStart="@+id/cbr_1_course_location" />
+
+    <TextView
+        android:text="Course Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbr_1_course_name_text"
+        android:layout_above="@+id/cbr_woman_yard"
+        android:layout_toRightOf="@+id/cbr_hole_number"
+        android:layout_toEndOf="@+id/cbr_hole_number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/cbr_1_course_location"
+        android:layout_alignBaseline="@+id/cbr_man_tee"
+        android:layout_alignBottom="@+id/cbr_man_tee"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Course Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbr_1_course_location_text"
+        android:layout_above="@+id/cbr_yd3"
+        android:layout_toRightOf="@+id/cbr_man_tee"
+        android:layout_toEndOf="@+id/cbr_man_tee" />
+
+    <Button
+        android:text="enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cbr_next_hole"
+        android:layout_alignRight="@+id/cbr_1_course_name_text"
+        android:layout_alignEnd="@+id/cbr_1_course_name_text"
+        android:id="@+id/cbr_1_enter"
+        android:onClick="courseCreate"/>
+
+</RelativeLayout>
