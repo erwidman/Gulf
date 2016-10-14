@@ -21,9 +21,9 @@
         <activity android:name=".MainScreen" />
         <activity android:name=".Location" />
         <activity android:name=".GameType" />
-        <activity android:name=".select_course"    />
-        <activity android:name=".how_to_create_course" />
-        <activity android:name=".create_before_round" ></activity>
+        <activity android:name=".Select_course"    />
+        <activity android:name=".How_to_create_course" />
+        <activity android:name=".Create_before_round" ></activity>
     </application>
 
 </manifest>

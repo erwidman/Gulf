@@ -52,21 +52,8 @@ public class MainScreen extends AppCompatActivity {
             switch(id){
                 case "playGame":
                     //todo Transition to next page
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
-                    //todo KILL ALL FORMS OF ONE TRUE BRACE STYLE
 
-
-
-                    intent = new Intent(v.getContext(), select_course.class);
+                    intent = new Intent(v.getContext(), Select_course.class);
                     startActivity(intent);
                     break;
                 case "stats":

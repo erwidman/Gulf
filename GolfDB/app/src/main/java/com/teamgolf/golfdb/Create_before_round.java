@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 
 
-public class create_before_round extends AppCompatActivity {
+public class Create_before_round extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

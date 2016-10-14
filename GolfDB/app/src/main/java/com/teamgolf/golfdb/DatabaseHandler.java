@@ -100,7 +100,8 @@ public class DatabaseHandler {
     public Cursor getCourses(String location){
         SQLiteDatabase db = dbHelper.connectDB();
         //perform query
-        Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"loaction = ?",new String[] {location},null,null,null,null);
+        //Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"like %?%",new String[] {location},null,null,null);
+        Cursor c = db.rawQuery("Select name,courseDifficulty,numOfHoles from courses where location like %?%;",new String[] {location});
         db.close();
 
         if(c.getCount()>0)
@@ -111,7 +112,7 @@ public class DatabaseHandler {
 
     public boolean insertCourse(String name, String state, String city, String difficulty, String numOfHoles){
 
-        String loc = state + ":" + name;
+        String loc = state + ":" + city +":" + name;
 
         SQLiteDatabase db = dbHelper.connectDB();
 
