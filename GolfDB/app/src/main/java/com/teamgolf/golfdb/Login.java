@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
 
         //Run Once at start (initalizations)
         if(firstStart) {
-
+            findViewById(R.id.invalid_login).setVisibility(View.INVISIBLE);
             //load constants
             new Constants(this.getApplicationContext());
             DatabaseHandler dbHandler = Constants.dbHandler;

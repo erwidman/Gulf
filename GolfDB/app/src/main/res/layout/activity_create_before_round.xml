@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
@@ -123,18 +124,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="24dp"
-        android:id="@+id/cbr_next_hole" />
-
-    <Button
-        android:text="THIS IS A BIG FUCKING BUTTON"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cbr_next_hole"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/cbr_testbox"
-        android:textSize="30sp"
-        android:onClick="test"/>
+        android:id="@+id/cbr_next_hole"
+        android:onClick="addedHole"/>
 
     <TextView
         android:text="TextView"
@@ -179,22 +170,63 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Course Location"
+        android:text="Course City"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cbr_1_course_location_text"
         android:layout_above="@+id/cbr_yd3"
-        android:layout_toRightOf="@+id/cbr_man_tee"
-        android:layout_toEndOf="@+id/cbr_man_tee" />
+        android:layout_alignLeft="@+id/cbr_1_course_name_text"
+        android:layout_alignStart="@+id/cbr_1_course_name_text" />
+
+    <TextView
+        android:text="Course State"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbr_1_course_location"
+        android:layout_alignLeft="@+id/cbr_1_course_location_text"
+        android:layout_alignStart="@+id/cbr_1_course_location_text"
+        android:id="@+id/cbr_1_course_state_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/cbr_1_course_state"
+        android:layout_below="@+id/cbr_1_course_state_text"
+        android:layout_alignLeft="@+id/cbr_1_course_location"
+        android:layout_alignStart="@+id/cbr_1_course_location"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbr_1_numholes_text"
+        tools:text="Number of Holes"
+        android:layout_below="@+id/cbr_1_course_state"
+        android:layout_alignLeft="@+id/cbr_1_course_state_text"
+        android:layout_alignStart="@+id/cbr_1_course_state_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_below="@+id/cbr_1_numholes_text"
+        android:layout_alignRight="@+id/cbr_1_course_state"
+        android:layout_alignEnd="@+id/cbr_1_course_state"
+        android:layout_marginTop="14dp"
+        android:id="@+id/cbr_1_numholes" />
 
     <Button
         android:text="enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/cbr_next_hole"
-        android:layout_alignRight="@+id/cbr_1_course_name_text"
-        android:layout_alignEnd="@+id/cbr_1_course_name_text"
         android:id="@+id/cbr_1_enter"
-        android:onClick="courseCreate"/>
+        android:onClick="courseCreate"
+        android:layout_alignBottom="@+id/textView15"
+        android:layout_alignRight="@+id/cbr_1_course_name_text"
+        android:layout_alignEnd="@+id/cbr_1_course_name_text" />
 
 </RelativeLayout>
