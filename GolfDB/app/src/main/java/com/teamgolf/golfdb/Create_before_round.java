@@ -19,6 +19,7 @@ private int currentHole;
     private int goTo;
     protected void onCreate(Bundle savedInstanceState)
     {
+        findViewById(R.id.cbr_1_dumass).setVisibility(View.INVISIBLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_before_round);
         hideStage2();
@@ -38,6 +39,7 @@ private int currentHole;
         findViewById(R.id.cbr_1_course_state_text).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_numholes).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_numholes_text).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_1_dumass).setVisibility(View.INVISIBLE);
     }
     public void hideStage2()
     {
@@ -78,17 +80,35 @@ private int currentHole;
     }
     public void courseCreate(View v)
     {
+        String courseName = ((EditText)findViewById(R.id.cbr_1_course_name)).getText().toString().toLowerCase().trim();
+        String state = ((EditText)findViewById(R.id.cbr_1_course_state)).getText().toString().toLowerCase().trim();
+        String city = ((EditText)findViewById(R.id.cbr_1_course_location)).getText().toString().toLowerCase().trim();
+        String numHoles = ((EditText)findViewById(R.id.cbr_1_numholes)).getText().toString().toLowerCase().trim();
+        if (courseName.length()==0||state.length()==0||city.length()==0||numHoles.length()==0)
+        {
+            findViewById(R.id.cbr_1_dumass).setVisibility(View.VISIBLE);
+        }
         //this is where we check if they gave us course+location that we like
-        Constants.dbHandler.insertCourse(((EditText)findViewById(R.id.cbr_1_course_name)).getText().toString().toLowerCase().trim(),((EditText)findViewById(R.id.cbr_1_course_state)).getText().toString().toLowerCase().trim(),((EditText)findViewById(R.id.cbr_1_course_location)).getText().toString().toLowerCase().trim(),"0",((EditText)findViewById(R.id.cbr_1_numholes)).getText().toString().toLowerCase().trim());
-        this.holesOnCourse=Integer.parseInt(((EditText)findViewById(R.id.cbr_1_numholes)).getText().toString());
-        hideStage1();
-        showStage2();
+        if(Constants.dbHandler.insertCourse(courseName,state,city,"0",numHoles);
+        {
+            this.holesOnCourse=Integer.parseInt(((EditText)findViewById(R.id.cbr_1_numholes)).getText().toString());
+            hideStage1();
+            showStage2();
+        }
+        else
+        {
+            //todo course already exist
+        }
+
     }
+
     public void addedHole(View v)
     {
         if (currentHole==holesOnCourse)
         {
             //// TODO: 10/16/16 transition to new page to play the round
+            Intent intent = new Intent(Create_before_round.this, Select_course.class);
+            startActivity(intent);
 
         }
         if (currentHole==9){this.goTo=2;}

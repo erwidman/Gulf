@@ -23,6 +23,7 @@ public class DatabaseHandler {
 
         //!!!!!!!!!!!!!!for testing
         dbHelper.connectDB().execSQL("delete from player where 1 =1;");
+        dbHelper.connectDB().execSQL("delete from courses where 1=1;");
 
     }
 
@@ -112,11 +113,12 @@ public class DatabaseHandler {
 
     public boolean insertCourse(String name, String state, String city, String difficulty, String numOfHoles){
 
+        Log.d("Test",name);
         String loc = state + ":" + city +":" + name;
 
         SQLiteDatabase db = dbHelper.connectDB();
 
-        Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"loaction = ? and name = ?",new String[] {loc,name},null,null,null,null);
+        Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"location = ? and name = ?",new String[] {loc,name},null,null,null,null);
 
         if(c.getCount() > 0)
             return false;

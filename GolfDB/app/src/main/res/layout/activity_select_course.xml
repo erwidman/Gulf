@@ -102,4 +102,13 @@
         android:layout_toStartOf="@+id/button"
         android:onClick="create_course"/>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_checkbox_error"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="87dp"
+        android:id="@+id/spinner" />
+
 </RelativeLayout>
