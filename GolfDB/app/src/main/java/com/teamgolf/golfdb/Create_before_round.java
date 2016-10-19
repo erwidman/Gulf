@@ -57,6 +57,7 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_1_numholes).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_numholes_text).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_dumass).setVisibility(View.INVISIBLE);
+
     }
     public void hideStage2()
     {
@@ -72,6 +73,7 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_child_tee).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_hole).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_hole_number).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_par).setVisibility(View.INVISIBLE);
 
     }
     public void showStage2()
@@ -88,6 +90,7 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_child_tee).setVisibility(View.VISIBLE);
         findViewById(R.id.cbr_hole).setVisibility(View.VISIBLE);
         findViewById(R.id.cbr_hole_number).setVisibility(View.VISIBLE);
+        findViewById(R.id.cbr_par).setVisibility(View.VISIBLE);
 
     }
 
@@ -150,12 +153,13 @@ public class Create_before_round extends AppCompatActivity {
         String childDis = ((EditText)findViewById(R.id.cbr_child_yard)).toString().trim();
         String menDis = ((EditText)findViewById(R.id.cbr_man_yard)).toString().trim();
         String womenDis = ((EditText)findViewById(R.id.cbr_woman_yard)).toString().trim();
-        //TODO add par
+        String par = ((EditText)findViewById(R.id.cbr_par)).toString().trim();
         //String par = ....
 
         this.holeDistanceChild[currentHole] = Integer.parseInt(childDis);
         this.holeDistanceWomen[currentHole] = Integer.parseInt(womenDis);
         this.holeDistanceMen[currentHole] = Integer.parseInt(menDis);
+        this.par[currentHole] = Integer.parseInt(par);
         //TODO add par
         //this.par[currentHole] = Integer.parseInt(par);
 
