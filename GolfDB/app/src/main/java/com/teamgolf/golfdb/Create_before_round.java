@@ -63,6 +63,7 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_1_numholes).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_numholes_text).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_error).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_1_enter).setVisibility(View.INVISIBLE);
 
     }
     public void hideStage2()
@@ -159,28 +160,24 @@ public class Create_before_round extends AppCompatActivity {
 
 
         //store values in array
-        String childDis = ((EditText)findViewById(R.id.cbr_child_yard)).toString().trim();
-        String menDis = ((EditText)findViewById(R.id.cbr_man_yard)).toString().trim();
-        String womenDis = ((EditText)findViewById(R.id.cbr_woman_yard)).toString().trim();
-        String par = ((EditText)findViewById(R.id.cbr_par)).toString().trim();
-        //String par = ....
-<<<<<<< HEAD
+        String childDis = ((EditText)findViewById(R.id.cbr_child_yard)).getText().toString().trim();
+        String menDis = ((EditText)findViewById(R.id.cbr_man_yard)).getText().toString().trim();
+        String womenDis = ((EditText)findViewById(R.id.cbr_woman_yard)).getText().toString().trim();
+        String par = ((EditText)findViewById(R.id.cbr_par)).getText().toString().trim();
+
 
         //if any of the strings are null print error
-
-
-=======
-        if (childDis==null || menDis==null||womenDis==null||par==null)
+        Log.d("Compare",childDis);
+        if (childDis.isEmpty() || menDis.isEmpty()||womenDis.isEmpty()||par.isEmpty())
         {
             findViewById(R.id.cbr_error2).setVisibility(View.VISIBLE);
+            return;
         }
->>>>>>> 505ffdaf09be46cde500ad334a91dd7faf2c4f7b
-        this.holeDistanceChild[currentHole] = Integer.parseInt(childDis);
-        this.holeDistanceWomen[currentHole] = Integer.parseInt(womenDis);
-        this.holeDistanceMen[currentHole] = Integer.parseInt(menDis);
-        this.par[currentHole] = Integer.parseInt(par);
-        //TODO add par
-        //this.par[currentHole] = Integer.parseInt(par);
+        this.holeDistanceChild[currentHole-1] = Integer.parseInt(childDis);
+        this.holeDistanceWomen[currentHole-1] = Integer.parseInt(womenDis);
+        this.holeDistanceMen[currentHole-1] = Integer.parseInt(menDis);
+        this.par[currentHole-1] = Integer.parseInt(par);
+        emptyText();
 
 
         if (currentHole==9){this.goTo=2;}
@@ -192,16 +189,23 @@ public class Create_before_round extends AppCompatActivity {
             a[1]=String.valueOf(currentHole).charAt(1);
         }
         ((TextView)findViewById(R.id.cbr_hole)).setText(a,0,goTo);
-        if (currentHole==(holesOnCourse-1))
+        if (currentHole==(holesOnCourse))
         {
             String t = "Finish";
             char tt []= t.toCharArray();
-            ((Button)(findViewById(R.id.cbr_next_hole))).setText(tt,0,5);
+            ((Button)(findViewById(R.id.cbr_next_hole))).setText(tt,0,6);
         }
         // TODO: 10/16/16 add the information entered in boxes to the database
 
 
 
+    }
 
+    public void emptyText()
+    {
+        ((EditText)findViewById(R.id.cbr_child_yard)).setText("");
+        ((EditText)findViewById(R.id.cbr_man_yard)).setText("");
+        ((EditText)findViewById(R.id.cbr_woman_yard)).setText("");
+        ((EditText)findViewById(R.id.cbr_par)).setText("");
     }
 }
