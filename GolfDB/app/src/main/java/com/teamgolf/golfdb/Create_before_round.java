@@ -8,13 +8,17 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
+
 public class Create_before_round extends AppCompatActivity {
 
+    @Override
+    public void onBackPressed() {
+    }
     //inits
     private int currentHole;
     private int holesOnCourse;
@@ -45,6 +49,8 @@ public class Create_before_round extends AppCompatActivity {
         char a [] = {' ', ' '};
         a[0]=String.valueOf(currentHole).charAt(0);
         ((TextView)findViewById(R.id.cbr_hole)).setText(a,0,1);
+        findViewById(R.id.cbr_1_error).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_error2).setVisibility(View.INVISIBLE);
     }
     public void hideStage1()
     {
@@ -56,7 +62,8 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_1_course_state_text).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_numholes).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_1_numholes_text).setVisibility(View.INVISIBLE);
-        findViewById(R.id.cbr_1_dumass).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_1_error).setVisibility(View.INVISIBLE);
+
     }
     public void hideStage2()
     {
@@ -72,6 +79,8 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_child_tee).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_hole).setVisibility(View.INVISIBLE);
         findViewById(R.id.cbr_hole_number).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_par).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cbr_par_text).setVisibility(View.INVISIBLE);
 
     }
     public void showStage2()
@@ -88,6 +97,8 @@ public class Create_before_round extends AppCompatActivity {
         findViewById(R.id.cbr_child_tee).setVisibility(View.VISIBLE);
         findViewById(R.id.cbr_hole).setVisibility(View.VISIBLE);
         findViewById(R.id.cbr_hole_number).setVisibility(View.VISIBLE);
+        findViewById(R.id.cbr_par).setVisibility(View.VISIBLE);
+        findViewById(R.id.cbr_par_text).setVisibility(View.VISIBLE);
 
     }
 
@@ -107,7 +118,8 @@ public class Create_before_round extends AppCompatActivity {
         //if an input is missing
         if (courseName.length()==0||state.length()==0||city.length()==0||numHoles.length()==0)
         {
-            findViewById(R.id.cbr_1_dumass).setVisibility(View.VISIBLE);
+            findViewById(R.id.cbr_1_error).setVisibility(View.VISIBLE);
+            return;
         }
 
         //if course is succesfully inserted
@@ -144,24 +156,34 @@ public class Create_before_round extends AppCompatActivity {
             startActivity(intent);
 
         }
-        if (currentHole==9){this.goTo=2;}
+
 
         //store values in array
         String childDis = ((EditText)findViewById(R.id.cbr_child_yard)).toString().trim();
         String menDis = ((EditText)findViewById(R.id.cbr_man_yard)).toString().trim();
         String womenDis = ((EditText)findViewById(R.id.cbr_woman_yard)).toString().trim();
-        //TODO add par
+        String par = ((EditText)findViewById(R.id.cbr_par)).toString().trim();
         //String par = ....
+<<<<<<< HEAD
 
         //if any of the strings are null print error
 
 
+=======
+        if (childDis==null || menDis==null||womenDis==null||par==null)
+        {
+            findViewById(R.id.cbr_error2).setVisibility(View.VISIBLE);
+        }
+>>>>>>> 505ffdaf09be46cde500ad334a91dd7faf2c4f7b
         this.holeDistanceChild[currentHole] = Integer.parseInt(childDis);
         this.holeDistanceWomen[currentHole] = Integer.parseInt(womenDis);
         this.holeDistanceMen[currentHole] = Integer.parseInt(menDis);
+        this.par[currentHole] = Integer.parseInt(par);
         //TODO add par
         //this.par[currentHole] = Integer.parseInt(par);
 
+
+        if (currentHole==9){this.goTo=2;}
         this.currentHole++;
         char a [] = {' ', ' '};
         a[0]=String.valueOf(currentHole).charAt(0);
@@ -170,6 +192,12 @@ public class Create_before_round extends AppCompatActivity {
             a[1]=String.valueOf(currentHole).charAt(1);
         }
         ((TextView)findViewById(R.id.cbr_hole)).setText(a,0,goTo);
+        if (currentHole==(holesOnCourse-1))
+        {
+            String t = "Finish";
+            char tt []= t.toCharArray();
+            ((Button)(findViewById(R.id.cbr_next_hole))).setText(tt,0,5);
+        }
         // TODO: 10/16/16 add the information entered in boxes to the database
 
 

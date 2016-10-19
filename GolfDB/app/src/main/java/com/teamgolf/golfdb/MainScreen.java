@@ -8,6 +8,9 @@ import android.widget.Button;
 
 public class MainScreen extends AppCompatActivity {
 
+    @Override
+    public void onBackPressed() {
+    }
     Button playGameButton, optionButton, statisticsButton, closeButton;
     static Boolean firstStart = true;
 

@@ -19,7 +19,9 @@ public class Create_new_acc extends AppCompatActivity {
        findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
         findViewById(R.id.short_uname).setVisibility(View.INVISIBLE);
     }
-
+    @Override
+    public void onBackPressed() {
+    }
 
     public void create_Account(View v)
     {
