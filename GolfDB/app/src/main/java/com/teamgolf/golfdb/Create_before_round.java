@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 public class Create_before_round extends AppCompatActivity {
 
+    @Override
+    public void onBackPressed() {
+    }
     //inits
     private int currentHole;
     private int holesOnCourse;
