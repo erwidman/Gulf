@@ -32,9 +32,6 @@ public class MainScreen extends AppCompatActivity {
     }
     protected void onDestroy(){
         super.onDestroy();
-        if(isFinishing()){
-            firstStart = false;
-        }
     }
 
     public class ButtonListener implements Button.OnClickListener {

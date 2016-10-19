@@ -13,6 +13,7 @@ public class Login extends AppCompatActivity {
 
     Button loginButton, newUserButton;
 
+
     //boolean noting if app iNs on first run of code at startup
     static Boolean firstStart = true;
 
@@ -20,25 +21,24 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //Run Once at start (initalizations)
+        if(firstStart) {
+            Log.d("Run once","...");
+            new Constants(this.getApplicationContext());
+            firstStart = false;
+        }
+
+
         //create login view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loginButton = (Button)findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new ButtonListener("login"));
+        newUserButton = (Button)findViewById(R.id.newUserButton);
+        newUserButton.setOnClickListener(new ButtonListener("newUser"));
+        findViewById(R.id.invalid_login).setVisibility(View.INVISIBLE);
 
 
-        //Run Once at start (initalizations)
-        if(firstStart) {
-            findViewById(R.id.invalid_login).setVisibility(View.INVISIBLE);
-            //load constants
-            new Constants(this.getApplicationContext());
-            DatabaseHandler dbHandler = Constants.dbHandler;
-
-            //init
-            loginButton = (Button)findViewById(R.id.loginButton);
-            loginButton.setOnClickListener(new ButtonListener("login",dbHandler));
-            newUserButton = (Button)findViewById(R.id.newUserButton);
-            newUserButton.setOnClickListener(new ButtonListener("newUser",dbHandler));
-            firstStart = false;
-        }
 
     }
 
@@ -52,11 +52,10 @@ public class Login extends AppCompatActivity {
 
     public class ButtonListener implements Button.OnClickListener {
         String id;
-        DatabaseHandler dbHandler;
+        DatabaseHandler dbHandler = Constants.dbHandler;
 
-        public ButtonListener(String id, DatabaseHandler dbHandler){
+        public ButtonListener(String id){
             this.id = id;
-            this.dbHandler = dbHandler;
         }
 
         @Override
@@ -68,7 +67,9 @@ public class Login extends AppCompatActivity {
                     String user = tmp.getText().toString().trim();
                     tmp = (EditText)findViewById(R.id.uPassword);
                     String password = tmp.getText().toString().trim();
-                    Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
+                    Log.d("user",user);
+                    Log.d("password",password);
+                    //Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                     if(dbHandler.checkPassword(user,password)){
                         //transition to blank activity
                         Intent intent = new Intent(Login.this, MainScreen.class);

@@ -22,7 +22,7 @@ public class DatabaseHandler {
         dbHelper = new DatabaseHelper(context);
 
         //!!!!!!!!!!!!!!for testing
-        dbHelper.connectDB().execSQL("delete from player where 1 =1;");
+       // dbHelper.connectDB().execSQL("delete from player where 1 =1;");
         dbHelper.connectDB().execSQL("delete from courses where 1=1;");
 
     }

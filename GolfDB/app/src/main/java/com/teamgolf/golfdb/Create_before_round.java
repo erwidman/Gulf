@@ -153,6 +153,9 @@ public class Create_before_round extends AppCompatActivity {
         //TODO add par
         //String par = ....
 
+        //if any of the strings are null print error
+
+
         this.holeDistanceChild[currentHole] = Integer.parseInt(childDis);
         this.holeDistanceWomen[currentHole] = Integer.parseInt(womenDis);
         this.holeDistanceMen[currentHole] = Integer.parseInt(menDis);
