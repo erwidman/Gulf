@@ -98,23 +98,38 @@ public class DatabaseHandler {
 
     //course table
     //_________________________________________________________________________________________________________________________________
-    public Cursor getCourses(String location){
+
+
+    public Cursor getCourses(String input, Boolean isLocationSearch){
         SQLiteDatabase db = dbHelper.connectDB();
         //perform query
-        //Cursor c = db.query("courses",new String[] {"name","courseDifficulty","numOfHoles"},"like %?%",new String[] {location},null,null,null);
-        Cursor c = db.rawQuery("Select name,courseDifficulty,numOfHoles from courses where location like %?%;",new String[] {location});
-        db.close();
+        Cursor c;
+        input = "%" + input + "%";
+
+        if(isLocationSearch)
+        {
+            c = db.rawQuery("Select name,courseDifficulty,numOfHoles from courses where location like ?;", new String[]{input});
+        }
+
+        else
+        {
+            c = db.rawQuery("Select name,courseDifficulty,numOfHoles from courses where name like ?;", new String[]{input});
+        }
 
         if(c.getCount()>0)
+        {
+            db.close();
             return c;
+        }
 
+        db.close();
         return null;
     }
 
     public boolean insertCourse(String name, String state, String city, String difficulty, String numOfHoles){
 
         Log.d("Test",name);
-        String loc = state + ":" + city +":" + name;
+        String loc = state + ":" + city ;
 
         SQLiteDatabase db = dbHelper.connectDB();
 

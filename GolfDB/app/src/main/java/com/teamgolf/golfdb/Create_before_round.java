@@ -14,12 +14,29 @@ import android.widget.TextView;
 
 
 public class Create_before_round extends AppCompatActivity {
-private int currentHole;
+
+    //inits
+    private int currentHole;
     private int holesOnCourse;
     private int goTo;
+
+    private String currCourseName;
+    private String courseLocation;
+
+
+    //paraelle arrays
+    private int holeDistanceChild [];
+    private int holeDistanceWomen [];
+    private int holeDistanceMen [];
+    private int par[];
+
+
+
+
     protected void onCreate(Bundle savedInstanceState)
     {
-        findViewById(R.id.cbr_1_dumass).setVisibility(View.INVISIBLE);
+        //FIX
+        //findViewById(R.id.cbr_1_dumass).setVisibility(View.INVISIBLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_before_round);
         hideStage2();
@@ -73,31 +90,47 @@ private int currentHole;
         findViewById(R.id.cbr_hole_number).setVisibility(View.VISIBLE);
 
     }
-    public void test(View v)
-    {
-        Intent intent = new Intent(v.getContext(), MainScreen.class);
-        startActivity(intent);
-    }
+
+    //______________________________________________________________________________________________________________
+
+
     public void courseCreate(View v)
     {
+        Log.d("courseCreate","RUNNING METHOD");
+        //init textfields
         String courseName = ((EditText)findViewById(R.id.cbr_1_course_name)).getText().toString().toLowerCase().trim();
         String state = ((EditText)findViewById(R.id.cbr_1_course_state)).getText().toString().toLowerCase().trim();
         String city = ((EditText)findViewById(R.id.cbr_1_course_location)).getText().toString().toLowerCase().trim();
         String numHoles = ((EditText)findViewById(R.id.cbr_1_numholes)).getText().toString().toLowerCase().trim();
+
+
+        //if an input is missing
         if (courseName.length()==0||state.length()==0||city.length()==0||numHoles.length()==0)
         {
             findViewById(R.id.cbr_1_dumass).setVisibility(View.VISIBLE);
         }
-        //this is where we check if they gave us course+location that we like
-        if(Constants.dbHandler.insertCourse(courseName,state,city,"0",numHoles);
+
+        //if course is succesfully inserted
+        if(Constants.dbHandler.insertCourse(courseName,state,city,"0",numHoles))
         {
             this.holesOnCourse=Integer.parseInt(((EditText)findViewById(R.id.cbr_1_numholes)).getText().toString());
             hideStage1();
             showStage2();
+
+            //used for inserting holes later
+            this.courseLocation = state + ":" + city;
+            this.currCourseName = courseName;
+
+            //load array sizes
+            int size = Integer.parseInt(numHoles);
+            this.holeDistanceChild = new int [size];
+            this.holeDistanceMen = new int [size];
+            this.holeDistanceWomen = new int [size];
+            this.par = new int [size];
         }
         else
         {
-            //todo course already exist
+            //todo course already exist print error
         }
 
     }
@@ -112,6 +145,20 @@ private int currentHole;
 
         }
         if (currentHole==9){this.goTo=2;}
+
+        //store values in array
+        String childDis = ((EditText)findViewById(R.id.cbr_child_yard)).toString().trim();
+        String menDis = ((EditText)findViewById(R.id.cbr_man_yard)).toString().trim();
+        String womenDis = ((EditText)findViewById(R.id.cbr_woman_yard)).toString().trim();
+        //TODO add par
+        //String par = ....
+
+        this.holeDistanceChild[currentHole] = Integer.parseInt(childDis);
+        this.holeDistanceWomen[currentHole] = Integer.parseInt(womenDis);
+        this.holeDistanceMen[currentHole] = Integer.parseInt(menDis);
+        //TODO add par
+        //this.par[currentHole] = Integer.parseInt(par);
+
         this.currentHole++;
         char a [] = {' ', ' '};
         a[0]=String.valueOf(currentHole).charAt(0);
@@ -121,5 +168,9 @@ private int currentHole;
         }
         ((TextView)findViewById(R.id.cbr_hole)).setText(a,0,goTo);
         // TODO: 10/16/16 add the information entered in boxes to the database
+
+
+
+
     }
 }
