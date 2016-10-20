@@ -35,20 +35,15 @@ public class Select_course extends AppCompatActivity
         String toSearch=((EditText)findViewById(R.id.search_course_entry)).getText().toString().toLowerCase().trim();
         //loaction check box
         Boolean locationSearch = ((CheckBox)findViewById(R.id.search_city)).isChecked();
-        Log.d("COURSE_SEARCH",locationSearch.toString());
-            //Todo search the dba for toSearch
-        Cursor c = Constants.dbHandler.getCourses(toSearch,locationSearch);
+        Boolean nameSearch = ((CheckBox)findViewById(R.id.search_course)).isChecked();
 
-        //if the result of search is nothing do nothing
-        if(c == null)
-            return;
+        String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
 
-        //iterate through search
-        c.moveToFirst();
-        while(c.moveToNext()){
-                //TODO create buttons for resulting courses
+        if(results!=null) {
+            for (String s : results) {
+                Log.d("SearchResult", s);
             }
-
+        }
 
 
     }

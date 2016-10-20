@@ -49,6 +49,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             throw new Error("Improper Path");
         }
 
+        db.execSQL("pragma foreign_keys= on;");
+
         return db;
     }
 
@@ -74,7 +76,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                    e.printStackTrace();
                }
            }
-
     }
     @Override
     public void onCreate(SQLiteDatabase db) {

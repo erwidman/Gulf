@@ -23,8 +23,21 @@ public class DatabaseHandler {
 
         //!!!!!!!!!!!!!!for testing
        // dbHelper.connectDB().execSQL("delete from player where 1 =1;");
-        dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+        // dbHelper.connectDB().execSQL("delete from courses where 1=1;");
 
+    }
+
+    //hole table
+    //__________________________________________________________________________________________________________________________________________________________
+    public void insertHoles(String cName, String cLocation, String [] par, String menDis[], String womenDis[], String[] childDis){
+        SQLiteDatabase db= dbHelper.connectDB();
+        db.beginTransaction();
+        for(int i=0; i < par.length;i++){
+            db.execSQL("insert into hole values(?,?,?,?,?,?,?,?)", new String [] {cName,cLocation,Integer.toString(i+1),par[i],childDis[i],womenDis[i],menDis[i],"0"});
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
     }
 
     //player table
@@ -100,26 +113,36 @@ public class DatabaseHandler {
     //_________________________________________________________________________________________________________________________________
 
 
-    public Cursor getCourses(String input, Boolean isLocationSearch){
+    public String[] getCourses(String input, Boolean isLocationSearch, Boolean isNameSearch){
         SQLiteDatabase db = dbHelper.connectDB();
         //perform query
         Cursor c;
         input = "%" + input + "%";
 
-        if(isLocationSearch)
-        {
-            c = db.rawQuery("Select name,courseDifficulty,numOfHoles from courses where location like ?;", new String[]{input});
-        }
-
+        if(isLocationSearch&&!isNameSearch)
+            c = db.rawQuery("Select name,location from courses where location like ?;", new String[]{input});
+        else if(isNameSearch&&!isLocationSearch)
+            c = db.rawQuery("Select name,location from courses where name like ?;", new String[]{input});
         else
-        {
-            c = db.rawQuery("Select name,courseDifficulty,numOfHoles from courses where name like ?;", new String[]{input});
-        }
+            c = db.rawQuery("Select name,location from courses where name like ? union select name, location from courses where location like ?;", new String[]{input,input});
 
-        if(c.getCount()>0)
+
+
+
+        //if querey is succesful populate results
+        int numResults = c.getCount();
+        if(numResults>0)
         {
+            String[] results = new String[numResults];
+            String resString;
+            int i = 0;
+            while(c.moveToNext()){
+                resString= c.getString(0)+":"+c.getString(1);
+                results[i]=resString;
+                i++;
+            }
             db.close();
-            return c;
+            return results;
         }
 
         db.close();

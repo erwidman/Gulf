@@ -29,10 +29,10 @@ public class Create_before_round extends AppCompatActivity {
 
 
     //paraelle arrays
-    private int holeDistanceChild [];
-    private int holeDistanceWomen [];
-    private int holeDistanceMen [];
-    private int par[];
+    private String holeDistanceChild [];
+    private String holeDistanceWomen [];
+    private String holeDistanceMen [];
+    private String par[];
 
 
 
@@ -136,10 +136,10 @@ public class Create_before_round extends AppCompatActivity {
 
             //load array sizes
             int size = Integer.parseInt(numHoles);
-            this.holeDistanceChild = new int [size];
-            this.holeDistanceMen = new int [size];
-            this.holeDistanceWomen = new int [size];
-            this.par = new int [size];
+            this.holeDistanceChild = new String[size];
+            this.holeDistanceMen = new String[size];
+            this.holeDistanceWomen = new String[size];
+            this.par = new String[size];
         }
         else
         {
@@ -150,6 +150,12 @@ public class Create_before_round extends AppCompatActivity {
 
     public void addedHole(View v)
     {
+        //if forums completed
+        if(((Button)(findViewById(R.id.cbr_next_hole))).getText().equals("Finish")){
+
+        }
+
+
         if (currentHole==holesOnCourse)
         {
             //// TODO: 10/16/16 transition to new page to play the round
@@ -173,10 +179,12 @@ public class Create_before_round extends AppCompatActivity {
             findViewById(R.id.cbr_error2).setVisibility(View.VISIBLE);
             return;
         }
-        this.holeDistanceChild[currentHole-1] = Integer.parseInt(childDis);
-        this.holeDistanceWomen[currentHole-1] = Integer.parseInt(womenDis);
-        this.holeDistanceMen[currentHole-1] = Integer.parseInt(menDis);
-        this.par[currentHole-1] = Integer.parseInt(par);
+
+        //save data to arrays to be written to db.
+        this.holeDistanceChild[currentHole-1] = childDis;
+        this.holeDistanceWomen[currentHole-1] = womenDis;
+        this.holeDistanceMen[currentHole-1] = menDis;
+        this.par[currentHole-1] = par;
         emptyText();
 
 

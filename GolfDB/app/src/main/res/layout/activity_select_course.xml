@@ -5,7 +5,7 @@
     tools:context="com.teamgolf.golfdb.Login">
 
     <TextView
-        android:text="Search By City"
+        android:text="Search By Location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -105,10 +105,10 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:id="@+id/spinner"
         android:layout_below="@+id/search_checkbox_error"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="87dp"
-        android:id="@+id/spinner" />
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
 
 </RelativeLayout>
