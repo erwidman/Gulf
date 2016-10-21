@@ -15,6 +15,8 @@ import android.widget.EditText;
 
 public class Select_course extends AppCompatActivity
 {
+    public final static String EXTRA_MESSAGE = "com.teamgolf.golfdb";
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -43,8 +45,11 @@ public class Select_course extends AppCompatActivity
             for (String s : results) {
                 Log.d("SearchResult", s);
             }
-        }
 
+        }
+        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
+        intent.putExtra(EXTRA_MESSAGE, results);
+        startActivity(intent);
 
     }
 }
