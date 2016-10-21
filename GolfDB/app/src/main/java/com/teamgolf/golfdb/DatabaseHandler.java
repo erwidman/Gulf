@@ -1,6 +1,7 @@
 package com.teamgolf.golfdb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -23,16 +24,24 @@ public class DatabaseHandler {
 
         //!!!!!!!!!!!!!!for testing
         //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
+
         dbHelper.connectDB().execSQL("delete from courses where 1=1;");
 
+        Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
+
+        while(c.moveToNext()){
+            Log.d("TestingHoleInsert", c.getString(1));
+        }
     }
 
     //hole table
     //__________________________________________________________________________________________________________________________________________________________
     public void insertHoles(String cName, String cLocation, String [] par, String menDis[], String womenDis[], String[] childDis){
         SQLiteDatabase db= dbHelper.connectDB();
+        Log.d("TestingHoleInsert", "Start");
         db.beginTransaction();
         for(int i=0; i < par.length;i++){
+            Log.d("TestingHoleInsert", Integer.toString(i));
             db.execSQL("insert into hole values(?,?,?,?,?,?,?,?)", new String [] {cName,cLocation,Integer.toString(i+1),par[i],childDis[i],womenDis[i],menDis[i],"0"});
         }
         db.setTransactionSuccessful();

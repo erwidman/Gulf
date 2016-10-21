@@ -150,16 +150,10 @@ public class Create_before_round extends AppCompatActivity {
 
     public void addedHole(View v)
     {
-        //if forums completed
-        if(((Button)(findViewById(R.id.cbr_next_hole))).getText().equals("Finish")){
-            Constants.dbHandler.insertHoles(currCourseName,courseLocation, par,holeDistanceMen,holeDistanceWomen,holeDistanceChild);
-            return;
-        }
-
 
         if (currentHole==holesOnCourse)
         {
-            //// TODO: 10/16/16 transition to new page to play the round
+            Constants.dbHandler.insertHoles(currCourseName,courseLocation, par,holeDistanceMen,holeDistanceWomen,holeDistanceChild);
             Intent intent = new Intent(Create_before_round.this, Select_course.class);
             startActivity(intent);
 
