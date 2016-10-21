@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 
 
 /**
@@ -15,7 +17,7 @@ import android.widget.EditText;
 
 public class Select_course extends AppCompatActivity
 {
-    public final static String EXTRA_MESSAGE = "com.teamgolf.golfdb";
+//    public final static String EXTRA_MESSAGE = "com.teamgolf.golfdb";
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,11 +47,14 @@ public class Select_course extends AppCompatActivity
             for (String s : results) {
                 Log.d("SearchResult", s);
             }
+            ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
+            listview.setAdapter(adapter);
 
         }
-        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
-        intent.putExtra(EXTRA_MESSAGE, results);
-        startActivity(intent);
+//        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
+//        intent.putExtra(EXTRA_MESSAGE, results);
+//        startActivity(intent);
 
     }
 }
