@@ -152,7 +152,8 @@ public class Create_before_round extends AppCompatActivity {
     {
         //if forums completed
         if(((Button)(findViewById(R.id.cbr_next_hole))).getText().equals("Finish")){
-
+            Constants.dbHandler.insertHoles(currCourseName,courseLocation, par,holeDistanceMen,holeDistanceWomen,holeDistanceChild);
+            return;
         }
 
 

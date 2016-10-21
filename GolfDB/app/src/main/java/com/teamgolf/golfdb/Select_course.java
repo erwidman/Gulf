@@ -47,9 +47,6 @@ public class Select_course extends AppCompatActivity
             }
 
         }
-        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
-        intent.putExtra(EXTRA_MESSAGE, results);
-        startActivity(intent);
 
     }
 }
