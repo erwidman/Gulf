@@ -44,8 +44,20 @@ public class Select_course extends AppCompatActivity
         String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
 
         if(results!=null) {
+            int k = 0;
             for (String s : results) {
+                int i = 0;
+                for (char c : s.toCharArray()){
+
+                    if(c== ':'){
+                        Log.d("Character", "true");
+                       s = s.substring(0,i) + ' ' + s.substring(i+1,s.length());
+                    }
+                    i++;
+                }
                 Log.d("SearchResult", s);
+                results[k] = s;
+                k++;
             }
             ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
