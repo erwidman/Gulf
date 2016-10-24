@@ -72,6 +72,7 @@ public class Login extends AppCompatActivity {
                     //Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                     if(dbHandler.checkPassword(user,password)){
                         //transition to blank activity
+                        Constants.user=user;
                         Intent intent = new Intent(Login.this, MainScreen.class);
                         startActivity(intent);
 

@@ -15,6 +15,9 @@ public class DatabaseHandler {
 
     DatabaseHelper dbHelper = null;
     Context context;
+    int currGame;
+    String currName;
+    String currLocation;
 
 
     public DatabaseHandler(Context context) {
@@ -211,5 +214,43 @@ public class DatabaseHandler {
             return true;
 
         return false;
+    }
+
+    //________________________________________________________________________________________________________________----
+    public boolean startGame(String courseName, String courseLoc) {
+
+        SQLiteDatabase db = dbHelper.connectDB();
+        //load curr game
+        Cursor c = db.rawQuery("Select * from increment;",null);
+        c.moveToFirst();
+        this.currGame = c.getInt(0)+1;
+        this.currLocation= courseLoc;
+        this.currName = courseName;
+        //increment in db
+        db.beginTransaction();
+        db.execSQL("Update increment set play = play + 1;");
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+        if(currGame!=0)
+            return true;
+
+        return false;
+    }
+
+    public void insertScore(String holeNumber, String score){
+        SQLiteDatabase db = dbHelper.connectDB();
+        db.beginTransaction();
+        db.execSQL("Insert into log values(?, ?, ?, ?, ?, ?);",new String [] {Constants.user,holeNumber,currName,currLocation,score,Integer.toString(currGame)});
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+    }
+
+    public String[] holeInfo(){
+        //// TODO: 24/10/16
+        SQLiteDatabase db = dbHelper.connectDB();
+        //Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ?, location = ?, number = ?;");
+        return null;
     }
 }
