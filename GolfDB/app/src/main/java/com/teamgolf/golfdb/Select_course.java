@@ -59,9 +59,9 @@ public class Select_course extends AppCompatActivity
                 results[k] = s;
                 k++;
             }
-            ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
+           // ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
-            listview.setAdapter(adapter);
+           // listview.setAdapter(adapter);
 
         }
 //        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);

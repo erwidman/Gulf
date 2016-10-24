@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class Basic_round extends AppCompatActivity
 {
-    private int curHole;
+    private String curHole;
     private int firstRun=1;
     public TextView hole1Text;
     public TextView hole2Text;
@@ -27,40 +27,36 @@ public class Basic_round extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_round);
 
-        if (firstRun==1)
-        {
-            TextView hole1Text=(TextView) findViewById(R.id.br_hole1);
-            TextView hole2Text=(TextView) findViewById(R.id.br_hole2);
-            TextView hole3Text=(TextView) findViewById(R.id.br_hole3);
-            TextView hole4Text=(TextView) findViewById(R.id.br_hole4);
-            this.curHole=1;
-            firstRun=0;
-            char [] a = {' ', ' '};
-            a[0]=1;
-            hole1Text.setText(a,0,1);
-            a[0]=2;
-            hole2Text.setText(a,0,1);
-            a[0]=3;
-            hole3Text.setText(a,0,1);
-            a[0]=4;
-            hole4Text.setText(a,0,1);
+        if (firstRun==1) {
+            curHole="1";
+            TextView hole1Text = (TextView) findViewById(R.id.br_h1);
+            TextView hole2Text = (TextView) findViewById(R.id.br_h2);
+            TextView hole3Text = (TextView) findViewById(R.id.br_h3);
+            TextView hole4Text = (TextView) findViewById(R.id.br_h4);
+            hole1Text.setText(curHole.toCharArray(),0,1);
+            curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+            hole2Text.setText(curHole.toCharArray(),0,1);
+            curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+            hole3Text.setText(curHole.toCharArray(),0,1);
+            curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+            hole4Text.setText(curHole.toCharArray(),0,1);
 
         }
     }
     public void prev(View v)
     {
-        TextView hole1Text=(TextView) findViewById(R.id.br_hole1);
-        TextView hole2Text=(TextView) findViewById(R.id.br_hole2);
-        TextView hole3Text=(TextView) findViewById(R.id.br_hole3);
-        TextView hole4Text=(TextView) findViewById(R.id.br_hole4);
+        TextView hole1Text=(TextView) findViewById(R.id.br_h1);
+        TextView hole2Text=(TextView) findViewById(R.id.br_h2);
+        TextView hole3Text=(TextView) findViewById(R.id.br_h3);
+        TextView hole4Text=(TextView) findViewById(R.id.br_h4);
     }
 
 
     public void next(View v)
     {
-        TextView hole1Text=(TextView) findViewById(R.id.br_hole1);
-        TextView hole2Text=(TextView) findViewById(R.id.br_hole2);
-        TextView hole3Text=(TextView) findViewById(R.id.br_hole3);
-        TextView hole4Text=(TextView) findViewById(R.id.br_hole4);
+        TextView hole1Text=(TextView) findViewById(R.id.br_h1);
+        TextView hole2Text=(TextView) findViewById(R.id.br_h2);
+        TextView hole3Text=(TextView) findViewById(R.id.br_h3);
+        TextView hole4Text=(TextView) findViewById(R.id.br_h4);
     }
 }
