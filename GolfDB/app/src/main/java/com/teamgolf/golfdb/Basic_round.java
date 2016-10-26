@@ -18,6 +18,7 @@ public class Basic_round extends AppCompatActivity
 {
     private String curHole;
     private int firstRun=1;
+    int hatejava =1;
     public TextView hole1Text;
     public TextView hole2Text;
     public TextView hole3Text;
@@ -45,18 +46,57 @@ public class Basic_round extends AppCompatActivity
     }
     public void prev(View v)
     {
+        if (Integer.parseInt(curHole)<4)
+        {
+            return;
+        }
+
         TextView hole1Text=(TextView) findViewById(R.id.br_h1);
         TextView hole2Text=(TextView) findViewById(R.id.br_h2);
         TextView hole3Text=(TextView) findViewById(R.id.br_h3);
         TextView hole4Text=(TextView) findViewById(R.id.br_h4);
+        curHole=(hole1Text.getText().toString());
+        curHole= Integer.toString(Integer.parseInt(curHole) -4);
+
+        hole1Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+        hole2Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+        hole3Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+        hole4Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) -3);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+
+
     }
 
 
     public void next(View v)
     {
+
         TextView hole1Text=(TextView) findViewById(R.id.br_h1);
         TextView hole2Text=(TextView) findViewById(R.id.br_h2);
         TextView hole3Text=(TextView) findViewById(R.id.br_h3);
         TextView hole4Text=(TextView) findViewById(R.id.br_h4);
+        curHole=(hole1Text.getText().toString());
+        curHole= Integer.toString(Integer.parseInt(curHole) + 3);
+
+        hole1Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+        hole2Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+        hole3Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) + 1);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
+        hole4Text.setText(curHole.toCharArray(),0,hatejava);
+        curHole= Integer.toString(Integer.parseInt(curHole) -3);
+        if (Integer.parseInt(curHole)>9){hatejava=2; } else if (Integer.parseInt(curHole)<9){hatejava=1;}
     }
+
 }

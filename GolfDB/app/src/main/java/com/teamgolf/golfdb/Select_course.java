@@ -69,6 +69,12 @@ public class Select_course extends AppCompatActivity
 //        startActivity(intent);
 
     }
+    public void courseSelected(View v)
+    {
+        //on click listener for course selection
+        ListView list = (ListView)findViewById(R.id.c_Course_Search_Results);
+        //list.getAdapter().;
+    }
     public void playCourse(String courseName, String courseLoc){
 
         //load newgame for user

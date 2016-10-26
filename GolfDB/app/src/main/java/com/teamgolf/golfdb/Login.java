@@ -86,10 +86,10 @@ public class Login extends AppCompatActivity {
                     break;
 
                 case "newUser":
-                    //Intent intent = new Intent(v.getContext(), Create_new_acc.class);
-                    //startActivity(intent);
-                    Intent intent = new Intent(Login.this, Basic_round.class);
+                    Intent intent = new Intent(v.getContext(), Create_new_acc.class);
                     startActivity(intent);
+                    //Intent intent = new Intent(Login.this, Basic_round.class);
+                    //startActivity(intent);
                     break;
             }
         }

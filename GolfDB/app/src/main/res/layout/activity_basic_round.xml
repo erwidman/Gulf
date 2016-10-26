@@ -280,7 +280,7 @@
         android:layout_alignTop="@+id/br_prev"
         android:layout_alignRight="@+id/br_sc4"
         android:layout_alignEnd="@+id/br_sc4"
-        android:onClick="Next"
+        android:onClick="next"
         android:id="@+id/br_next" />
 
     <TextView
