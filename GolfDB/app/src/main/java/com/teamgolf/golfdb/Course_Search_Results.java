@@ -11,7 +11,7 @@ public class Course_Search_Results extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course__search__results);
+//        setContentView(R.layout.activity_course__search__results);
 
         //String[] result = getIntent().getStringArrayExtra(Select_course.EXTRA_MESSAGE);
 

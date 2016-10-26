@@ -59,14 +59,26 @@ public class Select_course extends AppCompatActivity
                 results[k] = s;
                 k++;
             }
-            ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
+<<<<<<< HEAD
+            //ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
-            listview.setAdapter(adapter);
+            //listview.setAdapter(adapter);
+=======
+           // ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
+           // listview.setAdapter(adapter);
+>>>>>>> a76ce445534c1c5fa0fa2b1a577f781c6f7032dc
 
         }
 //        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
 //        intent.putExtra(EXTRA_MESSAGE, results);
 //        startActivity(intent);
 
+    }
+    public void playCourse(String courseName, String courseLoc){
+
+        //load newgame for user
+        Constants.dbHandler.startGame(courseName,courseLoc);
+        //todo transition to scorecard
     }
 }

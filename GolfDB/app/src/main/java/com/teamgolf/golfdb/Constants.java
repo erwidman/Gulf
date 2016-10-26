@@ -10,6 +10,7 @@ public class Constants {
 
     public static DatabaseHandler dbHandler;
     public static Context context;
+    public static String user = null;
 
     public Constants(Context context){
         this.context = context;

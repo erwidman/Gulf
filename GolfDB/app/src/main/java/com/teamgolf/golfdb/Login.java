@@ -72,6 +72,7 @@ public class Login extends AppCompatActivity {
                     //Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                     if(dbHandler.checkPassword(user,password)){
                         //transition to blank activity
+                        Constants.user=user;
                         Intent intent = new Intent(Login.this, MainScreen.class);
                         startActivity(intent);
 
@@ -85,7 +86,9 @@ public class Login extends AppCompatActivity {
                     break;
 
                 case "newUser":
-                    Intent intent = new Intent(v.getContext(), Create_new_acc.class);
+                    //Intent intent = new Intent(v.getContext(), Create_new_acc.class);
+                    //startActivity(intent);
+                    Intent intent = new Intent(Login.this, Basic_round.class);
                     startActivity(intent);
                     break;
             }
