@@ -26,15 +26,17 @@ public class DatabaseHandler {
         dbHelper = new DatabaseHelper(context);
 
         //!!!!!!!!!!!!!!for testing
-        dbHelper.connectDB().execSQL("delete from player where 1 =1;");
-
-        dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+        //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
+        //dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+        String [][] tmp = holeInfo("hillside","michigan:farmington");
+        for(int i =0; i< tmp[0].length; i+=1){
+            for(int j =0; j<tmp.length;j+=1){
+                Log.d("Test",j+":"+i+" "+tmp[j][i]);
+            }
+        }
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
 
-        while(c.moveToNext()){
-            Log.d("TestingHoleInsert", c.getString(1));
-        }
     }
 
     //hole table
@@ -247,10 +249,30 @@ public class DatabaseHandler {
         db.close();
     }
 
-    public String[] holeInfo(){
+    /**
+     * Returns a 2-d array of info on holes for param golf course, array is 4 rows and # of
+     * golf course cols (col 0 = hole 1). Row 0 is par, Row 1 is menDis, Row 2 is womenDis
+     * row 3 = childDis
+     *
+     * @param name CourseName
+     * @param location CourseLocation
+     * @return Retur
+     */
+    public String[][] holeInfo(String name, String location){
         //// TODO: 24/10/16
         SQLiteDatabase db = dbHelper.connectDB();
-        //Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ?, location = ?, number = ?;");
-        return null;
+        Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? ;",new String[] {name,location});
+
+        //iterate through and populate result array
+        String [][] res = new String[4][c.getCount()];
+        int i = 0;
+        while(c.moveToNext()){
+            res[0][i]= c.getString(0); //par
+            res[1][i]= c.getString(1); //mendis
+            res[2][i]= c.getString(2); //womendis
+            res[3][i]= c.getString(3); //childis
+            i++;
+        }
+        return res;
     }
 }

@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.io.StringBufferInputStream;
 
 
 /**
@@ -69,11 +73,10 @@ public class Select_course extends AppCompatActivity
 //        startActivity(intent);
 
     }
-    public void courseSelected(View v)
+    public void courseSelected()
     {
         //on click listener for course selection
         ListView list = (ListView)findViewById(R.id.c_Course_Search_Results);
-        //list.getAdapter().;
     }
     public void playCourse(String courseName, String courseLoc){
 
