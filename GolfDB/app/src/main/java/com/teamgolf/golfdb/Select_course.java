@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.List;
+
 
 /**
  * Created by fred on 10/13/16.
@@ -59,7 +61,7 @@ public class Select_course extends AppCompatActivity
                 results[k] = s;
                 k++;
             }
-            ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
+            ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
 
