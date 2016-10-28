@@ -264,7 +264,7 @@ public class DatabaseHandler {
         Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? ;",new String[] {name,location});
 
         //iterate through and populate result array
-        String [][] res = new String[4][c.getCount()];
+        String [][] res = new String[4][c.getCount()l`];
         int i = 0;
         while(c.moveToNext()){
             res[0][i]= c.getString(0); //par

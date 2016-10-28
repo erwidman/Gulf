@@ -67,6 +67,22 @@ public class Select_course extends AppCompatActivity
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
 
+
+
+
+
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    //TODO
+                }
+
+            });
+
+
+
         }
 //        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
 //        intent.putExtra(EXTRA_MESSAGE, results);
