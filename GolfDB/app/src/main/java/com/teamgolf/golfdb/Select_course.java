@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.io.StringBufferInputStream;
 
 import java.util.List;
 
@@ -61,14 +65,45 @@ public class Select_course extends AppCompatActivity
                 results[k] = s;
                 k++;
             }
+<<<<<<< HEAD
             ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
+=======
+           ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
+>>>>>>> origin/master
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
+
+
+
+
+
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    //TODO
+                }
+
+            });
+
+
 
         }
 //        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
 //        intent.putExtra(EXTRA_MESSAGE, results);
 //        startActivity(intent);
 
+    }
+    public void courseSelected()
+    {
+        //on click listener for course selection
+        ListView list = (ListView)findViewById(R.id.c_Course_Search_Results);
+    }
+    public void playCourse(String courseName, String courseLoc){
+
+        //load newgame for user
+        Constants.dbHandler.startGame(courseName,courseLoc);
+        //todo transition to scorecard
     }
 }

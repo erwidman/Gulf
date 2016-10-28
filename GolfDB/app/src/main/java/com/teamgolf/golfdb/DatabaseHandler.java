@@ -15,6 +15,9 @@ public class DatabaseHandler {
 
     DatabaseHelper dbHelper = null;
     Context context;
+    int currGame;
+    String currName;
+    String currLocation;
 
 
     public DatabaseHandler(Context context) {
@@ -24,14 +27,16 @@ public class DatabaseHandler {
 
         //!!!!!!!!!!!!!!for testing
         //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
-
-        dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+        //dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+        String [][] tmp = holeInfo("hillside","michigan:farmington");
+        for(int i =0; i< tmp[0].length; i+=1){
+            for(int j =0; j<tmp.length;j+=1){
+                Log.d("Test",j+":"+i+" "+tmp[j][i]);
+            }
+        }
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
 
-        while(c.moveToNext()){
-            Log.d("TestingHoleInsert", c.getString(1));
-        }
     }
 
     //hole table
@@ -211,5 +216,63 @@ public class DatabaseHandler {
             return true;
 
         return false;
+    }
+
+    //________________________________________________________________________________________________________________----
+    public boolean startGame(String courseName, String courseLoc) {
+
+        SQLiteDatabase db = dbHelper.connectDB();
+        //load curr game
+        Cursor c = db.rawQuery("Select * from increment;",null);
+        c.moveToFirst();
+        this.currGame = c.getInt(0)+1;
+        this.currLocation= courseLoc;
+        this.currName = courseName;
+        //increment in db
+        db.beginTransaction();
+        db.execSQL("Update increment set play = play + 1;");
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+        if(currGame!=0)
+            return true;
+
+        return false;
+    }
+
+    public void insertScore(String holeNumber, String score){
+        SQLiteDatabase db = dbHelper.connectDB();
+        db.beginTransaction();
+        db.execSQL("Insert into log values(?, ?, ?, ?, ?, ?);",new String [] {Constants.user,holeNumber,currName,currLocation,score,Integer.toString(currGame)});
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+    }
+
+    /**
+     * Returns a 2-d array of info on holes for param golf course, array is 4 rows and # of
+     * golf course cols (col 0 = hole 1). Row 0 is par, Row 1 is menDis, Row 2 is womenDis
+     * row 3 = childDis
+     *
+     * @param name CourseName
+     * @param location CourseLocation
+     * @return Retur
+     */
+    public String[][] holeInfo(String name, String location){
+        //// TODO: 24/10/16
+        SQLiteDatabase db = dbHelper.connectDB();
+        Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? ;",new String[] {name,location});
+
+        //iterate through and populate result array
+        String [][] res = new String[4][c.getCount()l`];
+        int i = 0;
+        while(c.moveToNext()){
+            res[0][i]= c.getString(0); //par
+            res[1][i]= c.getString(1); //mendis
+            res[2][i]= c.getString(2); //womendis
+            res[3][i]= c.getString(3); //childis
+            i++;
+        }
+        return res;
     }
 }
