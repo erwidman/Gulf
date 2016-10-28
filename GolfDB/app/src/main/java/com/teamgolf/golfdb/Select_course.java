@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -62,6 +63,22 @@ public class Select_course extends AppCompatActivity
            ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
+
+
+
+
+
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    //TODO
+                }
+
+            });
+
+
 
         }
 //        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
