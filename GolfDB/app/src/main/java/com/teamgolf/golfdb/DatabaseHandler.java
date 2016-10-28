@@ -1,7 +1,6 @@
 package com.teamgolf.golfdb;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -28,12 +27,7 @@ public class DatabaseHandler {
         //!!!!!!!!!!!!!!for testing
         //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
         //dbHelper.connectDB().execSQL("delete from courses where 1=1;");
-        String [][] tmp = holeInfo("hillside","michigan:farmington");
-        for(int i =0; i< tmp[0].length; i+=1){
-            for(int j =0; j<tmp.length;j+=1){
-                Log.d("Test",j+":"+i+" "+tmp[j][i]);
-            }
-        }
+     
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
 
@@ -46,7 +40,7 @@ public class DatabaseHandler {
         Log.d("TestingHoleInsert", "Start");
         db.beginTransaction();
         for(int i=0; i < par.length;i++){
-            Log.d("TestingHoleInsert", Integer.toString(i));
+            Log.d("TestingHoleInsert", par[i]);
             db.execSQL("insert into hole values(?,?,?,?,?,?,?,?)", new String [] {cName,cLocation,Integer.toString(i+1),par[i],childDis[i],womenDis[i],menDis[i],"0"});
         }
         db.setTransactionSuccessful();
@@ -156,10 +150,12 @@ public class DatabaseHandler {
                 i++;
             }
             db.close();
+            c.close();
             return results;
         }
 
         db.close();
+        c.close();
         return null;
     }
 
@@ -180,6 +176,7 @@ public class DatabaseHandler {
         db.setTransactionSuccessful();
         db.endTransaction();
         db.close();
+        c.close();
 
         return true;
     }
@@ -212,10 +209,8 @@ public class DatabaseHandler {
         Log.d("COMPARE_PASS",s1);
         Log.d("COMPARE_PASS",fetch);
 
-        if(s1.equals(fetch))
-            return true;
+        return s1.equals(fetch);
 
-        return false;
     }
 
     //________________________________________________________________________________________________________________----
@@ -234,10 +229,9 @@ public class DatabaseHandler {
         db.setTransactionSuccessful();
         db.endTransaction();
         db.close();
-        if(currGame!=0)
-            return true;
+        c.close();
+        return currGame!=0;
 
-        return false;
     }
 
     public void insertScore(String holeNumber, String score){
@@ -261,18 +255,21 @@ public class DatabaseHandler {
     public String[][] holeInfo(String name, String location){
         //// TODO: 24/10/16
         SQLiteDatabase db = dbHelper.connectDB();
-        Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? ;",new String[] {name,location});
+        Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? order by number asc;",new String[] {name,location});
 
         //iterate through and populate result array
-        String [][] res = new String[4][c.getCount()l`];
+        String [][] res = new String[4][c.getCount()];
         int i = 0;
         while(c.moveToNext()){
+            Log.d("holeInfo:", c.getString(0));
             res[0][i]= c.getString(0); //par
             res[1][i]= c.getString(1); //mendis
             res[2][i]= c.getString(2); //womendis
             res[3][i]= c.getString(3); //childis
             i++;
         }
+        db.close();
+        c.close();
         return res;
     }
 }

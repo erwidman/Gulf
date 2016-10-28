@@ -151,15 +151,6 @@ public class Create_before_round extends AppCompatActivity {
     public void addedHole(View v)
     {
 
-        if (currentHole==holesOnCourse)
-        {
-            Constants.dbHandler.insertHoles(currCourseName,courseLocation, par,holeDistanceMen,holeDistanceWomen,holeDistanceChild);
-            Intent intent = new Intent(Create_before_round.this, Select_course.class);
-            startActivity(intent);
-
-        }
-
-
         //store values in array
         String childDis = ((EditText)findViewById(R.id.cbr_child_yard)).getText().toString().trim();
         String menDis = ((EditText)findViewById(R.id.cbr_man_yard)).getText().toString().trim();
@@ -181,6 +172,15 @@ public class Create_before_round extends AppCompatActivity {
         this.holeDistanceMen[currentHole-1] = menDis;
         this.par[currentHole-1] = par;
         emptyText();
+
+        if (currentHole==holesOnCourse)
+        {
+            Constants.dbHandler.insertHoles(currCourseName,courseLocation, this.par ,holeDistanceMen,holeDistanceWomen,holeDistanceChild);
+            Intent intent = new Intent(Create_before_round.this, Select_course.class);
+            startActivity(intent);
+
+        }
+
 
 
         if (currentHole==9){this.goTo=2;}

@@ -65,11 +65,8 @@ public class Select_course extends AppCompatActivity
                 results[k] = s;
                 k++;
             }
-<<<<<<< HEAD
             ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
-=======
-           ListView listview =  (ListView) findViewById(R.id.c_Course_Search_Results);
->>>>>>> origin/master
+
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
 
