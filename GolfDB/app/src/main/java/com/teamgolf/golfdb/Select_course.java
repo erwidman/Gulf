@@ -47,24 +47,24 @@ public class Select_course extends AppCompatActivity
         Boolean locationSearch = ((CheckBox)findViewById(R.id.search_city)).isChecked();
         Boolean nameSearch = ((CheckBox)findViewById(R.id.search_course)).isChecked();
 
-        String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
+        final String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
 
         if(results!=null) {
-            int k = 0;
-            for (String s : results) {
-                int i = 0;
-                for (char c : s.toCharArray()){
-
-                    if(c== ':'){
-                        Log.d("Character", "true");
-                       s = s.substring(0,i) + ' ' + s.substring(i+1,s.length());
-                    }
-                    i++;
-                }
-                Log.d("SearchResult", s);
-                results[k] = s;
-                k++;
-            }
+//            int k = 0;
+//            for (String s : results) {
+//                int i = 0;
+//                for (char c : s.toCharArray()){
+//
+//                    if(c== ':'){
+//                        Log.d("Character", "true");
+//                       s = s.substring(0,i) + ' ' + s.substring(i+1,s.length());
+//                    }
+//                    i++;
+//                }
+//                Log.d("SearchResult", s);
+//                results[k] = s;
+//                k++;
+//            }
             ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
@@ -79,7 +79,9 @@ public class Select_course extends AppCompatActivity
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    //TODO
+                    String course = results [position];
+                    courseSelected(course,view);
+
                 }
 
             });
@@ -92,10 +94,37 @@ public class Select_course extends AppCompatActivity
 //        startActivity(intent);
 
     }
-    public void courseSelected()
-    {
-        //on click listener for course selection
-        ListView list = (ListView)findViewById(R.id.c_Course_Search_Results);
+    public void courseSelected(String course, View v){
+        Log.d("TEST",course);
+        String courseName = "";
+        String location = "";
+
+        char tmp;
+        boolean loc = false;
+        for(int i =0; i<course.length();i+=1){
+            tmp = course.charAt(i);
+            if(tmp == ':'&&!loc) {
+                loc = true;
+                continue;
+            }
+            if(!loc)
+                courseName = courseName + tmp;
+            else
+                location = location + tmp;
+        }
+        Log.d("Name",courseName);
+        Log.d("Location",location);
+
+        String [][] holeInfo = Constants.dbHandler.holeInfo(courseName,location);
+        for(int i =0; i<holeInfo[0].length;i+=1){
+            Log.d("Par",holeInfo[0][i]);
+            Log.d("MenDis",holeInfo[1][i]);
+            Log.d("WomenDis",holeInfo[2][i]);
+            Log.d("ChildDis",holeInfo[3][i]);
+        }
+        Constants.holeLoaded= holeInfo;
+        Intent intent = new Intent(v.getContext(), Basic_round.class);
+        startActivity(intent);
     }
     public void playCourse(String courseName, String courseLoc){
 

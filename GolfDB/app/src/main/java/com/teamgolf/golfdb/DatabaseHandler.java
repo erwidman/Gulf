@@ -26,7 +26,7 @@ public class DatabaseHandler {
 
         //!!!!!!!!!!!!!!for testing
         //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
-        //dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+        dbHelper.connectDB().execSQL("delete from courses where 1=1;");
      
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
