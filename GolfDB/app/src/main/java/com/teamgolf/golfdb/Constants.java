@@ -11,6 +11,11 @@ public class Constants {
     public static DatabaseHandler dbHandler;
     public static Context context;
     public static String user = null;
+    public static int  numPlayers;
+    public static boolean isAdvanced;
+    public static String p2=null;
+    public static String p3=null;
+    public static String p4 = null;
 
     public Constants(Context context){
         this.context = context;

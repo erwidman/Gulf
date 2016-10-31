@@ -10,23 +10,76 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.teamgolf.golfdb.GameType">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_alignTop="@+id/basicButton"
+        android:layout_toLeftOf="@+id/basicButton"
+        android:layout_marginTop="11dp"
+        android:id="@+id/gt_numPlayers" />
+
+    <TextView
+        android:text="Basic can keep stats for up to 4 players. Score at the end of hole only"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <Button
         android:text="Basic"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="134dp"
+        android:layout_marginTop="67dp"
         android:id="@+id/basicButton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 
     <Button
         android:text="Advanced"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:id="@+id/advancedButton"
         android:textSize="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp" />
+
+    <TextView
+        android:text="Advanced lets you record every club used for more advanced stats."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7"
+        android:layout_marginBottom="89dp"
+        android:layout_alignBottom="@+id/advancedButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:text="# players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:layout_above="@+id/gt_numPlayers"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Please Enter Number of Players 1-4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/basicButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp"
+        android:id="@+id/gt_error"
+        android:textColor="@android:color/holo_red_light" />
 </RelativeLayout>

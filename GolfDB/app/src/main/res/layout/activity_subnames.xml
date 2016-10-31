@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="73dp"
+        android:id="@+id/s_player2Name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_below="@+id/s_player2Name"
+        android:layout_alignLeft="@+id/s_player2Name"
+        android:layout_alignStart="@+id/s_player2Name"
+        android:layout_marginTop="67dp"
+        android:id="@+id/s_player3Name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_below="@+id/s_player3Name"
+        android:layout_alignLeft="@+id/s_player3Name"
+        android:layout_alignStart="@+id/s_player3Name"
+        android:layout_marginTop="101dp"
+        android:id="@+id/s_player4Name" />
+
+    <TextView
+        android:text="Player 2 Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/s_player2Name"
+        android:layout_alignStart="@+id/s_player2Name"
+        android:layout_marginTop="45dp"
+        android:id="@+id/s_player2" />
+
+    <TextView
+        android:text="Player 3 Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/s_player2Name"
+        android:layout_alignLeft="@+id/s_player3Name"
+        android:layout_alignStart="@+id/s_player3Name"
+        android:layout_marginTop="43dp"
+        android:id="@+id/s_player3" />
+
+    <TextView
+        android:text="Player 4 Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/s_player4Name"
+        android:layout_alignLeft="@+id/s_player4Name"
+        android:layout_alignStart="@+id/s_player4Name"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/s_player4" />
+
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/s_player4Name"
+        android:layout_toEndOf="@+id/s_player4Name"
+        android:layout_marginBottom="26dp"
+        android:onClick="Submit"
+        android:id="@+id/s_Submit" />
+</RelativeLayout>

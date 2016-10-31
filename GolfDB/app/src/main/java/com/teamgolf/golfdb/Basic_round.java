@@ -19,10 +19,13 @@ public class Basic_round extends AppCompatActivity
     private String curHole;
     private int firstRun=1;
     int hatejava =1;
+    public int [][] score;
     public TextView hole1Text;
     public TextView hole2Text;
     public TextView hole3Text;
     public TextView hole4Text;
+    public int numPlayers;
+    int numHoles;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,10 @@ public class Basic_round extends AppCompatActivity
 
         if (firstRun==1) {
             curHole="1";
+
+            numPlayers=1;
+            numHoles=18;
+            score=new int [numPlayers][numHoles];
             TextView hole1Text = (TextView) findViewById(R.id.br_h1);
             TextView hole2Text = (TextView) findViewById(R.id.br_h2);
             TextView hole3Text = (TextView) findViewById(R.id.br_h3);
@@ -43,6 +50,29 @@ public class Basic_round extends AppCompatActivity
             hole4Text.setText(curHole.toCharArray(),0,1);
 
         }
+    }
+    public void grabStats(int position)
+    {
+        TextView hole1Par=(TextView) findViewById(R.id.br_par1);
+        TextView hole2Par=(TextView) findViewById(R.id.br_par2);
+        TextView hole3Par=(TextView) findViewById(R.id.br_par3);
+        TextView hole4Par=(TextView) findViewById(R.id.br_par4);
+
+        TextView hole1YDs=(TextView) findViewById(R.id.br_yd1);
+        TextView hole2YDs=(TextView) findViewById(R.id.br_yd2);
+        TextView hole3YDs=(TextView) findViewById(R.id.br_yd3);
+        TextView hole4YDs=(TextView) findViewById(R.id.br_yd4);
+
+        TextView hole1Score=(TextView) findViewById(R.id.br_sc1);
+        TextView hole2Score=(TextView) findViewById(R.id.br_sc2);
+        TextView hole3Score=(TextView) findViewById(R.id.br_sc3);
+        TextView hole4Score=(TextView) findViewById(R.id.br_sc4);
+
+        DatabaseHandler dbhandler = Constants.dbHandler;
+
+        //dbhandler.
+
+
     }
     public void prev(View v)
     {

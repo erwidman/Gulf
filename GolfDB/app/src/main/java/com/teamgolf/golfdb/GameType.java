@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameType extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class GameType extends AppCompatActivity {
 
         basicButton = (Button) findViewById(R.id.basicButton);
         basicButton.setOnClickListener(new ButtonListener("basic"));
+        findViewById(R.id.gt_error).setVisibility(View.INVISIBLE);
     }
 
 
@@ -36,11 +38,25 @@ public class GameType extends AppCompatActivity {
             switch(id){
                 case "advanced":
                     //todo Transition to next page
-
+                    Constants.numPlayers=1;
+                    Constants.isAdvanced=true;
                     break;
                 case "basic":
                     //todo Trasition to next page
+                    if (findViewById(R.id.gt_numPlayers).toString().length()==0)
+                    {
+                        findViewById(R.id.gt_error).setVisibility(View.VISIBLE);
+                        return;
+                    }
+                    Constants.numPlayers=Integer.parseInt(((TextView)findViewById(R.id.gt_numPlayers)).getText().toString());
+                    Constants.isAdvanced=false;
 
+                    if  (Constants.numPlayers >1)
+                    {
+                        //transition to insert new player names
+                    }
+                    //transition to basic scorecard
+                    //todo transition
                     break;
             }
 
