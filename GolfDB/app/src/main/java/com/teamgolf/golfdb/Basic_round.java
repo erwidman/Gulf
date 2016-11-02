@@ -14,10 +14,13 @@ import android.widget.TextView;
  * Created by fred on 10/23/16.
  */
 
+//todo check for courses less 3 holes.
+
 public class Basic_round extends AppCompatActivity
 {
     private String curHole;
     private int firstRun=1;
+    int playedHole;
     int hatejava =1;
     public int [][] score;
     public TextView hole1Text;
@@ -58,8 +61,14 @@ public class Basic_round extends AppCompatActivity
     }
     public void grabStats(int pntr)
     {
-        courseInfo=Constants.holeLoaded;
-        this.numHoles=courseInfo.length+1;
+        if (firstRun==1)
+        {
+            courseInfo=Constants.holeLoaded;
+            this.numHoles=courseInfo.length+1;
+            score=new int [numPlayers][numHoles];
+            firstRun=512;
+        }
+        //showScore();
         TextView hole1Par=(TextView) findViewById(R.id.br_par1);
         TextView hole2Par=(TextView) findViewById(R.id.br_par2);
         TextView hole3Par=(TextView) findViewById(R.id.br_par3);
@@ -302,6 +311,67 @@ public class Basic_round extends AppCompatActivity
         findViewById(R.id.br_h2).setVisibility(View.VISIBLE);
         findViewById(R.id.br_h3).setVisibility(View.VISIBLE);
         findViewById(R.id.br_h4).setVisibility(View.VISIBLE);
+
+    }
+
+    public void Enter(View v)
+    {
+        //todo implement multiple players
+        score[0][playedHole-1]=Integer.parseInt(((EditText)findViewById(R.id.br_enteredScore)).getText().toString());
+        playedHole++;
+        showScore();
+    }
+
+    public void showScore()
+    {
+        TextView hole1Score=(TextView) findViewById(R.id.br_sc1);
+        TextView hole2Score=(TextView) findViewById(R.id.br_sc2);
+        TextView hole3Score=(TextView) findViewById(R.id.br_sc3);
+        TextView hole4Score=(TextView) findViewById(R.id.br_sc4);
+
+        //todo add support for 1+ players
+            if (playedHole-Integer.parseInt(curHole)>=1)
+            {
+                hole1Score.setText(score[0][Integer.parseInt(curHole)]);
+            }
+        else
+            {
+                hole1Score.setVisibility(View.INVISIBLE);
+                hole2Score.setVisibility(View.INVISIBLE);
+                hole3Score.setVisibility(View.INVISIBLE);
+                hole4Score.setVisibility(View.INVISIBLE);
+                return;
+            }
+
+        if (playedHole-Integer.parseInt(curHole)>=2)
+        {
+            hole2Score.setText(score[0][Integer.parseInt(curHole)+1]);
+        }
+        else
+        {
+            hole2Score.setVisibility(View.INVISIBLE);
+            hole3Score.setVisibility(View.INVISIBLE);
+            hole4Score.setVisibility(View.INVISIBLE);
+        }
+
+        if (playedHole-Integer.parseInt(curHole)>=3)
+        {
+            hole3Score.setText(score[0][Integer.parseInt(curHole)+2]);
+        }
+        else
+        {
+            hole3Score.setVisibility(View.INVISIBLE);
+            hole4Score.setVisibility(View.INVISIBLE);
+        }
+
+        if (playedHole-Integer.parseInt(curHole)>=4)
+        {
+            hole4Score.setText(score[0][Integer.parseInt(curHole)]+3);
+        }
+        else
+        {
+            hole4Score.setVisibility(View.INVISIBLE);
+        }
 
     }
 
