@@ -116,6 +116,20 @@ public class DatabaseHandler {
 
     //log table
     //__________________________________________________________________________________________________________________________________
+    public void insertScore(int [] [] score){
+        SQLiteDatabase db = dbHelper.connectDB();
+
+        Log.d("CurrName,CurLoc:",currName+ ","+currLocation);
+        Log.d("Course in db: ",Integer.toString(db.rawQuery("Select * from courses where name = ? and location = ?;",new String[] {currName,currLocation}).getCount()));
+        for(int i =0 ; i<score[0].length;i+=1){
+            db.beginTransaction();
+            db.execSQL("insert into log values(?, ?, ?, ?, ?, ?);", new String[] {Constants.user,Integer.toString(i+1),currName,currLocation,Integer.toString(score[0][i]),Integer.toString(this.currGame)});
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        }
+
+        db.close();
+    }
 
     //course table
     //_________________________________________________________________________________________________________________________________
@@ -161,8 +175,11 @@ public class DatabaseHandler {
 
     public boolean insertCourse(String name, String state, String city, String difficulty, String numOfHoles){
 
-        Log.d("Test",name);
+        Log.d("Test",name.toLowerCase());
         String loc = state + ":" + city ;
+
+        name = name.toLowerCase();
+        loc = loc.toLowerCase();
 
         SQLiteDatabase db = dbHelper.connectDB();
 
@@ -234,14 +251,6 @@ public class DatabaseHandler {
 
     }
 
-    public void insertScore(String holeNumber, String score){
-        SQLiteDatabase db = dbHelper.connectDB();
-        db.beginTransaction();
-        db.execSQL("Insert into log values(?, ?, ?, ?, ?, ?);",new String [] {Constants.user,holeNumber,currName,currLocation,score,Integer.toString(currGame)});
-        db.setTransactionSuccessful();
-        db.endTransaction();
-        db.close();
-    }
 
     /**
      * Returns a 2-d array of info on holes for param golf course, array is 4 rows and # of
@@ -270,6 +279,7 @@ public class DatabaseHandler {
         }
         db.close();
         c.close();
+        startGame(name,location);
         return res;
     }
 }

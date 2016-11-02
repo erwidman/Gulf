@@ -108,7 +108,6 @@ public class Create_before_round extends AppCompatActivity {
 
     public void courseCreate(View v)
     {
-        Log.d("courseCreate","RUNNING METHOD");
         //init textfields
         String courseName = ((EditText)findViewById(R.id.cbr_1_course_name)).getText().toString().toLowerCase().trim();
         String state = ((EditText)findViewById(R.id.cbr_1_course_state)).getText().toString().toLowerCase().trim();

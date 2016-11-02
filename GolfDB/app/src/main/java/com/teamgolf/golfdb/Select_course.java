@@ -123,6 +123,7 @@ public class Select_course extends AppCompatActivity
             Log.d("ChildDis",holeInfo[3][i]);
         }
         Constants.holeLoaded= holeInfo;
+
         Intent intent = new Intent(v.getContext(), Basic_round.class);
         startActivity(intent);
     }

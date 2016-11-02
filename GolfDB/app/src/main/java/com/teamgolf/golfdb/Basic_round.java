@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class Basic_round extends AppCompatActivity
 {
     private String curHole;
-    private int firstRun=1;
+    private boolean firstRun= true;
     int playedHole;
     int hatejava =1;
     public int [][] score;
@@ -36,11 +36,10 @@ public class Basic_round extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_round);
 
-        if (firstRun==1) {
+        if (firstRun) {
             gender=1;
 
             numPlayers=1;
-            score=new int [numPlayers][numHoles];
             curHole="1";
             TextView hole1Text = (TextView) findViewById(R.id.br_h1);
             TextView hole2Text = (TextView) findViewById(R.id.br_h2);
@@ -54,20 +53,22 @@ public class Basic_round extends AppCompatActivity
             curHole= Integer.toString(Integer.parseInt(curHole) + 1);
             hole4Text.setText(curHole.toCharArray(),0,1);
             curHole="1";
-            grabStats(Integer.parseInt(curHole));
             Log.d("Currhole",curHole);
+            grabStats(Integer.parseInt(curHole));
+
 
         }
     }
     public void grabStats(int pntr)
     {
-        if (firstRun==1)
+        if (firstRun)
         {
             courseInfo=Constants.holeLoaded;
-            this.numHoles=courseInfo.length+1;
+            this.numHoles=courseInfo.length;
             score=new int [numPlayers][numHoles];
-            firstRun=512;
+            //firstRun=false;
         }
+
         //showScore();
         TextView hole1Par=(TextView) findViewById(R.id.br_par1);
         TextView hole2Par=(TextView) findViewById(R.id.br_par2);
@@ -89,13 +90,6 @@ public class Basic_round extends AppCompatActivity
         //row 1 = men
         //row 2 = women
         //row 3 = child
-
-
-       // hole1Par.setText(courseInfo[0][0]);
-       // hole2Par.setText(courseInfo[0][1]);
-       // hole3Par.setText(courseInfo[0][2]);
-       // hole4Par.setText(courseInfo[0][3]);
-
         hole1Par.setText(courseInfo[0][pntr-1]);
         hole2Par.setText(courseInfo[0][pntr-0]);
         hole3Par.setText(courseInfo[0][pntr+1]);
@@ -105,14 +99,6 @@ public class Basic_round extends AppCompatActivity
         hole2YDs.setText(courseInfo[gender][pntr-0]);
         hole3YDs.setText(courseInfo[gender][pntr+1]);
         hole4YDs.setText(courseInfo[gender][pntr+2]);
-
-
-
-
-
-        DatabaseHandler dbhandler = Constants.dbHandler;
-
-        //dbhandler.
 
 
     }
