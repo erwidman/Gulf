@@ -36,7 +36,7 @@ public class Subnames extends AppCompatActivity {
     public void Submit(View v)
     {
         //TODO check if name will fit
-        String player2 =
+       // String player2 =
 
         int availableChar =32-(Constants.user.length()+1);
         if (Constants.numPlayers >= 2) {
