@@ -12,25 +12,24 @@ public class MainScreen extends AppCompatActivity {
     public void onBackPressed() {
     }
     Button playGameButton, optionButton, statisticsButton, closeButton;
-    static Boolean firstStart = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        if(firstStart) {
+
             //init button
-            playGameButton = (Button) findViewById(R.id.playGameButton);
-            playGameButton.setOnClickListener(new ButtonListener("playGame", Constants.dbHandler));
-            optionButton = (Button) findViewById(R.id.optionsButton);
-            optionButton.setOnClickListener(new ButtonListener("options", Constants.dbHandler));
-            statisticsButton = (Button) findViewById(R.id.statisticsButton);
-            statisticsButton.setOnClickListener(new ButtonListener("stats", Constants.dbHandler));
-            closeButton = (Button) findViewById(R.id.closeButton);
-            closeButton.setOnClickListener(new ButtonListener("close", Constants.dbHandler));
-            firstStart = false;
-        }
+        playGameButton = (Button) findViewById(R.id.playGameButton);
+        playGameButton.setOnClickListener(new ButtonListener("playGame", Constants.dbHandler));
+        optionButton = (Button) findViewById(R.id.optionsButton);
+        optionButton.setOnClickListener(new ButtonListener("options", Constants.dbHandler));
+        statisticsButton = (Button) findViewById(R.id.statisticsButton);
+        statisticsButton.setOnClickListener(new ButtonListener("stats", Constants.dbHandler));
+        closeButton = (Button) findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(new ButtonListener("close", Constants.dbHandler));
+
 
     }
     protected void onDestroy(){

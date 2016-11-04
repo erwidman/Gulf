@@ -300,31 +300,29 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:layout_alignTop="@+id/textView33"
+        android:id="@+id/br_enteredScore"
+        android:layout_alignBottom="@+id/textView33"
         android:layout_alignLeft="@+id/br_sc2"
-        android:layout_alignStart="@+id/br_sc2"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        android:id="@+id/editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:layout_below="@+id/textView33"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
-        android:id="@+id/br_enteredScore" />
+        android:layout_alignStart="@+id/br_sc2" />
 
     <Button
         android:text="Enter Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/br_enteredScore"
-        android:layout_toLeftOf="@+id/br_totals"
-        android:layout_toStartOf="@+id/br_totals"
         android:onClick="Enter"
-        android:id="@+id/br_button" />
+        android:id="@+id/br_button"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/br_enteredScore"
+        android:layout_alignRight="@+id/radioButton3"
+        android:layout_alignEnd="@+id/radioButton3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/button3"
+        android:onClick="Submit"
+        android:layout_alignTop="@+id/br_button"
+        android:layout_toRightOf="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
 </RelativeLayout>
