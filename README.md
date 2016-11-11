@@ -13,7 +13,7 @@
 
 4. Golf Course Selection Screen
 		Theres a place to seach for your golf course, if not found, then you can 
-		click a create unlisted course button to make a new course.
+		click a create unlisted course button to make a new course. Click on a listed course after typeing in the search bar and pressing the search button to move onto the scorecard.
 
 5. Create Unlisted Course Sccreen
 		This brings to two buttons to be clicked on. The top button will allow you to create
@@ -24,3 +24,6 @@
 		in the course. Click enter to start entering the information hole by hole.
 		When you click enter you are then prompted to enter the information for the lengths from
 		all the tees and the par of the hole. After it will bring you back o the Golf Course Selection Screen.
+
+6. Scorecard
+		Use next and previous buttons to select your hole, the selected hole is the furthest to the left on your screen. To enter your score, type in your score in the "Score on Hole" text field and click the Enter Score Button. Once you are done, click the submit button.
