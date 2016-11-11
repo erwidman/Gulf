@@ -56,7 +56,8 @@ public class MainScreen extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case "stats":
-                    //todo Transition
+                    intent = new Intent(v.getContext(), Basic_stats.class);
+                    startActivity(intent);
                     break;
                 case "options":
                     //todo Transition
