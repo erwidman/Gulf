@@ -30,7 +30,7 @@ public class DatabaseHandler {
      
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
-
+        c.close();
     }
 
     //hole table
@@ -79,7 +79,7 @@ public class DatabaseHandler {
             db.close();
             return true;
         }
-
+        c.close();
         db.close();
         return false;
     }
@@ -162,6 +162,7 @@ public class DatabaseHandler {
             res[row][2] = c.getInt(2);
             row++;
         }
+        c.close();
         db.close();
         return res;
     }
@@ -181,6 +182,7 @@ public class DatabaseHandler {
             res[row][2] = c.getInt(2);
             row++;
         }
+        c.close();
         db.close();
         return res;
     }
