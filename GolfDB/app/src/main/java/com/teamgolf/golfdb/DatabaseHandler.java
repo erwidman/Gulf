@@ -131,6 +131,62 @@ public class DatabaseHandler {
         db.close();
     }
 
+    public void insertAdvancedScore(int [] advancedScore){
+        SQLiteDatabase db = dbHelper.connectDB();
+        Log.d("CurrName,CurLoc:",currName+ ","+currLocation);
+        Log.d("Course in db: ",Integer.toString(db.rawQuery("Select * from courses where name = ? and location = ?;",new String[] {currName,currLocation}).getCount()));
+        for(int i =0 ; i<advancedScore.length;i+=1){
+            db.beginTransaction();
+            db.execSQL("insert into advancedLog values(?, ?, ?, ?, ?, ?);", new String[] {Constants.user,Integer.toString(i+1),currName,currLocation,Integer.toString(advancedScore[i]),Integer.toString(this.currGame)});
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        }
+
+        db.close();
+    }
+
+
+    public int [] [] getScore(boolean advanced, String courseName,String courseLocation){
+        Cursor c;
+        SQLiteDatabase db = dbHelper.connectDB();
+
+        if(!advanced)
+            c = db.rawQuery("Select number, score, play_id from log where userid = ? and name = ? and location = ? order by number,play_id asc;",new String[] {Constants.user,courseName,courseLocation});
+        else
+            c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? and name = ? and location ? order by number, play_id asc;", new String [] {Constants.user, courseName, courseLocation});
+        int [] [] res = new int [c.getCount()][3];
+        int row = 0;
+        while(c.moveToNext()){
+            res[row][0] = c.getInt(0);
+            res[row][1] = c.getInt(1);
+            res[row][2] = c.getInt(2);
+            row++;
+        }
+        db.close();
+        return res;
+    }
+    public int [] [] getScore(boolean advanced){
+        Cursor c;
+        SQLiteDatabase db = dbHelper.connectDB();
+
+        if(!advanced)
+            c = db.rawQuery("Select number, score, play_id from log where userid = ? order by number, play_id asc;",new String[] {Constants.user});
+        else
+            c = db.rawQuery("Select number,clubUsed,play_id from advancedLog where userid = ? order by number, play_id asc;",new String[] {Constants.user});
+        int [] [] res = new int [c.getCount()][3];
+        int row = 0;
+        while(c.moveToNext()){
+            res[row][0] = c.getInt(0);
+            res[row][1] = c.getInt(1);
+            res[row][2] = c.getInt(2);
+            row++;
+        }
+        db.close();
+        return res;
+    }
+
+
+
     //course table
     //_________________________________________________________________________________________________________________________________
 
