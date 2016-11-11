@@ -1,0 +1,61 @@
+package com.teamgolf.golfdb;
+
+/**
+ * Created by Robby Reid on 11/11/2016.
+ */
+
+public class Stat_methods {
+    private int roundInformation[][];
+    private int courseInformation[];
+    private int roundTotal[];
+
+    public int AverageRoundScore()
+    {
+        int average = 0;
+        int totalHoles =  roundInformation.length * roundInformation[0].length;
+        roundTotal = new int[roundInformation.length];
+        for (int row= 0; row < roundInformation[0].length; row++)
+        {
+            for (int column = 0; column < roundInformation.length; column++) {
+                average += roundInformation[row][column];
+                roundTotal[row]+=roundInformation[row][column];
+            }
+        }
+        return average / totalHoles;
+    }
+    public int TimesPlayed (){
+        return roundTotal.length;
+    }
+    public int[] Percentages()
+    {
+        int[] percentages = new int[3];
+
+        for (int row= 0; row < roundInformation[0].length; row++)
+        {
+            for (int column = 0; column < roundInformation.length; column++) {
+                int par = courseInformation[column];
+                int strokes = roundInformation[row][column];
+
+                if(par-strokes == 1){
+                    percentages[0]+=1;
+                }else if(par-strokes == 0){
+                    percentages[1] +=1;
+                }else if(par-strokes ==-1){
+                    percentages[2]+=1;
+                }
+            }
+        }
+
+        for (int i =0; i <3; i++){
+            percentages[i] = percentages[i] / (roundInformation.length * roundInformation[0].length);
+        }
+        return percentages;
+    }
+
+
+
+    public void Stat_methods(int[][] roundInformation,int[]  courseInformation){
+        this.roundInformation = roundInformation;
+        this.courseInformation = courseInformation;
+    }
+}
