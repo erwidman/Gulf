@@ -56,7 +56,7 @@ public class MainScreen extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case "stats":
-                    intent = new Intent(v.getContext(), Basic_stats.class);
+                    intent = new Intent(v.getContext(), Stat_select.class);
                     startActivity(intent);
                     break;
                 case "options":

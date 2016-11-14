@@ -31,6 +31,8 @@ public class DatabaseHandler {
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
         c.close();
+
+
     }
 
     //hole table
@@ -163,7 +165,28 @@ public class DatabaseHandler {
             row++;
         }
         c.close();
-        db.close();
+
+        Cursor c2;
+        if(!advanced)
+            c2 = db.rawQuery("Select distinct play_id from log where userid = ? and name = ? and location =  ?;",new String[] {Constants.user,courseName,courseLocation});
+        else
+            c2 = db.rawQuery("Select distinct play_id from log where userid = ? and name = ? and location = ?",new String[] {Constants.user,courseName,courseLocation});
+
+        int currZ = 0;
+        String [][] s = Constants.holeLoaded;
+        //filter data
+        int [][] tmp = new int [c2.getCount()] [s[0].length];
+        for(int i = 0 ; i<tmp.length;i++){
+            int plyID = res[currZ][2];
+            for(int j = 0; j<tmp[0].length;j++){
+                if(res[currZ][2]==plyID)
+                    tmp[i][j] = res[currZ][0];
+                else
+                    plyID = res[currZ] [2];
+                currZ++;
+            }
+        }
+
         return res;
     }
     public int [] [] getScore(boolean advanced){
@@ -291,6 +314,7 @@ public class DatabaseHandler {
     //________________________________________________________________________________________________________________----
     public boolean startGame(String courseName, String courseLoc) {
 
+        Log.d("startGame","Called!");
         SQLiteDatabase db = dbHelper.connectDB();
         //load curr game
         Cursor c = db.rawQuery("Select * from increment;",null);

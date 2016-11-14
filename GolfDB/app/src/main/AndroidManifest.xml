@@ -28,7 +28,8 @@
         <activity android:name=".How_to_create_course" />
         <activity android:name=".Create_before_round" />
         <activity android:name=".Course_Search_Results" />
-        <activity android:name=".Basic_stats"></activity>
+        <activity android:name=".Stat_select" />
+        <activity android:name=".General_stats"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.teamgolf.golfdb.Basic_stats">
+    tools:context="com.teamgolf.golfdb.Stat_select">
 
     <TextView
         android:text="Statistics"
@@ -28,15 +28,15 @@
         android:layout_below="@+id/textView11"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="87dp"
-        android:id="@+id/General Stats" />
+        android:id="@+id/GenStats" />
 
     <Button
         android:text="course_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/General Stats"
+        android:layout_below="@+id/GenStats"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="114dp"
-        android:id="@+id/Course stats" />
+        android:id="@+id/Coursestats" />
 
 </RelativeLayout>
