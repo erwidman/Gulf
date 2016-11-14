@@ -8,6 +8,7 @@ public class Stat_methods {
     private int roundInformation[][];
     private int courseInformation[];
     private int roundTotal[];
+    int CoursePar = 0;
 
     public int AverageRoundScore()
     {
@@ -34,6 +35,7 @@ public class Stat_methods {
         {
             for (int column = 0; column < roundInformation.length; column++) {
                 int par = courseInformation[column];
+                CoursePar+=par;
                 int strokes = roundInformation[row][column];
 
                 if(par-strokes == 1){
@@ -52,7 +54,16 @@ public class Stat_methods {
         return percentages;
     }
 
-
+    public int Handicap(){
+    	int averageOverPar = 0;
+    	if(CoursePar!=0){
+    		for(int i = 0; i < roundTotal.length; i++){
+    			averageOverPar+=roundTotal[i] - coursePar;
+    		}
+    	}
+    	averageOverPar = averageOverPar / roundTotal.length;
+    	return averageOverPar*.8;
+    }
 
     public void Stat_methods(int[][] roundInformation,int[]  courseInformation){
         this.roundInformation = roundInformation;
