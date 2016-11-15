@@ -54,16 +54,16 @@ public class Stat_methods {
         return percentages;
     }
 
-    public int Handicap(){
-    	int averageOverPar = 0;
-    	if(CoursePar!=0){
-    		for(int i = 0; i < roundTotal.length; i++){
-    			averageOverPar+=roundTotal[i] - coursePar;
-    		}
-    	}
-    	averageOverPar = averageOverPar / roundTotal.length;
-    	return averageOverPar*.8;
-    }
+//    public int Handicap(){
+//    	int averageOverPar = 0;
+//    	if(CoursePar!=0){
+//    		for(int i = 0; i < roundTotal.length; i++){
+//    			averageOverPar+=roundTotal[i] - coursePar;
+//    		}
+//    	}
+//    	averageOverPar = averageOverPar / roundTotal.length;
+//    	return averageOverPar*.8;
+//    }
 
     public void Stat_methods(int[][] roundInformation,int[]  courseInformation){
         this.roundInformation = roundInformation;

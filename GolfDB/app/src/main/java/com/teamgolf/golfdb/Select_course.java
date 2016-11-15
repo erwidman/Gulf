@@ -124,6 +124,7 @@ public class Select_course extends AppCompatActivity
         }
         Constants.holeLoaded= holeInfo;
 
+
         Intent intent = new Intent(v.getContext(), Basic_round.class);
         startActivity(intent);
     }

@@ -153,9 +153,9 @@ public class DatabaseHandler {
         SQLiteDatabase db = dbHelper.connectDB();
 
         if(!advanced)
-            c = db.rawQuery("Select number, score, play_id from log where userid = ? and name = ? and location = ? order by number,play_id asc;",new String[] {Constants.user,courseName,courseLocation});
+            c = db.rawQuery("Select number, score, play_id from log where userid = ? and name = ? and location = ? order by play_id asc;",new String[] {Constants.user,courseName,courseLocation});
         else
-            c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? and name = ? and location ? order by number, play_id asc;", new String [] {Constants.user, courseName, courseLocation});
+            c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? and name = ? and location ? order by play_id asc;", new String [] {Constants.user, courseName, courseLocation});
         int [] [] res = new int [c.getCount()][3];
         int row = 0;
         while(c.moveToNext()){
@@ -170,45 +170,34 @@ public class DatabaseHandler {
         if(!advanced)
             c2 = db.rawQuery("Select distinct play_id from log where userid = ? and name = ? and location =  ?;",new String[] {Constants.user,courseName,courseLocation});
         else
-            c2 = db.rawQuery("Select distinct play_id from log where userid = ? and name = ? and location = ?",new String[] {Constants.user,courseName,courseLocation});
+            c2 = db.rawQuery("Select distinct play_id from log where userid = ?;",new String[] {Constants.user,courseName,courseLocation});
+
 
         int currZ = 0;
         String [][] s = Constants.holeLoaded;
+        Log.d("c2.getCount",Integer.toString(c2.getCount()));
+        Log.d("s[0].length",Integer.toString(s[0].length));
         //filter data
         int [][] tmp = new int [c2.getCount()] [s[0].length];
         for(int i = 0 ; i<tmp.length;i++){
             int plyID = res[currZ][2];
             for(int j = 0; j<tmp[0].length;j++){
-                if(res[currZ][2]==plyID)
-                    tmp[i][j] = res[currZ][0];
+                if(res[currZ][2]==plyID) {
+                    tmp[i][j] = res[currZ][1];
+                }
                 else
-                    plyID = res[currZ] [2];
+                    break;
                 currZ++;
             }
+            if(currZ>res.length-1)
+                break;
+            plyID = res[currZ] [2];
         }
+
 
         return res;
     }
-    public int [] [] getScore(boolean advanced){
-        Cursor c;
-        SQLiteDatabase db = dbHelper.connectDB();
 
-        if(!advanced)
-            c = db.rawQuery("Select number, score, play_id from log where userid = ? order by number, play_id asc;",new String[] {Constants.user});
-        else
-            c = db.rawQuery("Select number,clubUsed,play_id from advancedLog where userid = ? order by number, play_id asc;",new String[] {Constants.user});
-        int [] [] res = new int [c.getCount()][3];
-        int row = 0;
-        while(c.moveToNext()){
-            res[row][0] = c.getInt(0);
-            res[row][1] = c.getInt(1);
-            res[row][2] = c.getInt(2);
-            row++;
-        }
-        c.close();
-        db.close();
-        return res;
-    }
 
 
 
@@ -362,6 +351,7 @@ public class DatabaseHandler {
         db.close();
         c.close();
         startGame(name,location);
+        Constants.holeLoaded= res;
         return res;
     }
 }
