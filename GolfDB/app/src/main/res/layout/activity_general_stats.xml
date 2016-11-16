@@ -11,23 +11,116 @@
     tools:context="com.teamgolf.golfdb.General_stats">
 
     <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView12"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="39dp"
+        android:layout_marginEnd="39dp"
+        android:id="@+id/Average_score" />
+
+    <TextView
+        android:text="Course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="50sp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="19dp"
+        android:id="@+id/course_name" />
+
+    <TextView
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rounds_played"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/numRounds"
+        android:layout_alignLeft="@+id/Average_score"
+        android:layout_alignStart="@+id/Average_score" />
+
+    <TextView
         android:text="Average Round Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="130dp"
         android:id="@+id/textView12"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/course_name"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="53dp" />
+
+    <TextView
+        android:text="Rounds played"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rounds_played"
+        android:layout_below="@+id/course_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp" />
+
+    <TextView
+        android:text="Percentages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Average_score"
+        android:layout_alignLeft="@+id/course_name"
+        android:layout_alignStart="@+id/course_name"
+        android:layout_marginTop="61dp"
+        android:id="@+id/Percentages" />
+
+    <TextView
+        android:text="Percentage Birdie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Percentages"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:id="@+id/birdie" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/birdie"
+        android:layout_alignRight="@+id/Average_score"
+        android:layout_alignEnd="@+id/Average_score"
+        android:id="@+id/textView24" />
+
+    <TextView
+        android:text="Percentage Par"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/birdie"
+        android:layout_alignLeft="@+id/Percentages"
+        android:layout_alignStart="@+id/Percentages"
+        android:layout_marginTop="44dp"
+        android:id="@+id/textView25" />
+
+    <TextView
+        android:text="Percentage Bogey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView25"
+        android:layout_alignLeft="@+id/textView25"
+        android:layout_alignStart="@+id/textView25"
+        android:layout_marginTop="53dp"
+        android:id="@+id/textView26" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView12"
-        android:layout_toRightOf="@+id/textView12"
-        android:layout_toEndOf="@+id/textView12"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
-        android:id="@+id/textView13" />
+        android:layout_alignTop="@+id/textView25"
+        android:layout_alignRight="@+id/textView24"
+        android:layout_alignEnd="@+id/textView24"
+        android:id="@+id/textView27" />
+
 </RelativeLayout>

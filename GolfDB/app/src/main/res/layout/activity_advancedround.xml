@@ -3,13 +3,191 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <Spinner
-        android:id="@+id/ar_spinner"
-        android:layout_width="match_parent"
+        android:id="@+id/ar_clubspinner"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
-        android:layout_marginBottom="98dp"
+        android:layout_width="175sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/ar_nextHole"
+        android:layout_toStartOf="@+id/ar_nextHole" />
+
+    <Button
+        android:text="Made Putt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="finishHole"
+        android:id="@+id/ar_madeputt" />
+
+    <TextView
+        android:text="Hole # | yards | par |||Clubs used"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_holeNum"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="XXXXXXXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ar_h2"
+        android:layout_alignLeft="@+id/ar_h2"
+        android:layout_alignStart="@+id/ar_h2"
+        android:layout_marginTop="15dp"
+        android:id="@+id/ar_h3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:id="@+id/ar_h2"
+        android:layout_below="@+id/ar_h1"
+        android:layout_alignLeft="@+id/ar_h1"
+        android:layout_alignStart="@+id/ar_h1"
+        android:text="XXXXXXXXXXXXXXXX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_h1"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignBottom="@+id/ar_madeputt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="XXXXXXXXXXXXX" />
+
+    <TextView
+        android:text="XXXXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ar_h3"
+        android:layout_alignLeft="@+id/ar_h3"
+        android:layout_alignStart="@+id/ar_h3"
+        android:layout_marginTop="11dp"
+        android:id="@+id/ar_h4" />
+
+    <TextView
+        android:text="XXXXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ar_h4"
+        android:layout_alignLeft="@+id/ar_h4"
+        android:layout_alignStart="@+id/ar_h4"
+        android:layout_marginTop="18dp"
+        android:id="@+id/ar_h5" />
+
+    <TextView
+        android:text="XXXXXXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/ar_h6"
+        android:layout_below="@+id/ar_h5"
+        android:layout_alignLeft="@+id/ar_h5"
+        android:layout_alignStart="@+id/ar_h5" />
+
+    <TextView
+        android:text="XXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/ar_h7"
+        android:layout_below="@+id/ar_h6"
+        android:layout_alignLeft="@+id/ar_h6"
+        android:layout_alignStart="@+id/ar_h6" />
+
+    <TextView
+        android:text="XXXXXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_h8"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/ar_h7"
+        android:layout_alignStart="@+id/ar_h7" />
+
+    <TextView
+        android:text="XXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ar_h8"
+        android:layout_alignLeft="@+id/ar_h8"
+        android:layout_alignStart="@+id/ar_h8"
+        android:layout_marginTop="19dp"
+        android:id="@+id/ar_h9" />
+
+    <Button
+        android:text="prevHole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ar_h9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="48dp"
+        android:onClick="prevHole"
+        android:id="@+id/ar_prevHole" />
+
+    <Button
+        android:text="Next Hole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_nextHole"
+        android:layout_alignBaseline="@+id/ar_prevHole"
+        android:layout_alignBottom="@+id/ar_prevHole"
+        android:layout_toRightOf="@+id/ar_h8"
+        android:onClick="nextHole"
+        android:layout_toEndOf="@+id/ar_h8" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_backSpace"
+        android:text="BackSpace"
+        android:layout_alignBaseline="@+id/ar_nextHole"
+        android:layout_alignBottom="@+id/ar_nextHole"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="11dp"
+        android:onClick="backspace"
+        android:layout_marginEnd="11dp" />
+
+    <TextView
+        android:text="D = Driver. W = Fairway Wood, P = Putter, # = iron used"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ar_nextHole"
+        android:layout_alignLeft="@+id/ar_h9"
+        android:layout_alignStart="@+id/ar_h9"
+        android:layout_marginBottom="13dp"
+        android:id="@+id/ar_help" />
+
+    <Button
+        android:text="Add Stoke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_addstroke"
+        android:onClick="addStroke"
+        android:layout_alignTop="@+id/ar_spinner"
+        android:layout_toRightOf="@+id/ar_h6"
+        android:layout_toEndOf="@+id/ar_h6" />
+
+    <Spinner
+        android:id="@+id/ar_spinner"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="75sp" />
+
+
 </RelativeLayout>
+

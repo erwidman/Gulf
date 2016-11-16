@@ -3,6 +3,7 @@ package com.teamgolf.golfdb;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +25,6 @@ public class GameType extends AppCompatActivity {
     }
 
 
-
     public class ButtonListener implements Button.OnClickListener {
         String id;
 
@@ -40,6 +40,8 @@ public class GameType extends AppCompatActivity {
                     //todo Transition to next page
                     Constants.numPlayers=1;
                     Constants.isAdvanced=true;
+                    intent = new Intent(GameType.this, advancedround.class);
+                    startActivity(intent);
                     break;
                 case "basic":
                     //todo Trasition to next page
@@ -48,13 +50,15 @@ public class GameType extends AppCompatActivity {
                         findViewById(R.id.gt_error).setVisibility(View.VISIBLE);
                         return;
                     }
-                    Constants.numPlayers=Integer.parseInt(((TextView)findViewById(R.id.gt_numPlayers)).getText().toString());
+                    Constants.numPlayers=1;//Integer.parseInt(((TextView)findViewById(R.id.gt_numPlayers)).getText().toString());
                     Constants.isAdvanced=false;
 
-                    if  (Constants.numPlayers >1)
+                    if  (Constants.numPlayers ==1)
                     {
-                        //transition to insert new player names
+                        intent = new Intent(GameType.this, Basic_round.class);
+                        startActivity(intent);
                     }
+
                     //transition to basic scorecard
                     //todo transition
                     break;

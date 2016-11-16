@@ -346,7 +346,9 @@ public class DatabaseHandler {
     public String[][] holeInfo(String name, String location){
         //// TODO: 24/10/16
         SQLiteDatabase db = dbHelper.connectDB();
-        Cursor c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? order by number asc;",new String[] {name,location});
+        Cursor c;
+
+        c = db.rawQuery("select par, menDis,womenDis,childDis from hole where name = ? and location = ? order by number asc;",new String[] {name,location});
 
         //iterate through and populate result array
         String [][] res = new String[4][c.getCount()];

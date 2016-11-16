@@ -54,11 +54,11 @@ public class Stat_methods {
         return percentages;
     }
 
-    public int Handicap(){
+    public double Handicap(){
     	int averageOverPar = 0;
     	if(CoursePar!=0){
     		for(int i = 0; i < roundTotal.length; i++){
-    			averageOverPar+=roundTotal[i] - coursePar;
+    			averageOverPar+=roundTotal[i] - CoursePar;
     		}
     	}
     	averageOverPar = averageOverPar / roundTotal.length;

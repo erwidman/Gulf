@@ -29,6 +29,7 @@
         <activity android:name=".Create_before_round" />
         <activity android:name=".Course_Search_Results" />
         <activity android:name=".Stat_select" />
+        <activity android:name=".advancedround" />
         <activity android:name=".General_stats"></activity>
     </application>
 
