@@ -137,9 +137,14 @@ public class DatabaseHandler {
         SQLiteDatabase db = dbHelper.connectDB();
         Log.d("CurrName,CurLoc:",currName+ ","+currLocation);
         Log.d("Course in db: ",Integer.toString(db.rawQuery("Select * from courses where name = ? and location = ?;",new String[] {currName,currLocation}).getCount()));
-        for(int i =0 ; i<advancedScore.length;i+=1){
+        int currHole = 1;
+        for(int i =0 ; i<advancedScore.length;i+=1) {
+            if (advancedScore[i] == -1){
+                currHole++;
+                continue;
+            }
             db.beginTransaction();
-            db.execSQL("insert into advancedLog values(?, ?, ?, ?, ?, ?);", new String[] {Constants.user,Integer.toString(i+1),currName,currLocation,Integer.toString(advancedScore[i]),Integer.toString(this.currGame)});
+            db.execSQL("insert into advancedLog values(?, ?, ?, ?, ?, ?);", new String[] {Constants.user,Integer.toString(currHole),currName,currLocation,Integer.toString(advancedScore[i]),Integer.toString(this.currGame)});
             db.setTransactionSuccessful();
             db.endTransaction();
         }
@@ -148,14 +153,23 @@ public class DatabaseHandler {
     }
 
 
-    public int [] [] getScore(boolean advanced, String courseName,String courseLocation){
+    public int [] [] getScore(boolean advanced, boolean noCourse, String courseName,String courseLocation){
         Cursor c;
         SQLiteDatabase db = dbHelper.connectDB();
 
-        if(!advanced)
-            c = db.rawQuery("Select number, score, play_id from log where userid = ? and name = ? and location = ? order by play_id asc;",new String[] {Constants.user,courseName,courseLocation});
-        else
-            c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? and name = ? and location ? order by play_id asc;", new String [] {Constants.user, courseName, courseLocation});
+        if(noCourse){
+            if(!advanced)
+                c = db.rawQuery("Select number, score, play_id from log where userid = ? order by play_id asc;",new String[] {Constants.user,courseName,courseLocation});
+            else
+                c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? order by play_id asc;", new String [] {Constants.user, courseName, courseLocation});
+        }
+        else {
+            if (!advanced)
+                c = db.rawQuery("Select number, score, play_id from log where userid = ? and name = ? and location = ? order by play_id asc;", new String[]{Constants.user, courseName, courseLocation});
+            else
+                c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? and name = ? and location ? order by play_id asc;", new String[]{Constants.user, courseName, courseLocation});
+        }
+
         int [] [] res = new int [c.getCount()][3];
         int row = 0;
         while(c.moveToNext()){
