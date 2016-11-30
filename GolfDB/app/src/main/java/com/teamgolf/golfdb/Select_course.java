@@ -123,13 +123,10 @@ public class Select_course extends AppCompatActivity
             Log.d("ChildDis",holeInfo[3][i]);
         }
         Constants.holeLoaded= holeInfo;
-<<<<<<< HEAD
         Intent intent = new Intent(Select_course.this, GameType.class);
-        //intent = new Intent(v.getContext(), Basic_round.class);
-=======
+        //intent = new Intent(v.getContext(), GameType.class);
 
-        Intent intent = new Intent(v.getContext(), Basic_round.class);
->>>>>>> 415629892bf7c49967c7c5266bb1b4684b3cf01c
+       // Intent intent = new Intent(v.getContext(), Basic_round.class);
         startActivity(intent);
     }
 

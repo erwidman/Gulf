@@ -254,7 +254,7 @@ public class advancedround extends AppCompatActivity {
             drawScore();
 
         }
-        else if (currentLine-curFirst==8 && currentLine==numHoles)
+        else if (currentLine-curFirst==8 || currentLine==numHoles)
         {
             return;
         }
@@ -280,33 +280,29 @@ public class advancedround extends AppCompatActivity {
         }
     }
 
-    public int [] ericLikesSmallArrays()
-    {
-        int giant1DArray[]=new int[numHoles*14];
-        int used=0;
-        for (int i =0;i<numHoles;i++)
-        {
-            for (int j=0;j<numHoles;j++)
-            {
-                if (intScore[i][j]==-1)
-                {
-                    giant1DArray[used]=-1;
+    public int [] ericLikesSmallArrays() {
+        int giant1DArray[] = new int[numHoles * 14];
+        int used = 0;
+        for (int i = 0; i < numHoles; i++) {
+            for (int j = 0; j < numHoles; j++) {
+                if (intScore[i][j] == -1) {
+                    giant1DArray[used] = -1;
                     used++;
                     break;
-                }
-                else
-                {
-                    giant1DArray[used]=intScore[i][j];
+                } else {
+                    giant1DArray[used] = intScore[i][j];
                     used++;
                 }
             }
 
         }
-        int toReturn [] = new int[used];
-        for (int i =0;i<used;i++)
+        int toReturn[] = new int[used];
+        for (int i = 0; i < used; i++)
         {
-            toReturn[used]=giant1DArray[used];
+            toReturn[i] = giant1DArray[i];
+            Log.d("Array to Eric's garbage",Integer.toString(toReturn[i]));
         }
+        Log.d("Array to Eric's garbage",toReturn.toString());
         return toReturn;
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -320,7 +316,7 @@ public class advancedround extends AppCompatActivity {
         generateTotals();
         String l = courseInfo[0][0];
         Log.d("# Lines to Display:", Integer.toString((numHoles-curFirst)+1));
-        for (int i =0;i<(numHoles-curFirst);i++)
+        for (int i =0;i<((numHoles-curFirst)+1);i++)
         {
             H[i].setVisibility(View.VISIBLE);
             H[i].setText(Integer.toString(curFirst+i)+"| "+courseInfo[gender][curFirst-1+i]+" yds  |  par "+courseInfo[0][curFirst-1+i]+" | Clubs: "+ Arrays.toString(score[curFirst-1+i]).replace(',',' '));
