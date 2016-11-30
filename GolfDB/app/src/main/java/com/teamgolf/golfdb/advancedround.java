@@ -5,30 +5,32 @@ package com.teamgolf.golfdb;
  */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Arrays;
+
 public class advancedround extends AppCompatActivity {
 
-    TextView h1;
-    TextView h2 ;
-    TextView h3 ;
-    TextView h4 ;
-    TextView h5 ;
-    TextView h6 ;
-    TextView h7 ;
-    TextView h8 ;
-    TextView h9 ;
+    TextView[] H = new TextView[9];
     int [] holeTotals;
     int totalTotal;
     int gender;
+    Spinner cSpinner;
     String [][] score;
+    int [] daLengths;
+    int [][]intScore;
+    String selected;
+    TextView [] tView;
     String [][]courseInfo;
     int currentLine;
     int curHoleStroke;
@@ -38,46 +40,186 @@ public class advancedround extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
-        h1 = (TextView)findViewById(R.id.ar_h1);
-        h2 = (TextView)findViewById(R.id.ar_h2);
-        h3 = (TextView)findViewById(R.id.ar_h3);
-        h4 = (TextView)findViewById(R.id.ar_h4);
-        h5 = (TextView)findViewById(R.id.ar_h5);
-        h6 = (TextView)findViewById(R.id.ar_h6);
-        h7 = (TextView)findViewById(R.id.ar_h7);
-        h8 = (TextView)findViewById(R.id.ar_h8);
-        h9 = (TextView)findViewById(R.id.ar_h9);
-
+        setContentView(R.layout.activity_advancedround);
         numHoles=Constants.holeLoaded[0].length;
-//        Spinner dropdown = (Spinner)findViewById(R.id.ar_spinner);
-//        String[] items = new String[]{"Putter", "2 iron", "3 iron", "4 iron", "5 iron", "6 iron","7 iron", "8 iron", "9 iron", "wedge", "Sand Wedge", "Fairway wood", "Driver"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, items);
-//        dropdown.setAdapter(adapter);
+        Spinner dropdown = (Spinner)findViewById(R.id.ar_clubspinner);
+        String[] items = new String[]{"Putter", "2 iron", "3 iron", "4 iron", "5 iron", "6 iron","7 iron", "8 iron", "9 iron", "wedge", "Sand Wedge", "Fairway wood", "Driver"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+        cSpinner=dropdown;
+
+
+
+
+        //Spinner gender_dropdown = (Spinner)findViewById(R.id.ar_spinner);
+        //String[] gender_items = new String[]{"Putter", "2 iron", "3 iron", "4 iron", "5 iron", "6 iron","7 iron", "8 iron", "9 iron", "wedge", "Sand Wedge", "Fairway wood", "Driver"};
+        //ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, gender_items);
+        //dropdown.setAdapter(adapter2);
+
+
         holeTotals=new int[numHoles];
-        score = new String [numHoles][10];
+        score = new String [numHoles][14];
+        intScore = new int [numHoles][14];
+        for (int i =0; i<numHoles;i++)
+        {
+            for (int j=0;j<14;j++)
+            {
+                intScore[i][j]=-1;
+            }
+        }
+        tView=new TextView[9];
         currentLine=1;
         curFirst=1;
         gender=1;
         courseInfo=Constants.holeLoaded;
+        daLengths=new int[numHoles];
+        for (int i =0;i<numHoles;i++)
+        {
+            daLengths[i]=0;
+        }
+
+        tView[0]=(TextView)findViewById(R.id.ar_h1t);
+        tView[1]=(TextView)findViewById(R.id.ar_h2t);
+        tView[2]=(TextView)findViewById(R.id.ar_h3t);
+        tView[3]=(TextView)findViewById(R.id.ar_h4t);
+        tView[4]=(TextView)findViewById(R.id.ar_h5t);
+        tView[5]=(TextView)findViewById(R.id.ar_h6t);
+        tView[6]=(TextView)findViewById(R.id.ar_h7t);
+        tView[7]=(TextView)findViewById(R.id.ar_h8t);
+        tView[8]=(TextView)findViewById(R.id.ar_h9t);
+
+
+
         Log.d("CousreInfo:", Integer.toString(Constants.holeLoaded[0].length));
+        H[0] = (TextView)findViewById(R.id.ar_h1);
+        H[1] = (TextView)findViewById(R.id.ar_h2);
+        H[2] = (TextView)findViewById(R.id.ar_h3);
+        H[3] = (TextView)findViewById(R.id.ar_h4);
+        H[4] = (TextView)findViewById(R.id.ar_h5);
+        H[5] = (TextView)findViewById(R.id.ar_h6);
+        H[6] = (TextView)findViewById(R.id.ar_h7);
+        H[7] = (TextView)findViewById(R.id.ar_h8);
+        H[8] = (TextView)findViewById(R.id.ar_h9);
 
+
+        cSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                Log.v("da CLUB is :", (String) parent.getItemAtPosition(position));
+                selected=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
+        for (int i =0; i <numHoles;i++)
+        {
+            for (int j=0;j<14;j++)
+            {
+                score[i][j]="";
+            }
+        }
         drawScore();
-    }
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    public void finishHole(View v)
-    {
-
-        //this is the onclick for when you finish a hole
-
-
-        curHoleStroke=0;
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     public void addStroke(View v)
     {
         //this is for when you add a stroke to the scorecard
+        String str = Integer.toString(cSpinner.getSelectedItemPosition());
+        Log.d("Club is :", Integer.toString((numHoles-curFirst)+1));
+
+        //"Putter", "2 iron", "3 iron", "4 iron", "5 iron", "6 iron","7 iron", "8 iron", "9 iron", "wedge", "Sand Wedge", "Fairway wood", "Driver"
+        switch(selected)
+        {
+            //in int 0 = driver; 1= fw wood; 2-9 = respective iron; 10 = wedge; 11 = Sand Wedge; 12 = putter;
+            // in string D = dr # = iron sw = sand wedge w = wedge p = putter fw = fairway wood
+            case "Putter":
+            {
+                score[currentLine-1][curHoleStroke]="P";
+                intScore[currentLine-1][curHoleStroke]=12;
+                break;
+            }
+            case "2 iron":
+            {
+                score[currentLine-1][curHoleStroke]="2";
+                intScore[currentLine-1][curHoleStroke]=2;
+                break;
+            }
+            case "3 iron":
+            {
+                score[currentLine-1][curHoleStroke]="3";
+                intScore[currentLine-1][curHoleStroke]=3;
+                break;
+            }
+            case "4 iron":
+            {
+                score[currentLine-1][curHoleStroke]="4";
+                intScore[currentLine-1][curHoleStroke]=4;
+                break;
+            }
+            case "5 iron":
+            {
+                score[currentLine-1][curHoleStroke]="5";
+                intScore[currentLine-1][curHoleStroke]=5;
+                break;
+            }
+            case "6 iron":
+            {
+                score[currentLine-1][curHoleStroke]="6";
+                intScore[currentLine-1][curHoleStroke]=6;
+                break;
+            }
+            case "7 iron":
+            {
+                score[currentLine-1][curHoleStroke]="7";
+                intScore[currentLine-1][curHoleStroke]=7;
+                break;
+            }
+            case "8 iron":
+            {
+                score[currentLine-1][curHoleStroke]="8";
+                intScore[currentLine-1][curHoleStroke]=8;
+                break;
+            }
+            case "9 iron":
+            {
+                score[currentLine-1][curHoleStroke]="9";
+                intScore[currentLine-1][curHoleStroke]=9;
+                break;
+            }
+            case "wedge":
+            {
+                score[currentLine-1][curHoleStroke]="W";
+                intScore[currentLine-1][curHoleStroke]=10;
+                break;
+            }
+            case "Sand Wedge":
+            {
+                score[currentLine-1][curHoleStroke]="SW";
+                intScore[currentLine-1][curHoleStroke]=11;
+                break;
+            }
+            case "Fairway wood":
+            {
+                score[currentLine-1][curHoleStroke]="FW";
+                intScore[currentLine-1][curHoleStroke]=1;
+                break;
+            }
+            case "Driver":
+            {
+                score[currentLine-1][curHoleStroke]="D";
+                intScore[currentLine-1][curHoleStroke]=0;
+                break;
+            }
+        }
+        curHoleStroke++;
+        drawScore();
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     public void prevHole(View v)
@@ -88,6 +230,7 @@ public class advancedround extends AppCompatActivity {
             curFirst=curFirst-9;
             currentLine--;
             drawScore();
+            curHoleStroke=daLengths[currentLine-1];
         }
         else if (currentLine==curFirst && curFirst==1)
         {
@@ -98,10 +241,12 @@ public class advancedround extends AppCompatActivity {
             currentLine--;
             drawScore();
         }
+        curHoleStroke=daLengths[currentLine];
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     public void nextHole(View v)
     {
+        daLengths[currentLine-1]=curHoleStroke;
         if (currentLine-curFirst==8 &&currentLine!=numHoles)
         {
             curFirst+=9;
@@ -118,11 +263,51 @@ public class advancedround extends AppCompatActivity {
             currentLine++;
             drawScore();
         }
+        curHoleStroke=daLengths[currentLine-1];
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     public void backspace(View v)
     {
         //for when you hit backspace
+    }
+    public void submit(View V)
+    {
+        if(currentLine==numHoles)
+        {
+            Constants.dbHandler.insertAdvancedScore(ericLikesSmallArrays());
+            Intent intent = new Intent(advancedround.this, MainScreen.class);
+            startActivity(intent);
+        }
+    }
+
+    public int [] ericLikesSmallArrays()
+    {
+        int giant1DArray[]=new int[numHoles*14];
+        int used=0;
+        for (int i =0;i<numHoles;i++)
+        {
+            for (int j=0;j<numHoles;j++)
+            {
+                if (intScore[i][j]==-1)
+                {
+                    giant1DArray[used]=-1;
+                    used++;
+                    break;
+                }
+                else
+                {
+                    giant1DArray[used]=intScore[i][j];
+                    used++;
+                }
+            }
+
+        }
+        int toReturn [] = new int[used];
+        for (int i =0;i<used;i++)
+        {
+            toReturn[used]=giant1DArray[used];
+        }
+        return toReturn;
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     public void drawScore()
@@ -132,138 +317,78 @@ public class advancedround extends AppCompatActivity {
         //row 2 = women
         //row 3 = child
         colorMeShit();
-        switch (numHoles-curFirst)
+        generateTotals();
+        String l = courseInfo[0][0];
+        Log.d("# Lines to Display:", Integer.toString((numHoles-curFirst)+1));
+        for (int i =0;i<(numHoles-curFirst);i++)
         {
-            //todo add totals to this :(
-
-            //if >=9 then default case
-            case 1:
+            H[i].setVisibility(View.VISIBLE);
+            H[i].setText(Integer.toString(curFirst+i)+"| "+courseInfo[gender][curFirst-1+i]+" yds  |  par "+courseInfo[0][curFirst-1+i]+" | Clubs: "+ Arrays.toString(score[curFirst-1+i]).replace(',',' '));
+            tView[i].setVisibility(View.VISIBLE);
+            int holeTotal=0;
+            for (int j=0;j<100;j++)
             {
-                h2.setVisibility(View.INVISIBLE); h3.setVisibility(View.INVISIBLE); h4.setVisibility(View.INVISIBLE); h5.setVisibility(View.INVISIBLE);h6.setVisibility(View.INVISIBLE); h7.setVisibility(View.INVISIBLE); h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
+                if (intScore[i][j] <0||intScore[i][j]>12){break;}
+                holeTotal+=1;
             }
-            case 2:
-            {
-                h3.setVisibility(View.INVISIBLE); h4.setVisibility(View.INVISIBLE); h5.setVisibility(View.INVISIBLE);h6.setVisibility(View.INVISIBLE); h7.setVisibility(View.INVISIBLE); h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-            }
-            case 3:
-            {
-                h4.setVisibility(View.INVISIBLE); h5.setVisibility(View.INVISIBLE);h6.setVisibility(View.INVISIBLE); h7.setVisibility(View.INVISIBLE); h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-            }
-            case 4:
-            {
-                h5.setVisibility(View.INVISIBLE);h6.setVisibility(View.INVISIBLE); h7.setVisibility(View.INVISIBLE); h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-                h4.setText(Integer.toString(curFirst+3)+"| "+courseInfo[gender][curFirst+2]+"| "+courseInfo[0][curFirst+2]+"||| "+score[curFirst+2].toString());
-            }
-            case 5:
-            {
-                h6.setVisibility(View.INVISIBLE); h7.setVisibility(View.INVISIBLE); h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-                h4.setText(Integer.toString(curFirst+3)+"| "+courseInfo[gender][curFirst+2]+"| "+courseInfo[0][curFirst+2]+"||| "+score[curFirst+2].toString());
-                h5.setText(Integer.toString(curFirst+4)+"| "+courseInfo[gender][curFirst+3]+"| "+courseInfo[0][curFirst+3]+"||| "+score[curFirst+3].toString());
-            }
-            case 6:
-            {
-                h7.setVisibility(View.INVISIBLE); h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-                h4.setText(Integer.toString(curFirst+3)+"| "+courseInfo[gender][curFirst+2]+"| "+courseInfo[0][curFirst+2]+"||| "+score[curFirst+2].toString());
-                h5.setText(Integer.toString(curFirst+4)+"| "+courseInfo[gender][curFirst+3]+"| "+courseInfo[0][curFirst+3]+"||| "+score[curFirst+3].toString());
-                h6.setText(Integer.toString(curFirst+5)+"| "+courseInfo[gender][curFirst+4]+"| "+courseInfo[0][curFirst+4]+"||| "+score[curFirst+4].toString());
-
-            }
-            case 7:
-            {
-                h8.setVisibility(View.INVISIBLE); h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-                h4.setText(Integer.toString(curFirst+3)+"| "+courseInfo[gender][curFirst+2]+"| "+courseInfo[0][curFirst+2]+"||| "+score[curFirst+2].toString());
-                h5.setText(Integer.toString(curFirst+4)+"| "+courseInfo[gender][curFirst+3]+"| "+courseInfo[0][curFirst+3]+"||| "+score[curFirst+3].toString());
-                h6.setText(Integer.toString(curFirst+5)+"| "+courseInfo[gender][curFirst+4]+"| "+courseInfo[0][curFirst+4]+"||| "+score[curFirst+4].toString());
-                h7.setText(Integer.toString(curFirst+6)+"| "+courseInfo[gender][curFirst+5]+"| "+courseInfo[0][curFirst+5]+"||| "+score[curFirst+5].toString());
-            }
-            case 8:
-            {
-                h9.setVisibility(View.INVISIBLE);
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-                h4.setText(Integer.toString(curFirst+3)+"| "+courseInfo[gender][curFirst+2]+"| "+courseInfo[0][curFirst+2]+"||| "+score[curFirst+2].toString());
-                h5.setText(Integer.toString(curFirst+4)+"| "+courseInfo[gender][curFirst+3]+"| "+courseInfo[0][curFirst+3]+"||| "+score[curFirst+3].toString());
-                h6.setText(Integer.toString(curFirst+5)+"| "+courseInfo[gender][curFirst+4]+"| "+courseInfo[0][curFirst+4]+"||| "+score[curFirst+4].toString());
-                h7.setText(Integer.toString(curFirst+6)+"| "+courseInfo[gender][curFirst+5]+"| "+courseInfo[0][curFirst+5]+"||| "+score[curFirst+5].toString());
-                h8.setText(Integer.toString(curFirst+7)+"| "+courseInfo[gender][curFirst+6]+"| "+courseInfo[0][curFirst+6]+"||| "+score[curFirst+6].toString());
-            }
-            default:
-            {
-                h1.setText(Integer.toString(curFirst)+"| "+courseInfo[gender][curFirst-1]+"| "+courseInfo[0][curFirst-1]+"||| "+score[curFirst-1].toString());
-                h2.setText(Integer.toString(curFirst+1)+"| "+courseInfo[gender][curFirst]+"| "+courseInfo[0][curFirst]+"||| "+score[curFirst].toString());
-                h3.setText(Integer.toString(curFirst+2)+"| "+courseInfo[gender][curFirst+1]+"| "+courseInfo[0][curFirst+1]+"||| "+score[curFirst+1].toString());
-                h4.setText(Integer.toString(curFirst+3)+"| "+courseInfo[gender][curFirst+2]+"| "+courseInfo[0][curFirst+2]+"||| "+score[curFirst+2].toString());
-                h5.setText(Integer.toString(curFirst+4)+"| "+courseInfo[gender][curFirst+3]+"| "+courseInfo[0][curFirst+3]+"||| "+score[curFirst+3].toString());
-                h6.setText(Integer.toString(curFirst+5)+"| "+courseInfo[gender][curFirst+4]+"| "+courseInfo[0][curFirst+4]+"||| "+score[curFirst+4].toString());
-                h7.setText(Integer.toString(curFirst+6)+"| "+courseInfo[gender][curFirst+5]+"| "+courseInfo[0][curFirst+5]+"||| "+score[curFirst+5].toString());
-                h8.setText(Integer.toString(curFirst+7)+"| "+courseInfo[gender][curFirst+6]+"| "+courseInfo[0][curFirst+6]+"||| "+score[curFirst+6].toString());
-                h9.setText(Integer.toString(curFirst+8)+"| "+courseInfo[gender][curFirst+7]+"| "+courseInfo[0][curFirst+7]+"||| "+score[curFirst+7].toString());
-            }
-
+            tView[i].setText(Integer.toString(holeTotal));
         }
+        for (int i =(numHoles-curFirst)+1;i<9;i++) {
+            H[i].setVisibility(View.INVISIBLE);
+            tView[i].setVisibility(View.INVISIBLE);
+        }
+
 
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     public void colorMeShit()
     {
-        //todo highlight current row
-        switch (curFirst%9) {
-            case 1:
+        if (currentLine==numHoles)
+        {
+            ((Button) findViewById(R.id.ar_submit)).setText("Submit Round");
+        }
+        else
+        {
+            ((Button) findViewById(R.id.ar_submit)).setText("Running Stats");
+        }
+         //todo highlight current row
+        for (int i=0;i<9;i++)
+        {
+            if (i==((currentLine%9)-1))
             {
-
+                H[i].setBackgroundColor(Color.CYAN);
             }
-            case 2:
+            else
             {
-
-            }
-            case 3:
-            {
-
-            }
-            case 4:
-            {
-
-            }
-            case 5:
-            {
-
-            }
-            case 6:
-            {
-
-            }
-            case 7:
-            {
-
-            }
-            case 8:
-            {
-
-            }
-            default:
-            {
-
+                H[i].setBackgroundColor(Color.WHITE);
             }
         }
+    }
+
+    public void generateTotals()
+    {
+        int total;
+        int rTotal=0;
+        for (int i =0; i<curFirst%9; i++)
+        {
+            total=0;
+            for (int j = 0; j < 14; j++)
+            {
+                if (score[i][j].equals(""))
+                {
+                    break;
+                }
+                total +=1; rTotal+=1;
+            }
+            tView[i].setVisibility(View.VISIBLE);
+            tView[i].setText(Integer.toString(total));
+        }
+
+        for (int i =curFirst%9; i<9; i++)
+        {
+            tView[i].setVisibility(View.INVISIBLE);
+        }
+        ((TextView)findViewById(R.id.ar_rdt)).setText(Integer.toString(rTotal));
     }
 }
 

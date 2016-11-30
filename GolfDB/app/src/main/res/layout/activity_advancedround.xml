@@ -14,16 +14,6 @@
         android:layout_toLeftOf="@+id/ar_nextHole"
         android:layout_toStartOf="@+id/ar_nextHole" />
 
-    <Button
-        android:text="Made Putt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="finishHole"
-        android:id="@+id/ar_madeputt" />
-
     <TextView
         android:text="Hole # | yards | par |||Clubs used"
         android:layout_width="wrap_content"
@@ -52,17 +42,6 @@
         android:layout_alignLeft="@+id/ar_h1"
         android:layout_alignStart="@+id/ar_h1"
         android:text="XXXXXXXXXXXXXXXX" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ar_h1"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_alignBottom="@+id/ar_madeputt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="XXXXXXXXXXXXX" />
 
     <TextView
         android:text="XXXXXXXXXXXXX"
@@ -114,59 +93,179 @@
         android:layout_alignStart="@+id/ar_h7" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_h1"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:text="XXXXXXXXXXXXX"
+        android:layout_below="@+id/ar_holeNum"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ar_h2"
+        android:layout_alignRight="@+id/ar_txt"
+        android:layout_alignEnd="@+id/ar_txt"
+        android:id="@+id/ar_h1t" />
+
+    <TextView
+        android:text="Hole Totals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_txt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ar_h2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h2t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ar_h3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h3t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ar_h5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h4t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ar_h6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h5t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ar_h6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h6t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ar_h7"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h7t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h8t" />
+
+    <TextView
+        android:text="XXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ar_h9"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ar_h9t" />
+
+    <TextView
         android:text="XXXXXXXXXXX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/ar_h9"
         android:layout_below="@+id/ar_h8"
         android:layout_alignLeft="@+id/ar_h8"
-        android:layout_alignStart="@+id/ar_h8"
-        android:layout_marginTop="19dp"
-        android:id="@+id/ar_h9" />
+        android:layout_alignStart="@+id/ar_h8" />
+
+    <TextView
+        android:text="Round Total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_rdt"
+        android:layout_below="@+id/ar_h9t"
+        android:layout_toLeftOf="@+id/ar_txt"
+        android:layout_toStartOf="@+id/ar_txt"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:text="D = Driver. FW = Fairway Wood, P = Putter, # = iron used,        W = wedge, SW = sand wedge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ar_help"
+        android:layout_above="@+id/ar_backSpace"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp" />
 
     <Button
         android:text="prevHole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ar_h9"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="48dp"
         android:onClick="prevHole"
-        android:id="@+id/ar_prevHole" />
+        android:id="@+id/ar_prevHole"
+        android:layout_marginBottom="44dp"
+        android:layout_above="@+id/ar_clubspinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Next Hole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ar_nextHole"
+        android:onClick="nextHole"
         android:layout_alignBaseline="@+id/ar_prevHole"
         android:layout_alignBottom="@+id/ar_prevHole"
-        android:layout_toRightOf="@+id/ar_h8"
-        android:onClick="nextHole"
-        android:layout_toEndOf="@+id/ar_h8" />
+        android:layout_alignRight="@+id/ar_holeNum"
+        android:layout_alignEnd="@+id/ar_holeNum" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ar_backSpace"
         android:text="BackSpace"
+        android:onClick="backspace"
         android:layout_alignBaseline="@+id/ar_nextHole"
         android:layout_alignBottom="@+id/ar_nextHole"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="11dp"
-        android:onClick="backspace"
-        android:layout_marginEnd="11dp" />
+        android:layout_toRightOf="@+id/ar_nextHole"
+        android:layout_toEndOf="@+id/ar_nextHole" />
 
-    <TextView
-        android:text="D = Driver. W = Fairway Wood, P = Putter, # = iron used"
+    <Button
+        android:text="Running Stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ar_nextHole"
-        android:layout_alignLeft="@+id/ar_h9"
-        android:layout_alignStart="@+id/ar_h9"
-        android:layout_marginBottom="13dp"
-        android:id="@+id/ar_help" />
+        android:id="@+id/ar_submit"
+        android:onClick="submit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="Add Stoke"
@@ -174,19 +273,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/ar_addstroke"
         android:onClick="addStroke"
-        android:layout_alignTop="@+id/ar_spinner"
-        android:layout_toRightOf="@+id/ar_h6"
-        android:layout_toEndOf="@+id/ar_h6" />
-
-    <Spinner
-        android:id="@+id/ar_spinner"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="75sp" />
+        android:layout_toRightOf="@+id/ar_h9"
+        android:layout_toEndOf="@+id/ar_h9" />
 
 
 </RelativeLayout>
