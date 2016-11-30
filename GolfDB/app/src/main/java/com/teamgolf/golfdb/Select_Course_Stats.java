@@ -1,8 +1,11 @@
 package com.teamgolf.golfdb;
-import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,25 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.io.StringBufferInputStream;
-
-import java.util.List;
-
-
-/**
- * Created by fred on 10/13/16.
- */
-
-public class Select_course extends AppCompatActivity
-{
-//    public final static String EXTRA_MESSAGE = "com.teamgolf.golfdb";
+public class Select_Course_Stats extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_course);
+        setContentView(R.layout.activity_select_course_stats);
         findViewById(R.id.search_checkbox_error).setVisibility(View.INVISIBLE);
     }
 
@@ -50,21 +41,7 @@ public class Select_course extends AppCompatActivity
         final String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
 
         if(results!=null) {
-//            int k = 0;
-//            for (String s : results) {
-//                int i = 0;
-//                for (char c : s.toCharArray()){
-//
-//                    if(c== ':'){
-//                        Log.d("Character", "true");
-//                       s = s.substring(0,i) + ' ' + s.substring(i+1,s.length());
-//                    }
-//                    i++;
-//                }
-//                Log.d("SearchResult", s);
-//                results[k] = s;
-//                k++;
-//            }
+
             ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
@@ -116,6 +93,17 @@ public class Select_course extends AppCompatActivity
         Log.d("Location",location);
 
         String [][] holeInfo = Constants.dbHandler.holeInfo(courseName,location);
+        int [][] roundInfo = Constants.dbHandler.getScore(false,false,courseName,location);
+        if(roundInfo.length==0){
+            //TODO print that user hasnt played course;
+            return;
+        }
+
+
+
+        Course_stats.roundInfo=roundInfo;
+        Course_stats.courseInfo=holeInfo;
+
         for(int i =0; i<holeInfo[0].length;i+=1){
             Log.d("Par",holeInfo[0][i]);
             Log.d("MenDis",holeInfo[1][i]);
@@ -128,8 +116,7 @@ public class Select_course extends AppCompatActivity
         Intent intent = new Intent(Select_course.this, GameType.class);
 =======
 */
-        Intent intent = new Intent(v.getContext(), Basic_round.class);
-//>>>>>>> a1966f8a60ce1a24df01602950a7331dbf14eb23
+        Intent intent = new Intent(v.getContext(), Course_stats.class);
         startActivity(intent);
     }
     public void playCourse(String courseName, String courseLoc){

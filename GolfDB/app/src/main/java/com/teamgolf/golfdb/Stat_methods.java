@@ -53,7 +53,7 @@ public class Stat_methods {
         }
         return percentages;
     }
-
+/*
 <<<<<<< HEAD
     public double Handicap(){
     	int averageOverPar = 0;
@@ -64,7 +64,7 @@ public class Stat_methods {
     	}
     	averageOverPar = averageOverPar / roundTotal.length;
     	return averageOverPar*.8;
-    }
+    }/*
 =======
 //    public int Handicap(){
 //    	int averageOverPar = 0;
@@ -77,9 +77,12 @@ public class Stat_methods {
 //    	return averageOverPar*.8;
 //    }
 >>>>>>> a1966f8a60ce1a24df01602950a7331dbf14eb23
-
+*/
     public void Stat_methods(int[][] roundInformation,int[]  courseInformation){
         this.roundInformation = roundInformation;
         this.courseInformation = courseInformation;
+    }
+    public void Stat_methods(int[][] roundInformation){
+        this.roundInformation=roundInformation;
     }
 }

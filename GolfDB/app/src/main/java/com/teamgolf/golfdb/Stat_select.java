@@ -3,12 +3,14 @@ package com.teamgolf.golfdb;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class Stat_select extends AppCompatActivity {
 
     Button GenStats;
+    Button AdvancedStats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +18,8 @@ public class Stat_select extends AppCompatActivity {
 
         GenStats = (Button) findViewById(R.id.GenStats);
         GenStats.setOnClickListener(new ButtonListener("general", Constants.dbHandler));
+        AdvancedStats = (Button) findViewById((R.id.Coursestats));
+        AdvancedStats.setOnClickListener(new ButtonListener("advanced",Constants.dbHandler));
     }
 
     public class ButtonListener implements Button.OnClickListener {
@@ -39,8 +43,8 @@ public class Stat_select extends AppCompatActivity {
                     break;
                 case "advanced":
                     //TODO
-                    //intent = new Intent(v.getContext(), Stat_select.class);
-                    //startActivity(intent);
+                    intent = new Intent(v.getContext(), Select_Course_Stats.class);
+                    startActivity(intent);
                     break;
             }
 
