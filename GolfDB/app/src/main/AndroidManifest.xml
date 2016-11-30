@@ -30,7 +30,13 @@
         <activity android:name=".Course_Search_Results" />
         <activity android:name=".Stat_select" />
         <activity android:name=".advancedround" />
-        <activity android:name=".General_stats"></activity>
+        <activity android:name=".General_stats" />
+        <activity
+            android:name=".Select_Course_Stats"
+            android:label="@string/title_activity_select__course__stats"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Course_stats" />
+        <activity android:name=".RoundList"></activity>
     </application>
 
 </manifest>

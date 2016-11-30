@@ -164,7 +164,7 @@ public class Basic_round extends AppCompatActivity
             return;
         }
         edit.setText("");
-        grabStats();
+        next(v);
     }
 
     public void Submit(View v){

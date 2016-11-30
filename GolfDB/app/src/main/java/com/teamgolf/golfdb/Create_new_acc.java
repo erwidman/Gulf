@@ -49,6 +49,7 @@ public class Create_new_acc extends AppCompatActivity {
                     findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
                     findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
                   //// TODO: 10/7/16 transition
+                    Constants.user = userName;
                     Intent intent = new Intent(Create_new_acc.this, MainScreen.class);
                     startActivity(intent);
                 }

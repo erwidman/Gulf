@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GolfDB</string>
+    <string name="title_activity_select__course__stats">Select_Course_Stats</string>
 </resources>
