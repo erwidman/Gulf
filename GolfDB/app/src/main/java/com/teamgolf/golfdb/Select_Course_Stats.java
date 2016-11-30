@@ -16,11 +16,30 @@ import android.widget.ListView;
 
 public class Select_Course_Stats extends AppCompatActivity {
 
+    ListView listview;
+    ArrayAdapter adapter;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_course_stats);
         findViewById(R.id.search_checkbox_error).setVisibility(View.INVISIBLE);
+        populateList();
+    }
+    private void populateList(){
+        final String [] res = Constants.dbHandler.getRecentCourses();
+        listview = (ListView)findViewById(R.id.c_Course_Search_Results2);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, res);
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String course = res [position];
+                courseSelected(course,view);
+
+            }
+        });
+
     }
 
     public void create_course(View v)
@@ -42,17 +61,10 @@ public class Select_Course_Stats extends AppCompatActivity {
 
         if(results!=null) {
 
-            ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
-
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
+            listview = (ListView)findViewById(R.id.c_Course_Search_Results2);
+            adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
-
-
-
-
-
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
@@ -60,19 +72,11 @@ public class Select_Course_Stats extends AppCompatActivity {
                     courseSelected(course,view);
 
                 }
-
             });
-
-
-
         }
-//        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
-//        intent.putExtra(EXTRA_MESSAGE, results);
-//        startActivity(intent);
-
     }
     public void courseSelected(String course, View v){
-        Log.d("TEST",course);
+
         String courseName = "";
         String location = "";
 
@@ -89,9 +93,9 @@ public class Select_Course_Stats extends AppCompatActivity {
             else
                 location = location + tmp;
         }
-        Log.d("Name",courseName);
-        Log.d("Location",location);
 
+        Constants.courseNamePickedForStats = courseName;
+        Constants.courseLocationPickedForStats = location;
         String [][] holeInfo = Constants.dbHandler.holeInfo(courseName,location);
         int [][] roundInfo = Constants.dbHandler.getScore(false,false,courseName,location);
         if(roundInfo.length==0){
@@ -100,29 +104,12 @@ public class Select_Course_Stats extends AppCompatActivity {
         }
 
 
-
         Course_stats.roundInfo=roundInfo;
         Course_stats.courseInfo=holeInfo;
-
-        for(int i =0; i<holeInfo[0].length;i+=1){
-            Log.d("Par",holeInfo[0][i]);
-            Log.d("MenDis",holeInfo[1][i]);
-            Log.d("WomenDis",holeInfo[2][i]);
-            Log.d("ChildDis",holeInfo[3][i]);
-        }
         Constants.holeLoaded= holeInfo;
-/*
-<<<<<<< HEAD
-        Intent intent = new Intent(Select_course.this, GameType.class);
-=======
-*/
-        Intent intent = new Intent(v.getContext(), Course_stats.class);
+
+        Intent intent = new Intent(v.getContext(), RoundList.class);
         startActivity(intent);
     }
-    public void playCourse(String courseName, String courseLoc){
 
-        //load newgame for user
-        Constants.dbHandler.startGame(courseName,courseLoc);
-        //todo transition to scorecard
-    }
 }

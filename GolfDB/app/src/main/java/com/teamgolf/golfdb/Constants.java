@@ -17,7 +17,8 @@ public class Constants {
     public static String p3=null;
     public static String p4 = null;
     public static String[][] holeLoaded;
-
+    public static String courseNamePickedForStats;
+    public static String courseLocationPickedForStats;
 
     public Constants(Context context){
         this.context = context;

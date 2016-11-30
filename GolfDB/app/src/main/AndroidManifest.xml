@@ -35,7 +35,8 @@
             android:name=".Select_Course_Stats"
             android:label="@string/title_activity_select__course__stats"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Course_stats"></activity>
+        <activity android:name=".Course_stats" />
+        <activity android:name=".RoundList"></activity>
     </application>
 
 </manifest>

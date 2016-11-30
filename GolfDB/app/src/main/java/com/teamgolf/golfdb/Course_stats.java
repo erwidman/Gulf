@@ -25,9 +25,9 @@ public class Course_stats extends AppCompatActivity {
                 intInfo[i][j]=Integer.parseInt(courseInfo[i][j]);
             }
         }
-        Stat_methods statMethod=new Stat_methods(roundInfo,intInfo);
+        //Stat_methods statMethod= new Stat_methods(roundInfo,intInfo);
 
-        statMethod.AverageRoundScore();
+        //statMethod.AverageRoundScore();
 
 
 

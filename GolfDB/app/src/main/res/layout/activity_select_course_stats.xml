@@ -124,6 +124,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
         android:layout_above="@+id/button"
-        android:id="@+id/c_Course_Search_Results" />
+        android:id="@+id/c_Course_Search_Results2" />
 
 </RelativeLayout>
