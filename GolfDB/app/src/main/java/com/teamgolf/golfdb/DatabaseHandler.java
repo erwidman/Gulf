@@ -26,14 +26,48 @@ public class DatabaseHandler {
 
         //!!!!!!!!!!!!!!for testing
         //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
-      //  dbHelper.connectDB().execSQL("delete from courses where 1=1;");
-     
+        //dbHelper.connectDB().execSQL("delete from courses where 1=1;");
+         dbHelper.connectDB().execSQL("delete from log where 1 =1;");
 
         Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
         c.close();
 
 
     }
+
+    public String [] getRecentCourses(){
+        Cursor c;
+        SQLiteDatabase db = dbHelper.connectDB();
+        c = db.rawQuery("Select distinct name, location from log where userid = ?;",new String [] {Constants.user});
+        String [] res = new String [c.getCount()];
+        Log.d("Cursor",Integer.toString(c.getCount()));
+        int i = 0;
+        while(c.moveToNext()){
+            String input = c.getString(0)+":"+c.getString(1);
+            res[i]= input;
+            i++;
+        }
+        c.close();
+        db.close();
+        return res;
+    }
+
+    public String [] getRounds(){
+        Cursor c;
+        SQLiteDatabase db = dbHelper.connectDB();
+        c = db.rawQuery("Select distinct play_id from log where name = ? and location = ?;", new String [] {Constants.courseNamePickedForStats,Constants.courseLocationPickedForStats});
+        String [] res = new String [c.getCount()];
+        int i = 0;
+        while(c.moveToNext()){
+            String input = c.getString(0);
+            res[i]= input;
+            i++;
+        }
+        c.close();
+        db.close();
+        return res;
+    }
+
 
     //hole table
     //__________________________________________________________________________________________________________________________________________________________
@@ -207,7 +241,6 @@ public class DatabaseHandler {
                 break;
             plyID = res[currZ] [2];
         }
-
 
         return res;
     }
