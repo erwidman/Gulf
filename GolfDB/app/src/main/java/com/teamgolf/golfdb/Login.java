@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-
+/**
+ * Class describing login page
+ */
 public class Login extends AppCompatActivity {
 
+    //buttons on page
     Button loginButton, newUserButton;
 
 
@@ -50,6 +53,9 @@ public class Login extends AppCompatActivity {
     }
 
 
+    /**
+     * Listeners for buttons on page, properly establish program conditions
+     */
     public class ButtonListener implements Button.OnClickListener {
         String id;
         DatabaseHandler dbHandler = Constants.dbHandler;
@@ -67,9 +73,6 @@ public class Login extends AppCompatActivity {
                     String user = tmp.getText().toString().trim();
                     tmp = (EditText)findViewById(R.id.uPassword);
                     String password = tmp.getText().toString().trim();
-                    Log.d("user",user);
-                    Log.d("password",password);
-                    //Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                     if(dbHandler.checkPassword(user,password)){
                         //transition to blank activity
                         Constants.user=user;
@@ -80,7 +83,6 @@ public class Login extends AppCompatActivity {
                     else{
                         //prompt user of invalid login
                         //create new user for testing purposes
-                        Log.d("TESTING_LOGIN",Boolean.toString(dbHandler.checkPassword(user,password)));
                         findViewById(R.id.invalid_login).setVisibility(View.VISIBLE);
                     }
                     break;

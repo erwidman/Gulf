@@ -6,6 +6,9 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/**
+ * Class describing page displaying stats
+ */
 public class Course_stats extends AppCompatActivity {
 
     static int [] [] roundInfo;
@@ -14,8 +17,6 @@ public class Course_stats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_stats);
-        Log.d("RoundInfo Len",Integer.toString(roundInfo.length));
-        Log.d("courseInfo Len", Integer.toString(courseInfo.length));
         String [] stats={"Average Round Score ", "Times Played ", "% Birdie ", "% Par ", "% Bogie "};
         int[][] intInfo=new int[courseInfo.length][courseInfo[0].length];
         for(int i=0;i<courseInfo.length;i++)
@@ -25,13 +26,6 @@ public class Course_stats extends AppCompatActivity {
                 intInfo[i][j]=Integer.parseInt(courseInfo[i][j]);
             }
         }
-        //Stat_methods statMethod= new Stat_methods(roundInfo,intInfo);
-
-        //statMethod.AverageRoundScore();
-
-
-
-
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, stats);

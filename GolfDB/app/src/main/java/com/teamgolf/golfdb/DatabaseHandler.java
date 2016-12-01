@@ -5,11 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import java.security.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * Created by Eric on 9/26/2016.
  */
 
+/**
+ * Class used to interface with db throughout the program
+ */
 public class DatabaseHandler {
 
     DatabaseHelper dbHelper = null;
@@ -24,23 +30,17 @@ public class DatabaseHandler {
         this.context = context;
         dbHelper = new DatabaseHelper(context);
 
-        //!!!!!!!!!!!!!!for testing
-        //dbHelper.connectDB().execSQL("delete from player where 1 =1;");
-        //dbHelper.connectDB().execSQL("delete from courses where 1=1;");
-         dbHelper.connectDB().execSQL("delete from log where 1 =1;");
-
-        Cursor c = dbHelper.connectDB().rawQuery("Select * from hole;",null);
-        c.close();
-
-
     }
 
+    /**
+     * Method used to get information on course recently played by currently signed in user
+     * @return String array of 2 cols cotaining name and location of course user has played at
+     */
     public String [] getRecentCourses(){
         Cursor c;
         SQLiteDatabase db = dbHelper.connectDB();
         c = db.rawQuery("Select distinct name, location from log where userid = ?;",new String [] {Constants.user});
         String [] res = new String [c.getCount()];
-        Log.d("Cursor",Integer.toString(c.getCount()));
         int i = 0;
         while(c.moveToNext()){
             String input = c.getString(0)+":"+c.getString(1);
@@ -52,14 +52,19 @@ public class DatabaseHandler {
         return res;
     }
 
+    /**
+     * Returns the rounds a user has played for a course select in the stats section of the program
+     * @return String array of two cols conaing a play_id and date
+     */
     public String [] getRounds(){
         Cursor c;
         SQLiteDatabase db = dbHelper.connectDB();
-        c = db.rawQuery("Select distinct play_id from log where name = ? and location = ?;", new String [] {Constants.courseNamePickedForStats,Constants.courseLocationPickedForStats});
-        String [] res = new String [c.getCount()];
-        int i = 0;
+        c = db.rawQuery("Select  play_id, date from (Select distinct play_id from log where name = ? and location = ?) natural join date;", new String [] {Constants.courseNamePickedForStats,Constants.courseLocationPickedForStats});
+        String [] res = new String [c.getCount()+1];
+        res[0] = "Combined Stats";
+        int i = 1;
         while(c.moveToNext()){
-            String input = c.getString(0);
+            String input = c.getString(0)+"-     Date: "+c.getString(1);
             res[i]= input;
             i++;
         }
@@ -69,8 +74,15 @@ public class DatabaseHandler {
     }
 
 
-    //hole table
-    //__________________________________________________________________________________________________________________________________________________________
+    /**
+     * Inserts a set of holes into db
+     * @param cName Course Name
+     * @param cLocation Location
+     * @param par array of pars
+     * @param menDis array of mens yardage
+     * @param womenDis array of womens yardage
+     * @param childDis array of childs yardage
+     */
     public void insertHoles(String cName, String cLocation, String [] par, String menDis[], String womenDis[], String[] childDis){
         SQLiteDatabase db= dbHelper.connectDB();
         Log.d("TestingHoleInsert", "Start");
@@ -83,10 +95,6 @@ public class DatabaseHandler {
         db.endTransaction();
         db.close();
     }
-
-    //player table
-    //____________________________________________________________________________________________________________________________________________________
-
 
     /**
      * Method used to input new users
@@ -148,10 +156,10 @@ public class DatabaseHandler {
         return false;
     }
 
-    //
-
-    //log table
-    //__________________________________________________________________________________________________________________________________
+    /**
+     * Method used to insert scores recorded by player after game into db (upon hitting submit)
+     * @param score 2d array of scores
+     */
     public void insertScore(int [] [] score){
         SQLiteDatabase db = dbHelper.connectDB();
 
@@ -167,6 +175,10 @@ public class DatabaseHandler {
         db.close();
     }
 
+    /**
+     * insert scores of the advanced type (club strokes) into db upon submission
+     * @param advancedScore int [] of advanced scores
+     */
     public void insertAdvancedScore(int [] advancedScore){
         SQLiteDatabase db = dbHelper.connectDB();
         Log.d("CurrName,CurLoc:",currName+ ","+currLocation);
@@ -187,15 +199,30 @@ public class DatabaseHandler {
     }
 
 
-    public int [] [] getScore(boolean advanced, boolean noCourse, String courseName,String courseLocation){
+    /**
+     * Master method to extract information from log, and advancedlog tables in db
+     * @param courseName name of course, null if not searching by name
+     * @param courseLocation name of location of course, null if not searching by name
+     * @param playID round number if searching by round
+     * @param advanced boolean indicating a search in advancedlog table
+     * @param allUserRecord boolean indicating to pull all stats from all courses for current user
+     * @return
+     */
+    public int [] [] getScore(String courseName,String courseLocation, String playID,boolean advanced,boolean allUserRecord){
         Cursor c;
         SQLiteDatabase db = dbHelper.connectDB();
 
-        if(noCourse){
+        if(allUserRecord)
+            c= db.rawQuery("Select number,score,play_id from log where userid = ?;", new String [] {Constants.user});
+
+        else if(playID!=null)
+            c = db.rawQuery("Select number,score,play_id from log where play_id = ? order by number asc;", new String[]{playID});
+
+        else if(courseName!=null){
             if(!advanced)
-                c = db.rawQuery("Select number, score, play_id from log where userid = ? order by play_id asc;",new String[] {Constants.user,courseName,courseLocation});
+                c = db.rawQuery("Select number, score, play_id from log where userid = ? order by play_id asc;",new String[] {Constants.user});
             else
-                c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? order by play_id asc;", new String [] {Constants.user, courseName, courseLocation});
+                c = db.rawQuery("Select number, clubUsed ,play_id from advancedLog where userid = ? order by play_id asc;", new String [] {Constants.user});
         }
         else {
             if (!advanced)
@@ -215,22 +242,37 @@ public class DatabaseHandler {
         c.close();
 
         Cursor c2;
-        if(!advanced)
+
+        if(courseName!=null)
             c2 = db.rawQuery("Select distinct play_id from log where userid = ? and name = ? and location =  ?;",new String[] {Constants.user,courseName,courseLocation});
         else
-            c2 = db.rawQuery("Select distinct play_id from log where userid = ?;",new String[] {Constants.user,courseName,courseLocation});
+            c2 = db.rawQuery("Select distinct play_id from log where userid = ?;",new String[] {Constants.user});
 
 
         int currZ = 0;
-        String [][] s = Constants.holeLoaded;
-        Log.d("c2.getCount",Integer.toString(c2.getCount()));
-        Log.d("s[0].length",Integer.toString(s[0].length));
-        //filter data
-        int [][] tmp = new int [c2.getCount()] [s[0].length];
+
+        int rows = c2.getCount();
+
+        //max rows
+        if(playID!=null)
+            rows = 1;
+
+        //max cols
+        int cols = 0;
+        if(Constants.holeLoaded!=null)
+            cols = Constants.holeLoaded[0].length;
+        if(allUserRecord)
+            cols = 27;
+
+
+
+
+        //filter data such that rows display scores and column index represents hole number
+        int [][] tmp = new int [rows] [cols];
         for(int i = 0 ; i<tmp.length;i++){
             int plyID = res[currZ][2];
             for(int j = 0; j<tmp[0].length;j++){
-                if(res[currZ][2]==plyID) {
+                if(currZ<res.length&&res[currZ][2]==plyID) {
                     tmp[i][j] = res[currZ][1];
                 }
                 else
@@ -242,16 +284,17 @@ public class DatabaseHandler {
             plyID = res[currZ] [2];
         }
 
-        return res;
+        return tmp;
     }
 
 
-
-
-    //course table
-    //_________________________________________________________________________________________________________________________________
-
-
+    /**
+     * Method used to serach db for a course
+     * @param input users input
+     * @param isLocationSearch are they searching by location?
+     * @param isNameSearch are they searching by name?
+     * @return String array of resulting querey
+     */
     public String[] getCourses(String input, Boolean isLocationSearch, Boolean isNameSearch){
         SQLiteDatabase db = dbHelper.connectDB();
         //perform query
@@ -264,8 +307,6 @@ public class DatabaseHandler {
             c = db.rawQuery("Select name,location from courses where name like ?;", new String[]{input});
         else
             c = db.rawQuery("Select name,location from courses where name like ? union select name, location from courses where location like ?;", new String[]{input,input});
-
-
 
 
         //if querey is succesful populate results
@@ -290,6 +331,15 @@ public class DatabaseHandler {
         return null;
     }
 
+    /**
+     * Method user to insert new courses into db
+     * @param name Name of course
+     * @param state state course is in
+     * @param city city course is in
+     * @param difficulty difficulty of course
+     * @param numOfHoles number of holes on course
+     * @return boolean indicating if insert was succesful
+     */
     public boolean insertCourse(String name, String state, String city, String difficulty, String numOfHoles){
 
         Log.d("Test",name.toLowerCase());
@@ -315,9 +365,11 @@ public class DatabaseHandler {
         return true;
     }
 
-    //helper methods
-    //______________________________________________________________________________________________________________________________________________________________
-
+    /**
+     * Method used to encrpy password
+     * @param pass input password
+     * @return encrypted password
+     */
     private String passwordEncryption(String pass){
         String result = null;
         try {
@@ -337,6 +389,12 @@ public class DatabaseHandler {
         return result;
     }
 
+    /**
+     * method used to compare encrypted text
+     * @param input
+     * @param fetch
+     * @return
+     */
     private boolean encryptCompare(String input, String fetch){
 
         String s1 = passwordEncryption(input);
@@ -347,10 +405,15 @@ public class DatabaseHandler {
 
     }
 
-    //________________________________________________________________________________________________________________----
+
+    /**
+     * Method used to setup conditions necesarry to begin recording and eventually submitting a game
+     * @param courseName name of course
+     * @param courseLoc location of course
+     * @return boolean indicating if the game was started
+     */
     public boolean startGame(String courseName, String courseLoc) {
 
-        Log.d("startGame","Called!");
         SQLiteDatabase db = dbHelper.connectDB();
         //load curr game
         Cursor c = db.rawQuery("Select * from increment;",null);
@@ -365,6 +428,16 @@ public class DatabaseHandler {
         db.endTransaction();
         db.close();
         c.close();
+
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+        db = dbHelper.connectDB();
+        db.beginTransaction();
+        db.execSQL("Insert into date values(?,?);", new String [] {Integer.toString(currGame),timeStamp});
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+        c.close();
+
         return currGame!=0;
 
     }

@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 
-
+/**
+ *
+ */
 public class How_to_create_course extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {

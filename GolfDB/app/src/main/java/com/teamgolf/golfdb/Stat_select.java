@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Class describing type of stats to view page
+ */
 public class Stat_select extends AppCompatActivity {
 
     Button GenStats;
@@ -22,6 +25,9 @@ public class Stat_select extends AppCompatActivity {
         AdvancedStats.setOnClickListener(new ButtonListener("advanced",Constants.dbHandler));
     }
 
+    /**
+     * Button listener for two buttons on page, advances program accordingly
+     */
     public class ButtonListener implements Button.OnClickListener {
         String id;
         DatabaseHandler dbHandler;
@@ -36,7 +42,8 @@ public class Stat_select extends AppCompatActivity {
             Intent intent;
             switch(id){
                 case "general":
-                    //todo Transition to next page
+                    int score [] [] = Constants.dbHandler.getScore(null,null,null,false,true);
+                    Log.d("Score",Integer.toString(score.length));
 
                     intent = new Intent(v.getContext(), General_stats.class);
                     startActivity(intent);

@@ -16,6 +16,7 @@ import java.io.InputStream;
 
 /**
  * Created by Eric on 9/23/2016.
+ * Class used to load exterior assets as well as connect to db
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 

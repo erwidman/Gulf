@@ -20,11 +20,9 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
 
-            //init button
+        //init button
         playGameButton = (Button) findViewById(R.id.playGameButton);
         playGameButton.setOnClickListener(new ButtonListener("playGame", Constants.dbHandler));
-        optionButton = (Button) findViewById(R.id.optionsButton);
-        optionButton.setOnClickListener(new ButtonListener("options", Constants.dbHandler));
         statisticsButton = (Button) findViewById(R.id.statisticsButton);
         statisticsButton.setOnClickListener(new ButtonListener("stats", Constants.dbHandler));
         closeButton = (Button) findViewById(R.id.closeButton);

@@ -11,6 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.teamgolf.golfdb.Select_Course_Stats"
-    tools:showIn="@layout/activity_select__course__stats">
+    tools:showIn="@layout/activity_select__course__stats"
+    android:background="@android:color/holo_green_light">
 
 </RelativeLayout>

@@ -34,7 +34,7 @@ public class Select_course extends AppCompatActivity
 
     public void create_course(View v)
     {
-        Intent intent = new Intent(v.getContext(), How_to_create_course.class);
+        Intent intent = new Intent(v.getContext(), Create_before_round.class);
         startActivity(intent);
     }
 
@@ -50,30 +50,9 @@ public class Select_course extends AppCompatActivity
         final String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
 
         if(results!=null) {
-//            int k = 0;
-//            for (String s : results) {
-//                int i = 0;
-//                for (char c : s.toCharArray()){
-//
-//                    if(c== ':'){
-//                        Log.d("Character", "true");
-//                       s = s.substring(0,i) + ' ' + s.substring(i+1,s.length());
-//                    }
-//                    i++;
-//                }
-//                Log.d("SearchResult", s);
-//                results[k] = s;
-//                k++;
-//            }
             ListView listview = (ListView)findViewById(R.id.c_Course_Search_Results);
-
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, results);
             listview.setAdapter(adapter);
-
-
-
-
-
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
@@ -85,13 +64,7 @@ public class Select_course extends AppCompatActivity
                 }
 
             });
-
-
-
         }
-//        Intent intent = new Intent(v.getContext(), Course_Search_Results.class);
-//        intent.putExtra(EXTRA_MESSAGE, results);
-//        startActivity(intent);
 
     }
     public void courseSelected(String course, View v){
@@ -112,21 +85,8 @@ public class Select_course extends AppCompatActivity
             else
                 location = location + tmp;
         }
-        Log.d("Name",courseName);
-        Log.d("Location",location);
-
-        String [][] holeInfo = Constants.dbHandler.holeInfo(courseName,location);
-        for(int i =0; i<holeInfo[0].length;i+=1){
-            Log.d("Par",holeInfo[0][i]);
-            Log.d("MenDis",holeInfo[1][i]);
-            Log.d("WomenDis",holeInfo[2][i]);
-            Log.d("ChildDis",holeInfo[3][i]);
-        }
-        Constants.holeLoaded= holeInfo;
+        Constants.dbHandler.holeInfo(courseName,location);
         Intent intent = new Intent(Select_course.this, GameType.class);
-        //intent = new Intent(v.getContext(), GameType.class);
-
-       // Intent intent = new Intent(v.getContext(), Basic_round.class);
         startActivity(intent);
     }
 

@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/holo_green_light">
 
     <Button
         android:text="Enter as I Play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="26dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="58dp"
-        android:id="@+id/button2" />
+        android:id="@+id/button2"
+        android:layout_marginBottom="116dp"
+        android:layout_above="@+id/htcc_before"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Enter from Scorecard before Round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2"
         android:id="@+id/htcc_before"
-        android:onClick="before_round"/>
+        android:onClick="before_round"
+        android:layout_marginBottom="172dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

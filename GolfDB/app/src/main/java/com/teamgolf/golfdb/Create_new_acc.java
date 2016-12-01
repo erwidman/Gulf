@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * Class describing page for account creation
+ */
 public class Create_new_acc extends AppCompatActivity {
-    //Context context =getApplicationContext();
+
     DatabaseHandler dbHandler= Constants.dbHandler;
 
     @Override
@@ -23,6 +26,10 @@ public class Create_new_acc extends AppCompatActivity {
     public void onBackPressed() {
     }
 
+    /**
+     * Button listiener for create account, makes proper cheks on user input (password consistency, matching passwords ect.) and triggers following action accordingly
+     * @param v
+     */
     public void create_Account(View v)
     {
         EditText d_uname = (EditText)findViewById(R.id.d_uname);
@@ -32,35 +39,23 @@ public class Create_new_acc extends AppCompatActivity {
         String pass2 = ((EditText)findViewById(R.id.d_pw2)).getText().toString().trim();
         String userName = ((EditText)findViewById(R.id.d_uname)).getText().toString().trim();
 
-        //// TODO: 10/7/16 Fred: add gui that signifys that passwords are not the same
-        if (pass.compareTo(pass2)!=0) {
-            Log.d("COMPARE_PASSWORDS", "Passwords do not match!");
-            Log.d("COMPARE_PASSWORDS",pass);
-            Log.d("COMPARE_PASSWORDS",pass2);
+        if (pass.compareTo(pass2)!=0)
             findViewById(R.id.bad_pw).setVisibility(View.VISIBLE);
-        }
-        else
-            {
+
+        else {
                 findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
-            if(dbHandler.insertUser(userName,pass))
-                {
-                   Log.d("INSERT_USER","User inserted!");
+            if(dbHandler.insertUser(userName,pass)) {
                     findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
                     findViewById(R.id.bad_pw).setVisibility(View.INVISIBLE);
                     findViewById(R.id.bad_uname).setVisibility(View.INVISIBLE);
-                  //// TODO: 10/7/16 transition
                     Constants.user = userName;
                     Intent intent = new Intent(Create_new_acc.this, MainScreen.class);
                     startActivity(intent);
                 }
-            else
-            {
+            else {
+                //user already exist, show error
                findViewById(R.id.bad_uname).setVisibility(View.VISIBLE);
-                //user already exists print out gui error message
-                Log.d("Check Username", "User already exists in the database");
             }
-
         }
-
     }
 }

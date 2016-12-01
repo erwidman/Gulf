@@ -17,20 +17,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Create_new_acc" />
-        <activity android:name=".MainScreen" />
+        <activity android:name=".Create_new_acc"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Basic_round"
             android:screenOrientation="portrait" />
-        <activity android:name=".Location" />
-        <activity android:name=".GameType" />
-        <activity android:name=".Select_course" />
-        <activity android:name=".How_to_create_course" />
-        <activity android:name=".Create_before_round" />
-        <activity android:name=".Course_Search_Results" />
-        <activity android:name=".Stat_select" />
-        <activity android:name=".advancedround" />
-        <activity android:name=".General_stats" />
+        <activity android:name=".Location"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".GameType"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Select_course"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".How_to_create_course"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Create_before_round"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Course_Search_Results"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Stat_select"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AdvancedRound"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".General_stats"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Select_Course_Stats"
             android:label="@string/title_activity_select__course__stats"

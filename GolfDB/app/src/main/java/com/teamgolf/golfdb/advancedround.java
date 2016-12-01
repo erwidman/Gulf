@@ -13,14 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Arrays;
 
-public class advancedround extends AppCompatActivity {
+public class AdvancedRound extends AppCompatActivity {
 
+    //instance variables
     TextView[] H = new TextView[9];
     int [] holeTotals;
     int totalTotal;
@@ -40,6 +40,7 @@ public class advancedround extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        //initalizations
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advancedround);
         numHoles=Constants.holeLoaded[0].length;
@@ -48,14 +49,6 @@ public class advancedround extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         cSpinner=dropdown;
-
-
-
-
-        //Spinner gender_dropdown = (Spinner)findViewById(R.id.ar_spinner);
-        //String[] gender_items = new String[]{"Putter", "2 iron", "3 iron", "4 iron", "5 iron", "6 iron","7 iron", "8 iron", "9 iron", "wedge", "Sand Wedge", "Fairway wood", "Driver"};
-        //ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, gender_items);
-        //dropdown.setAdapter(adapter2);
 
 
         holeTotals=new int[numHoles];
@@ -274,13 +267,13 @@ public class advancedround extends AppCompatActivity {
     {
         if(currentLine==numHoles)
         {
-            Constants.dbHandler.insertAdvancedScore(ericLikesSmallArrays());
-            Intent intent = new Intent(advancedround.this, MainScreen.class);
+            Constants.dbHandler.insertAdvancedScore(convertArray());
+            Intent intent = new Intent(AdvancedRound.this, MainScreen.class);
             startActivity(intent);
         }
     }
 
-    public int [] ericLikesSmallArrays() {
+    public int [] convertArray() {
         int giant1DArray[] = new int[numHoles * 14];
         int used = 0;
         for (int i = 0; i < numHoles; i++) {
@@ -300,9 +293,7 @@ public class advancedround extends AppCompatActivity {
         for (int i = 0; i < used; i++)
         {
             toReturn[i] = giant1DArray[i];
-            Log.d("Array to Eric's garbage",Integer.toString(toReturn[i]));
         }
-        Log.d("Array to Eric's garbage",toReturn.toString());
         return toReturn;
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -312,7 +303,7 @@ public class advancedround extends AppCompatActivity {
         //row 1 = men
         //row 2 = women
         //row 3 = child
-        colorMeShit();
+        ColorMe();
         generateTotals();
         String l = courseInfo[0][0];
         Log.d("# Lines to Display:", Integer.toString((numHoles-curFirst)+1));
@@ -337,7 +328,7 @@ public class advancedround extends AppCompatActivity {
 
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    public void colorMeShit()
+    public void ColorMe()
     {
         if (currentLine==numHoles)
         {

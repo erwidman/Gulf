@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-
+/**
+ * Screen displaying create course information
+ */
 public class Create_before_round extends AppCompatActivity {
 
     @Override

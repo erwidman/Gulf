@@ -13,13 +13,11 @@ import org.w3c.dom.Text;
 
 
 /**
- * Created by fred on 10/23/16.
+ * Class Used to display basic round recording screen
  */
-
-//todo check for courses less 3 holes.
-
 public class Basic_round extends AppCompatActivity
 {
+    //declaration of instances variables
     private int curHole;
     public int [][] score;
     public int numPlayers;
@@ -27,6 +25,7 @@ public class Basic_round extends AppCompatActivity
     public String [][] courseInfo;
     int numHoles;
 
+    //Gui objects
     TextView[] par = new TextView[4];
     TextView[] yds = new TextView[4];
     TextView[] scoreOnCard = new TextView[4];
@@ -39,13 +38,10 @@ public class Basic_round extends AppCompatActivity
     EditText edit;
 
 
-
-
-
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        //inits
+        //initaliztion of instance variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_round);
         par[0]=(TextView) findViewById(R.id.br_par1);
@@ -90,18 +86,27 @@ public class Basic_round extends AppCompatActivity
         totalYDS.setText(Integer.toString(yardTotal));
 
 
+        //begin display
         grabStats();
 
 
 
     }
+
+    /**
+     * Used to update text on screen for holes being displayed
+     */
     public void grabStats()
     {
+        //show all gui objects
         showAll();
+
         //row 0 = par
         //row 1 = men
         //row 2 = women
         //row 3 = child
+
+        //iterate through the holes and set text to proper information about given hole
         for(int i = 0; i <par.length;i+=1){
             if(curHole+(i-1)<numHoles){
                 txt[i].setText(Integer.toString(curHole+i));
@@ -124,6 +129,11 @@ public class Basic_round extends AppCompatActivity
 
 
     }
+
+    /**
+     * Addition function used to sum total inputed score
+     * @return totalScore
+     */
     private int sumScore(){
         int sum = 0;
         for(int i=0; i< score[0].length;i+=1){
@@ -131,6 +141,10 @@ public class Basic_round extends AppCompatActivity
         }
         return sum;
     }
+
+    /**
+     * Makes all gui objects visible
+     */
     private void showAll(){
         for(int i = 0; i <par.length;i+=1){
             txt[i].setVisibility(View.VISIBLE);
@@ -139,6 +153,11 @@ public class Basic_round extends AppCompatActivity
             scoreOnCard[i].setVisibility(View.VISIBLE);
         }
     }
+
+    /**
+     * Button listener for previous button
+     * @param v View
+     */
     public void Prev(View v)
     {
         if((curHole-1)!=0)
@@ -155,6 +174,10 @@ public class Basic_round extends AppCompatActivity
 
     }
 
+    /**
+     * Enter button listener
+     * @param v View
+     */
     public void Enter(View v)
     {
         if(!edit.getText().toString().isEmpty())
@@ -167,6 +190,10 @@ public class Basic_round extends AppCompatActivity
         next(v);
     }
 
+    /**
+     * Submit buttonlistener, inserts info into db
+     * @param v
+     */
     public void Submit(View v){
         Constants.dbHandler.insertScore(score);
         Intent intent = new Intent(v.getContext(), MainScreen.class);

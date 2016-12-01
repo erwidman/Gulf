@@ -3,13 +3,15 @@ package com.teamgolf.golfdb;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
+/**
+ * Class describing screen in which game type is selected
+ */
 public class GameType extends AppCompatActivity {
 
+    //buttons on screen
     Button advancedButton, basicButton;
 
     @Override
@@ -25,6 +27,9 @@ public class GameType extends AppCompatActivity {
     }
 
 
+    /**
+     * Listeners for noted buttons, transitions program to proper state
+     */
     public class ButtonListener implements Button.OnClickListener {
         String id;
 
@@ -40,7 +45,7 @@ public class GameType extends AppCompatActivity {
                     //todo Transition to next page
                     Constants.numPlayers=1;
                     Constants.isAdvanced=true;
-                    intent = new Intent(GameType.this, advancedround.class);
+                    intent = new Intent(GameType.this, AdvancedRound.class);
                     startActivity(intent);
                     break;
                 case "basic":

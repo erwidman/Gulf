@@ -12,6 +12,7 @@ import android.view.View;
 public class Subnames extends AppCompatActivity {
     static boolean firstrun = true;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //Run Once at start (initalizations)

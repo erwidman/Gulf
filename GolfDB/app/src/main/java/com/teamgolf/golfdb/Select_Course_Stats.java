@@ -14,19 +14,27 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
+/**
+ * Used to display page for seaching course the user has played
+ */
 public class Select_Course_Stats extends AppCompatActivity {
 
+    //gui objects
     ListView listview;
     ArrayAdapter adapter;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_course_stats);
-        findViewById(R.id.search_checkbox_error).setVisibility(View.INVISIBLE);
         populateList();
     }
+
+    /**
+     * used to pre populate the listview with courses user has played on
+     */
     private void populateList(){
         final String [] res = Constants.dbHandler.getRecentCourses();
+        Log.d("res",res.toString());
         listview = (ListView)findViewById(R.id.c_Course_Search_Results2);
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, res);
         listview.setAdapter(adapter);
@@ -39,25 +47,19 @@ public class Select_Course_Stats extends AppCompatActivity {
 
             }
         });
-
     }
 
-    public void create_course(View v)
-    {
-        Intent intent = new Intent(v.getContext(), How_to_create_course.class);
-        startActivity(intent);
-    }
-
-
+    /**
+     * Method used to serach for a course based on users inputs, utilizes dbhandler to get results
+     * @param v
+     */
     public void courseSearch(View v)
     {
         //inputed search
         String toSearch=((EditText)findViewById(R.id.search_course_entry)).getText().toString().toLowerCase().trim();
-        //loaction check box
-        Boolean locationSearch = ((CheckBox)findViewById(R.id.search_city)).isChecked();
-        Boolean nameSearch = ((CheckBox)findViewById(R.id.search_course)).isChecked();
 
-        final String[] results = Constants.dbHandler.getCourses(toSearch,locationSearch,nameSearch);
+
+        final String[] results = Constants.dbHandler.getCourses(toSearch,false,false);
 
         if(results!=null) {
 
@@ -75,6 +77,12 @@ public class Select_Course_Stats extends AppCompatActivity {
             });
         }
     }
+
+    /**
+     * Listener for listview, when item is clicked advances program conditions accordingly
+     * @param course
+     * @param v
+     */
     public void courseSelected(String course, View v){
 
         String courseName = "";
@@ -96,17 +104,13 @@ public class Select_Course_Stats extends AppCompatActivity {
 
         Constants.courseNamePickedForStats = courseName;
         Constants.courseLocationPickedForStats = location;
-        String [][] holeInfo = Constants.dbHandler.holeInfo(courseName,location);
-        int [][] roundInfo = Constants.dbHandler.getScore(false,false,courseName,location);
+        Constants.dbHandler.holeInfo(courseName,location);
+        int [][] roundInfo = Constants.dbHandler.getScore(courseName,location,null,false,false);
         if(roundInfo.length==0){
             //TODO print that user hasnt played course;
             return;
         }
-
-
         Course_stats.roundInfo=roundInfo;
-        Course_stats.courseInfo=holeInfo;
-        Constants.holeLoaded= holeInfo;
 
         Intent intent = new Intent(v.getContext(), RoundList.class);
         startActivity(intent);

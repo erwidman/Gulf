@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.teamgolf.golfdb.MainScreen">
+    tools:context="com.teamgolf.golfdb.MainScreen"
+    android:background="@android:color/holo_green_light">
 
     <Button
         android:text="Play Game"
@@ -16,39 +17,31 @@
         android:layout_height="wrap_content"
         android:id="@+id/playGameButton"
         android:textSize="40sp"
+        android:layout_marginTop="53dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Statistics"
         android:id="@+id/statisticsButton"
+        android:textSize="40dp"
         android:layout_below="@+id/playGameButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textSize="40dp"/>
+        android:layout_alignLeft="@+id/playGameButton"
+        android:layout_alignStart="@+id/playGameButton"
+        android:layout_marginTop="42dp" />
 
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Options"
-        android:id="@+id/optionsButton"
-        android:layout_below="@+id/statisticsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textSize="40dp"/>
-
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="Close"
+        android:text="Logout"
         android:id="@+id/closeButton"
-        android:layout_below="@+id/optionsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:layout_below="@+id/statisticsButton"
+        android:layout_alignLeft="@+id/statisticsButton"
+        android:layout_alignStart="@+id/statisticsButton"
+        android:layout_marginTop="42dp" />
 
 
 </RelativeLayout>

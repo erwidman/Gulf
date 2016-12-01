@@ -6,6 +6,9 @@ import android.content.Context;
  * Created by fred on 10/10/16.
  */
 
+/**
+ * Class containing all static variables used
+ */
 public class Constants {
 
     public static DatabaseHandler dbHandler;
