@@ -12,7 +12,8 @@
         android:layout_alignBottom="@+id/editText3"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="51dp"
-        android:id="@+id/cbr_hole" />
+        android:id="@+id/cbr_hole"
+        android:textSize="24sp" />
 
     <TextView
         android:text="yds"
@@ -189,7 +190,7 @@
         android:layout_marginTop="13dp" />
 
     <TextView
-        android:text="TextView"
+        android:text="Number of Holes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cbr_1_numholes_text"
