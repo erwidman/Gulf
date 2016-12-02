@@ -23,7 +23,6 @@ public class GameType extends AppCompatActivity {
 
         basicButton = (Button) findViewById(R.id.basicButton);
         basicButton.setOnClickListener(new ButtonListener("basic"));
-        findViewById(R.id.gt_error).setVisibility(View.INVISIBLE);
     }
 
 
@@ -50,22 +49,14 @@ public class GameType extends AppCompatActivity {
                     break;
                 case "basic":
                     //todo Trasition to next page
-                    if (findViewById(R.id.gt_numPlayers).toString().length()==0)
-                    {
-                        findViewById(R.id.gt_error).setVisibility(View.VISIBLE);
-                        return;
-                    }
-                    Constants.numPlayers=1;//Integer.parseInt(((TextView)findViewById(R.id.gt_numPlayers)).getText().toString());
+
+                    Constants.numPlayers=1;
                     Constants.isAdvanced=false;
 
-                    if  (Constants.numPlayers ==1)
-                    {
-                        intent = new Intent(GameType.this, Basic_round.class);
-                        startActivity(intent);
-                    }
-
                     //transition to basic scorecard
-                    //todo transition
+                    intent = new Intent(GameType.this, Basic_round.class);
+                    startActivity(intent);
+
                     break;
             }
 

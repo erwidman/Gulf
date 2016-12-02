@@ -17,37 +17,49 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Create_new_acc"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainScreen"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Create_new_acc"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainScreen"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Basic_round"
             android:screenOrientation="portrait" />
-        <activity android:name=".Location"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GameType"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Select_course"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".How_to_create_course"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Create_before_round"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course_Search_Results"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Stat_select"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".AdvancedRound"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".General_stats"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Location"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GameType"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Select_course"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".How_to_create_course"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Create_before_round"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course_Search_Results"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Stat_select"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdvancedRound"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".General_stats"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Select_Course_Stats"
             android:label="@string/title_activity_select__course__stats"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Course_stats" />
-        <activity android:name=".RoundList"></activity>
+        <activity android:name=".RoundList" />
+        <activity android:name=".RoundDisplay"></activity>
     </application>
 
 </manifest>

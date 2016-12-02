@@ -11,16 +11,6 @@
     tools:context="com.teamgolf.golfdb.GameType"
     android:background="@android:color/holo_green_light">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:layout_alignTop="@+id/basicButton"
-        android:layout_toLeftOf="@+id/basicButton"
-        android:layout_marginTop="11dp"
-        android:id="@+id/gt_numPlayers" />
-
     <TextView
         android:text="Basic can keep stats for up to 4 players. Score at the end of hole only"
         android:layout_width="wrap_content"
@@ -35,13 +25,12 @@
         android:text="Basic"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="67dp"
         android:id="@+id/basicButton"
         android:textSize="40dp"
         android:layout_below="@+id/textView3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_alignLeft="@+id/advancedButton"
+        android:layout_alignStart="@+id/advancedButton"
+        android:layout_marginTop="38dp" />
 
     <Button
         android:text="Advanced"
@@ -64,23 +53,4 @@
         android:layout_alignParentStart="true"
         android:textSize="20sp" />
 
-    <TextView
-        android:text="# players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:layout_above="@+id/gt_numPlayers"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Please Enter Number of Players 1-4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/basicButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="11dp"
-        android:id="@+id/gt_error"
-        android:textColor="@android:color/holo_red_light" />
 </RelativeLayout>

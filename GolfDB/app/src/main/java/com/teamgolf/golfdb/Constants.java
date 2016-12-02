@@ -22,6 +22,8 @@ public class Constants {
     public static String[][] holeLoaded;
     public static String courseNamePickedForStats;
     public static String courseLocationPickedForStats;
+    public static int [][] scoreForStats;
+    public static int [][] courseInfoForStats;
 
     public Constants(Context context){
         this.context = context;
