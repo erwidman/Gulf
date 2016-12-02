@@ -60,3 +60,18 @@
 		}
 		return percentages;
 	}
+	
+	
+	public static double AverageRoundScore(int roundInformation[][], int courseInformation[][]) {
+		double average = 0;
+		int totalHoles = roundInformation.length * roundInformation[0].length;
+		roundTotal = new int[roundInformation.length];
+		for (int row = 0; row < roundInformation.length; row++) {
+			for (int column = 0; column < roundInformation[0].length; column++) {
+				average += roundInformation[row][column] + 0.0;
+
+				roundTotal[row] += roundInformation[row][column];
+			}
+		}
+		return average / totalHoles;
+	}
