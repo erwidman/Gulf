@@ -1,0 +1,9 @@
+advancedLog(userid,number,name,location,play_id,clubUsed)
+date(play_id,date)
+increment(play)
+player(userid,password)
+courses(name,location,courseDifficulty,numOfHoles)
+hole(name,location,number,par,childDis,womenDis,menDis,holeDifficulty)
+log(userid,number,name,location,score,play_id,score)
+
+*Note: play_id represents round of golf being played
