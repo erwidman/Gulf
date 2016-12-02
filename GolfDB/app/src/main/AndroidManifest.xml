@@ -51,15 +51,13 @@
             android:name=".AdvancedRound"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".General_stats"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Select_Course_Stats"
             android:label="@string/title_activity_select__course__stats"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Course_stats" />
         <activity android:name=".RoundList" />
-        <activity android:name=".RoundDisplay"></activity>
+        <activity android:name=".RoundDisplay" />
+        <activity android:name=".AllCourseDisplay"></activity>
     </application>
 
 </manifest>

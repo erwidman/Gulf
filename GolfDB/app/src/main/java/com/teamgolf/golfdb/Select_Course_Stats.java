@@ -34,7 +34,7 @@ public class Select_Course_Stats extends AppCompatActivity {
      */
     private void populateList(){
         final String [] res = Constants.dbHandler.getRecentCourses();
-        Log.d("res",res.toString());
+
         listview = (ListView)findViewById(R.id.c_Course_Search_Results2);
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, res);
         listview.setAdapter(adapter);

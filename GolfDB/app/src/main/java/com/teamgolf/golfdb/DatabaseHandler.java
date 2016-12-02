@@ -85,10 +85,8 @@ public class DatabaseHandler {
      */
     public void insertHoles(String cName, String cLocation, String [] par, String menDis[], String womenDis[], String[] childDis){
         SQLiteDatabase db= dbHelper.connectDB();
-        Log.d("TestingHoleInsert", "Start");
         db.beginTransaction();
         for(int i=0; i < par.length;i++){
-            Log.d("TestingHoleInsert", par[i]);
             db.execSQL("insert into hole values(?,?,?,?,?,?,?,?)", new String [] {cName,cLocation,Integer.toString(i+1),par[i],childDis[i],womenDis[i],menDis[i],"0"});
         }
         db.setTransactionSuccessful();
@@ -114,7 +112,6 @@ public class DatabaseHandler {
         String encrypt = passwordEncryption(password);
 
         if(pass==0) {
-            Log.d("BEFORE_INSERT",Integer.toString(db.rawQuery("Select * from player;",null).getCount()));
             //attempt insert
             db.beginTransaction();
             db.execSQL("insert into player values(?,?);",new String [] {userid,encrypt});
@@ -147,8 +144,6 @@ public class DatabaseHandler {
 
             c.close();
             db.close();
-
-            Log.d("CHECK_PASSWORD", "Resulting query: " + result);
 
             //compare result
             return encryptCompare(password, result);
@@ -197,7 +192,6 @@ public class DatabaseHandler {
 
         db.close();
     }
-
 
     /**
      * Master method to extract information from log, and advancedlog tables in db
@@ -263,9 +257,6 @@ public class DatabaseHandler {
             cols = Constants.holeLoaded[0].length;
         if(allUserRecord)
             cols = 27;
-
-
-
 
         //filter data such that rows display scores and column index represents hole number
         int [][] tmp = new int [rows] [cols];
@@ -365,6 +356,7 @@ public class DatabaseHandler {
         return true;
     }
 
+
     /**
      * Method used to encrpy password
      * @param pass input password
@@ -381,10 +373,8 @@ public class DatabaseHandler {
 
 
         }catch(NoSuchAlgorithmException e){
-            Log.d("ENCRYPTION","MD5 is not a valid algorithm");
-        }
 
-        Log.d("ENCRYPTION",result);
+        }
 
         return result;
     }

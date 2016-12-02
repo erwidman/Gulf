@@ -35,7 +35,7 @@ public class RoundDisplay extends AppCompatActivity {
 
         int index = 4;
         for(int i =0 ;i <score[0].length;i++){
-            display[index] = "Hole " +i +" : " + score[0][i];
+            display[index] = "Hole " +(i+1) +" : " + score[0][i];
             index++;
         }
         Log.d("Tmp",Integer.toString(display.length));

@@ -52,14 +52,16 @@ public class RoundList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 //removes date
                 String clean = "";
                 String input = res[position];
 
                 int score [] [];
                 if(position == 0){
-                   score = Constants.dbHandler.getScore(Constants.courseNamePickedForStats,Constants.courseLocationPickedForStats,null,false,false);
+                    score = Constants.dbHandler.getScore(Constants.courseNamePickedForStats,Constants.courseLocationPickedForStats,null,false,false);
+                    Constants.scoreForStats = score;
+                    Intent in = new Intent(view.getContext(),AllCourseDisplay.class);
+                    startActivity(in);
                 }
                 else{
                     int index = 0;
@@ -75,7 +77,6 @@ public class RoundList extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-
             }
         });
     }

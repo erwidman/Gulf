@@ -18,9 +18,7 @@ public class Stat_select extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stat_select);
-
-        GenStats = (Button) findViewById(R.id.GenStats);
-        GenStats.setOnClickListener(new ButtonListener("general", Constants.dbHandler));
+        
         AdvancedStats = (Button) findViewById((R.id.Coursestats));
         AdvancedStats.setOnClickListener(new ButtonListener("advanced",Constants.dbHandler));
     }
@@ -41,13 +39,7 @@ public class Stat_select extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent;
             switch(id){
-                case "general":
-                    int score [] [] = Constants.dbHandler.getScore(null,null,null,false,true);
-                    Log.d("Score",Integer.toString(score.length));
 
-                    intent = new Intent(v.getContext(), General_stats.class);
-                    startActivity(intent);
-                    break;
                 case "advanced":
                     //TODO
                     intent = new Intent(v.getContext(), Select_Course_Stats.class);
