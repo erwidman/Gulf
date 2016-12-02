@@ -33,6 +33,27 @@
 			}
 		}
 
+	public static double Handicap(int roundInformation[][], int courseInformation[][]) {
+		int averageOverPar = 0;
+		int roundTotal[] = new int[roundInformation.length];
+		
+		// Calculates round total
+		for (int row = 0; row < roundInformation.length; row++) {
+			for (int column = 0; column < roundInformation[0].length; column++) {
+				roundTotal[row] += roundInformation[row][column];
+			}
+		}
+		
+		
+		if (CoursePar != 0) {
+			for (int i = 0; i < roundTotal.length; i++) {
+				averageOverPar += roundTotal[i] - CoursePar;
+			}
+		}
+		averageOverPar = averageOverPar / roundTotal.length;
+		return averageOverPar * .8;
+	}
+
 		for (int i = 0; i < 3; i++) {
 			percentages[i] = percentages[i]
 					/ (roundInformation.length * roundInformation[0].length);
