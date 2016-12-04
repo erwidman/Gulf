@@ -1,12 +1,14 @@
 package com.teamgolf.golfdb;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -92,7 +94,37 @@ public class Basic_round extends AppCompatActivity
 
 
     }
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
 
+        // Check which radio button was clicked
+        switch(view.getId())
+        {
+            case R.id.radioButton3:
+                if (checked)
+                {
+                    // Pirates are the best
+                    gender = 2;
+                    break;
+                }
+                break;
+            case R.id.radioButton2:
+                if (checked)
+                {
+                    gender=3;
+                    break;
+                }
+                break;
+            default:
+            {
+                gender=1;
+            }
+
+        }
+        grabStats();
+
+    }
     /**
      * Used to update text on screen for holes being displayed
      */
@@ -101,6 +133,7 @@ public class Basic_round extends AppCompatActivity
         //show all gui objects
         showAll();
 
+        ColorMe();
         //row 0 = par
         //row 1 = men
         //row 2 = women
@@ -198,6 +231,29 @@ public class Basic_round extends AppCompatActivity
         Constants.dbHandler.insertScore(score);
         Intent intent = new Intent(v.getContext(), MainScreen.class);
         startActivity(intent);
+    }
+
+
+    public void ColorMe()
+    {
+        //todo highlight current row
+        for (int i=0;i<4;i++)
+        {
+            if (i==0)
+            {
+                par[i].setBackgroundColor(Color.WHITE);
+                yds[i].setBackgroundColor(Color.WHITE);
+                scoreOnCard[i].setBackgroundColor(Color.WHITE);
+                txt[i].setBackgroundColor(Color.WHITE);
+            }
+            else
+            {
+                par[i].setBackgroundColor(17170452);
+                yds[i].setBackgroundColor(17170452);
+                scoreOnCard[i].setBackgroundColor(17170452);
+                txt[i].setBackgroundColor(17170452);
+            }
+        }
     }
 
 }

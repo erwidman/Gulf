@@ -236,6 +236,16 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/br_sc_total" />
 
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="200sp"
+        android:id="@+id/br_group"
+        android:layout_below="@+id/br_score"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="21dp"
+        android:checkedButton="@+id/radioButton">
     <RadioButton
         android:text="Men's Tee"
         android:layout_width="wrap_content"
@@ -243,8 +253,8 @@
         android:id="@+id/radioButton"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_alignParentStart="true"
+        android:onClick="onRadioButtonClicked"/>
     <RadioButton
         android:text="Women's Tee"
         android:layout_width="wrap_content"
@@ -253,7 +263,8 @@
         android:layout_alignBaseline="@+id/radioButton2"
         android:layout_alignBottom="@+id/radioButton2"
         android:layout_alignLeft="@+id/br_sc4"
-        android:layout_alignStart="@+id/br_sc4" />
+        android:layout_alignStart="@+id/br_sc4"
+        android:onClick="onRadioButtonClicked"/>
 
     <RadioButton
         android:text="Child's Tee"
@@ -262,49 +273,50 @@
         android:id="@+id/radioButton2"
         android:layout_alignBaseline="@+id/radioButton"
         android:layout_alignBottom="@+id/radioButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
 
     <Button
         android:text="Prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButton"
-        android:layout_toRightOf="@+id/br_sc1"
-        android:layout_toEndOf="@+id/br_sc1"
-        android:layout_marginTop="18dp"
         android:onClick="Prev"
-        android:id="@+id/br_prev" />
+        android:id="@+id/br_prev"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/br_next"
+        android:layout_alignStart="@+id/br_next" />
 
     <Button
         android:text="Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/br_prev"
-        android:layout_alignRight="@+id/br_sc4"
-        android:layout_alignEnd="@+id/br_sc4"
         android:onClick="next"
-        android:id="@+id/br_next" />
+        android:id="@+id/br_next"
+        android:layout_alignTop="@+id/br_group"
+        android:layout_alignRight="@+id/br_sc4"
+        android:layout_alignEnd="@+id/br_sc4" />
 
     <TextView
         android:text="Score on Hole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/br_prev"
+        android:onClick="Prev"
+        android:id="@+id/textView33"
+        android:layout_below="@+id/br_group"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="56dp"
-        android:onClick="Prev"
-        android:id="@+id/textView33" />
+        android:layout_marginTop="13dp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/br_enteredScore"
         android:layout_alignBottom="@+id/textView33"
-        android:layout_alignLeft="@+id/br_sc2"
-        android:layout_alignStart="@+id/br_sc2" />
+        android:layout_toLeftOf="@+id/br_prev"
+        android:layout_toStartOf="@+id/br_prev" />
 
     <Button
         android:text="Enter Score"
@@ -312,18 +324,16 @@
         android:layout_height="wrap_content"
         android:onClick="Enter"
         android:id="@+id/br_button"
-        android:layout_marginTop="31dp"
-        android:layout_below="@+id/br_enteredScore"
-        android:layout_alignRight="@+id/radioButton3"
-        android:layout_alignEnd="@+id/radioButton3" />
+        android:layout_alignTop="@+id/br_enteredScore"
+        android:layout_toRightOf="@+id/br_sc3"
+        android:layout_toEndOf="@+id/br_sc3" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Submit Entire Round"
         android:id="@+id/button3"
         android:onClick="Submit"
-        android:layout_alignTop="@+id/br_button"
-        android:layout_toRightOf="@+id/textView14"
-        android:layout_toEndOf="@+id/textView14" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
